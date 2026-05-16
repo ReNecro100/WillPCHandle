@@ -1,5 +1,7 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using System;
+using System.Diagnostics;
 
 namespace WillPC
 {
@@ -8,6 +10,17 @@ namespace WillPC
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        
+    private void OpenSteam(object sender, RoutedEventArgs e)
+        {
+            string url = "https://www.wikipedia.org/";
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
         }
        
 

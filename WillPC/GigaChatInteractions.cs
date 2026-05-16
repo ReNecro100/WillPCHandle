@@ -44,7 +44,7 @@ class GigaChatInteractions
 
         throw new Exception("access_token not found");
     }
-    public string GetGigaChatResponse()
+    public string GetGigaChatResponse(string prompt)
     {
         var handler = new HttpClientHandler
         {
@@ -56,22 +56,22 @@ class GigaChatInteractions
 
         var request = new HttpRequestMessage(HttpMethod.Post, "/api/v1/chat/completions");
 
-        request.Headers.Add("Content-Type", "application/json");
+        //request.Headers.Add("Content-Type", "application/json");
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("Authorization", "Bearer " + GetGigaChatToken(secretToken));
 
         // Ваши данные из --data-raw
-        string jsonData = @"{
-            ""model"": ""GigaChat"",
-            ""messages"": [
-                {
-                    ""role"": ""user"",
-                    ""content"": ""Привет! Как дела?""
-                }
-            ],
-            ""stream"": false,
-            ""repetition_penalty"": 1
-        }";
+        string jsonData = $@"{{
+        ""model"": ""GigaChat"",
+        ""messages"": [
+            {{
+                ""role"": ""user"",
+                ""content"": ""{prompt}""
+            }}
+        ],
+        ""stream"": false,
+        ""repetition_penalty"": 1
+    }}";
 
         request.Content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
@@ -79,11 +79,11 @@ class GigaChatInteractions
         string resultText = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
         using var jsonDoc = JsonDocument.Parse(resultText);
-
-        if (jsonDoc.RootElement.TryGetProperty("choices[0].message.content", out JsonElement tokenElement))
-        {
-            return tokenElement.GetString() ?? throw new Exception("Token is null");
-        }
-        throw new Exception("choices[0].message.content");
+        string content = jsonDoc.RootElement
+            .GetProperty("choices")[0]
+            .GetProperty("message")
+            .GetProperty("content")
+            .GetString() ?? string.Empty;
+        return content;
     }
 }

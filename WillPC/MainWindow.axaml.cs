@@ -51,7 +51,7 @@ namespace WillPC
         {
             GigaChatInteractions gigaChatInteractions = new GigaChatInteractions();
             Response.Text = "Token: ";
-            Response.Text += gigaChatInteractions.GetGigaChatResponse();
+            Response.Text += gigaChatInteractions.GetGigaChatResponse("Дай одну коротку цитату Климента Римского");
         }
     }
 }

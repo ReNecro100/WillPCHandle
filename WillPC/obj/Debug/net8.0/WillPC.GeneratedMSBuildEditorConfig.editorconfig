@@ -24,6 +24,9 @@ build_property.EnableCodeStyleSeverity =
 [D:/WillPcHandleGUI/WillPCHandle/WillPC/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/WillPcHandleGUI/WillPCHandle/WillPC/models/GamePageWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/WillPcHandleGUI/WillPCHandle/WillPC/models/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WillPC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5faa0267bfce7657b3b391bb071e84a5ac4fd01")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c224bb62d09ad99b3b9f8a722219e96228084fc")]
 [assembly: System.Reflection.AssemblyProductAttribute("WillPC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WillPC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

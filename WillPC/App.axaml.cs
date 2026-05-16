@@ -15,14 +15,7 @@ namespace WillPC
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var agreementWindow = new UserAgreementWindow();
-                agreementWindow.Closed += (_, _) =>
-                {
-                    desktop.MainWindow = new MainWindow();
-                    desktop.MainWindow.Show();
-                };
-
-                desktop.MainWindow = agreementWindow;
+                desktop.MainWindow = new GamePageWindow();
             }
 
             base.OnFrameworkInitializationCompleted();

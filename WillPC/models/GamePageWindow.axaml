@@ -1,0 +1,69 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="WillPC.GamePageWindow"
+        Background="#15212C"
+        Width="1024"
+        Height="768"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Title="Game Page">
+        
+        
+        <Window.Styles>
+        <Style Selector="Border.GameCard">
+                <Setter Property="Padding" Value="10,0,0,0"></Setter>
+                <Setter Property="Background" Value="#334E68"></Setter>
+                <Setter Property="CornerRadius" Value="15"></Setter>
+                <Setter Property="ClipToBounds" Value="True"/>
+                <Setter Property="Margin" Value="15"/>
+                <Setter Property="Width" Value="405"/>
+                <Setter Property="Height" Value="300"/>
+                <!--плавный переход фона  -->
+                <Setter Property="Transitions">
+                        <Transitions>
+                                <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                        </Transitions>
+                </Setter>
+        </Style>
+        </Window.Styles>
+    
+        <Grid RowDefinitions="Auto, *, Auto">
+                <Border Height="245" ClipToBounds="True">
+                        <Image Source="D:\WillPcHandleGUI\WillPCHandle\testhat.webp" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Center"></Image>
+                        
+                </Border>
+                <Border Classes="GameCard"  Grid.Row="1" HorizontalAlignment="Left">
+                        <TextBlock TextWrapping="Wrap" Padding="5, 5,0,0">
+                                <Run Text="В этом высокоскоростном научно-фантастическом шутере от первого лица вам предстоит примерить на себя роль оперативника элитного подразделения, заброшенного в самое сердце полуразрушенного мегаполиса будущего. Эксперимент с квантовой энергией вышел из-под контроля, открыв разломы в иные измерения, и теперь улицы наводнили легионы безжалостных тварей и искаженных мутантов"></Run>
+                                <LineBreak/>
+                                <Run Text="Системные требования:"/> 
+                                <Run Text="10 (64-бит)"/>
+                                <LineBreak/>
+                                <Run Text ="Процессор: Intel Core i5-750 (2.6 ГГц) или AMD Phenom II X4 955 (3.2 ГГц)"/>
+                                <LineBreak/>
+                                <Run Text = "Оперативная память: 4 ГБ ОЗУ"/>
+                                <LineBreak/>
+                                Видеокарта: NVIDIA GeForce GTX 460 или AMD Radeon HD 5850 (1 ГБ VRAM)
+                                <LineBreak/>
+                                DirectX: Версия 11
+                                <LineBreak/>
+                                Место на диске: 30 ГБ свободного пространства"
+                                <LineBreak/>
+                        </TextBlock>
+                </Border>
+                
+               
+        </Grid>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+</Window>

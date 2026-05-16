@@ -60,18 +60,17 @@ class GigaChatInteractions
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("Authorization", "Bearer " + GetGigaChatToken(secretToken));
 
-        // Ваши данные из --data-raw
         string jsonData = $@"{{
-        ""model"": ""GigaChat"",
-        ""messages"": [
-            {{
-                ""role"": ""user"",
-                ""content"": ""{prompt}""
-            }}
-        ],
-        ""stream"": false,
-        ""repetition_penalty"": 1
-    }}";
+            ""model"": ""GigaChat"",
+            ""messages"": [
+                {{
+                    ""role"": ""user"",
+                    ""content"": ""{prompt}""
+                }}
+            ],
+            ""stream"": false,
+            ""repetition_penalty"": 1
+        }}";
 
         request.Content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 

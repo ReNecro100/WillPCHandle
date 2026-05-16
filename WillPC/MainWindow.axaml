@@ -2,10 +2,94 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="768" d:DesignHeight="1024"
         x:Class="WillPC.MainWindow"
+        Background="#15212C"
+        Width="1024"
+        Height="768"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
         Title="WillPC">
-	<StackPanel>
-		<TextBlock Name="Dat" HorizontalAlignment="Center"/>
-	</StackPanel>
+
+	<Window.Styles>
+		<Style Selector="Button.MybuttonStyle">
+			<Setter Property="Background" Value="#58A6FF"></Setter>
+			<Setter Property="CornerRadius" Value="8"></Setter>
+			<Setter Property="Padding" Value="15,8"></Setter>
+		</Style>
+
+		<Style Selector="Button.MybuttonStyle:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#79B8FF"/>
+		</Style>
+
+
+		<Style Selector="Border.GameCard">
+			<Setter Property="Background" Value="#334E68"></Setter>
+			<Setter Property="CornerRadius" Value="15"></Setter>
+			<Setter Property="ClipToBounds" Value="True"/>
+			<Setter Property="Margin" Value="15"/>
+			<Setter Property="Width" Value="180"/>
+			<Setter Property="Height" Value="240"/>
+			<!--плавный переход фона  -->
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.2"/>
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<!-- эффект наведения  -->
+		<Style Selector="Border.GameCard:pointerover">
+			<Setter Property="Background" Value="#416284"/>
+
+			<Setter Property="Cursor" Value="Hand"/>
+			<!-- Курсор меняется на руку -->
+		</Style>
+
+		<Style Selector="Button.MybuttonStyle:pressed /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#4685CC"/>
+		</Style>
+	</Window.Styles>
+
+	<Border Padding="20">
+		<UniformGrid Rows="2"
+                     Columns="4"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Top"
+                     Margin="0,40,0,0">
+
+			<!-- КАРТОЧКА 1 -->
+			<Border Classes="GameCard">
+				<Grid RowDefinitions="140, *">
+					<!-- Верхняя часть: Картинка -->
+					<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+						<Panel Background="#1F2A38">
+							<Image Source="D:\123.webp" Stretch="UniformToFill"/>
+						</Panel>
+					</Border>
+
+					<!-- Нижняя часть: Текст -->
+					<Border Grid.Row="1" Padding="12">
+						<Grid RowDefinitions="*, Auto">
+							<!-- Блок с описанием -->
+							<StackPanel Grid.Row="0" Spacing="2">
+								<TextBlock Text="Title (34)" FontSize="14" FontWeight="Bold" Foreground="White"/>
+								<TextBlock Text="Genre (24)" FontSize="12" Foreground="#8B949E"/>
+								<TextBlock Text="Description (20 with...)" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+							</StackPanel>
+
+							<!-- Строка статуса -->
+							<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+								<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+								<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+							</Grid>
+						</Grid>
+					</Border>
+				</Grid>
+			</Border>
+
+			<!-- Дополнительные карточки -->
+
+		</UniformGrid>
+	</Border>
 </Window>

@@ -1,0 +1,66 @@
+
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="768" d:DesignHeight="1024"
+        x:Class="WillPC.UserAgreementWindow"
+        Background="#15212C"
+        Width="1024"
+        Height="768"
+        CanResize="False"
+        SystemDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        Title="WillPC">
+        
+        <Grid RowDefinitions="Auto, *, Auto">
+                
+                <TextBlock Text="Personal Agreement" Foreground="White"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Margin="0,0,0,16"/>
+                <Border Grid.Row="1" Background="#1F2E3D">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TextBlock Text="Используя приложение WillPC, пользователь подтверждает, что ознакомился с условиями использования.
+
+Приложение предоставляется в учебных целях. Разработчик не несет ответственности за возможные ошибки в расчетах, отображении данных или работе интерфейса.
+
+Пользователь обязуется использовать приложение только законным способом и не пытаться нарушить его работу.
+
+Продолжая использование приложения, пользователь соглашается с данными условиями"/>
+                    </ScrollViewer>
+                </Border>
+                <Button Grid.Row="2"
+                        Content="Принять"
+                        HorizontalAlignment="Right"
+                        Margin="0,16,0,0"
+                        Padding="18,8"
+                        Click="AcceptAgreement"/>
+                <Button Grid.Row="2"
+                        Content="Отказаться"
+                        HorizontalAlignment="Right"
+                        Margin="0,16,110,0"
+                        Padding="18,8"
+                        Click="DeclineAccept"/>
+        </Grid>
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+</Window>

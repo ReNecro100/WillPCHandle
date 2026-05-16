@@ -1,32 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "D:\\KarapetyanAA\\WillPCHandleProject\\WillPCHandle\\WillPC\\WillPC.csproj": {}
+    "D:\\WillPcHandleGUI\\WillPCHandle\\WillPC\\WillPC.csproj": {}
   },
   "projects": {
-    "D:\\KarapetyanAA\\WillPCHandleProject\\WillPCHandle\\WillPC\\WillPC.csproj": {
+    "D:\\WillPcHandleGUI\\WillPCHandle\\WillPC\\WillPC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\KarapetyanAA\\WillPCHandleProject\\WillPCHandle\\WillPC\\WillPC.csproj",
+        "projectUniqueName": "D:\\WillPcHandleGUI\\WillPCHandle\\WillPC\\WillPC.csproj",
         "projectName": "WillPC",
-        "projectPath": "D:\\KarapetyanAA\\WillPCHandleProject\\WillPCHandle\\WillPC\\WillPC.csproj",
-        "packagesPath": "C:\\Users\\КарапетянАА\\.nuget\\packages\\",
-        "outputPath": "D:\\KarapetyanAA\\WillPCHandleProject\\WillPCHandle\\WillPC\\obj\\",
+        "projectPath": "D:\\WillPcHandleGUI\\WillPCHandle\\WillPC\\WillPC.csproj",
+        "packagesPath": "C:\\Users\\Arseniy\\.nuget\\packages\\",
+        "outputPath": "D:\\WillPcHandleGUI\\WillPCHandle\\WillPC\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\КарапетянАА\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Arseniy\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/USERNAME/index.json": {},
+          "https://nuget.pkg.github.com/geshtalt111/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -87,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

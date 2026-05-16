@@ -28,10 +28,25 @@
         </Window.Styles>
     
         <Grid RowDefinitions="Auto, *, Auto">
-                <Border Height="245" ClipToBounds="True">
-                        <Image Source="D:\WillPcHandleGUI\WillPCHandle\testhat.webp" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Center"></Image>
-                        
+                <Border Grid.Row="0"
+                        Height="245"
+                        ClipToBounds="True">
+                        <Grid>
+                                <Image Source="D:\WillPcHandleGUI\WillPCHandle\testhat.webp"
+                                       Stretch="UniformToFill"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Center"/>
+
+                                <Border Background="#80000000"/>
+
+                                <TextBlock Text="Test Hat"
+                                           Foreground="White"
+                                           FontSize="40"
+                                           VerticalAlignment="Center"
+                                           Margin="44,0,0,0"/>
+                        </Grid>
                 </Border>
+                
                 <Border Classes="GameCard"  Grid.Row="1" HorizontalAlignment="Left">
                         <TextBlock TextWrapping="Wrap" Padding="5, 5,0,0">
                                 <Run Text="В этом высокоскоростном научно-фантастическом шутере от первого лица вам предстоит примерить на себя роль оперативника элитного подразделения, заброшенного в самое сердце полуразрушенного мегаполиса будущего. Эксперимент с квантовой энергией вышел из-под контроля, открыв разломы в иные измерения, и теперь улицы наводнили легионы безжалостных тварей и искаженных мутантов"></Run>

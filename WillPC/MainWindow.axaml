@@ -51,45 +51,648 @@
 		</Style>
 	</Window.Styles>
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<Border Padding="20">
-		<UniformGrid Rows="2"
-                     Columns="4"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Top"
-                     Margin="0,40,0,0">
+		<ScrollViewer VerticalScrollBarVisibility="Auto">
+			<UniformGrid
+						 Columns="4"
+						 HorizontalAlignment="Center"
+						 VerticalAlignment="Top"
+						 Margin="0,40,0,0">
 
-			<!-- КАРТОЧКА 1 -->
-			<Border Classes="GameCard">
-				<Grid RowDefinitions="140, *">
-					<!-- Верхняя часть: Картинка -->
-					<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
-						<Panel Background="#1F2A38">
-							<Image Source="D:\123.webp" Stretch="UniformToFill"/>
-						</Panel>
-					</Border>
+				<!-- КАРТОЧКА 1 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\123.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
 
-					<!-- Нижняя часть: Текст -->
-					<Border Grid.Row="1" Padding="12">
-						<Grid RowDefinitions="*, Auto">
-							<!-- Блок с описанием -->
-							<StackPanel Grid.Row="0" Spacing="2">
-								<TextBlock Text="Title (34)" FontSize="14" FontWeight="Bold" Foreground="White"/>
-								<TextBlock Text="Genre (24)" FontSize="12" Foreground="#8B949E"/>
-								<TextBlock Text="Description (20 with...)" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
-							</StackPanel>
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Far Cry 4" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Shooter" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best Shooter" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
 
-							<!-- Строка статуса -->
-							<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
-								<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
-								<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
 							</Grid>
-						</Grid>
-					</Border>
-				</Grid>
-			</Border>
+						</Border>
+					</Grid>
+				</Border>
 
-			<!-- Дополнительные карточки -->
+				<!-- КАРТОЧКА 2 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\1234.jpg" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
 
-		</UniformGrid>
-	</Border>
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="NFS MW" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Race" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best race game" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+
+
+
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\12345.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+
+
+
+			</UniformGrid>
+		</ScrollViewer>
+</Border>
 </Window>

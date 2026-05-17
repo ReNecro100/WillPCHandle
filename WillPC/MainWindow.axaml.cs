@@ -14,7 +14,7 @@ namespace WillPC
         {
             Dat.Text = HardWareInteractons.GetPCData();
             SteamInterations steamInterations = new SteamInterations();
-            foreach (var item in await steamInterations.GetGameRequirementsWithPackageAsync())
+            foreach (var item in await steamInterations.GetFeaturedAppsListAsync())
             {
                 Response.Text += item + '\n';
             }

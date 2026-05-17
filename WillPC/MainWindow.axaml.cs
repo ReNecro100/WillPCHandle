@@ -1,8 +1,4 @@
 using Avalonia.Controls;
-using System;
-using System.Diagnostics;
-using System.Management;
-using System.Runtime.InteropServices;
 
 namespace WillPC
 {
@@ -14,9 +10,14 @@ namespace WillPC
             Yes();
             GetGigachatResponse();
         }
-        public void Yes()
+        public async void Yes()
         {
             Dat.Text = HardWareInteractons.GetPCData();
+            SteamInterations steamInterations = new SteamInterations();
+            foreach (var item in await steamInterations.GetGameRequirementsWithPackageAsync())
+            {
+                Response.Text += item + '\n';
+            }
         }
         public void GetGigachatResponse()
         {
@@ -24,5 +25,6 @@ namespace WillPC
             //Response.Text = "Ответ нейронки: ";
             //Response.Text += gigaChatInteractions.GetGigaChatResponse("Просто напиши АГА КОНЕЧНО");
         }
+        
     }
 }

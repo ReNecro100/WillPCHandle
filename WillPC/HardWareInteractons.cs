@@ -23,7 +23,7 @@ class HardWareInteractons
         }
         foreach (ManagementObject g in gpu.Get())
         {
-            PCdata += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt32(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб" + '\n'; //Name, Caption, VideoProcessor
+            PCdata += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб" + '\n'; //Name, Caption, VideoProcessor
         }
         foreach (ManagementObject h in hdd.Get())
         {

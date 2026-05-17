@@ -13,6 +13,7 @@
           "Avalonia.Fonts.Inter": "12.0.3",
           "Avalonia.Themes.Fluent": "12.0.3",
           "AvaloniaUI.DiagnosticsSupport": "2.2.1",
+          "SteamStorefrontAPI": "2.0.1.1371",
           "System.Diagnostics.PerformanceCounter": "10.0.8",
           "System.Management": "10.0.8"
         },
@@ -403,6 +404,14 @@
           }
         }
       },
+      "Newtonsoft.Json/13.0.4": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.4.30916"
+          }
+        }
+      },
       "SkiaSharp/3.119.4-preview.1.1": {
         "dependencies": {
           "SkiaSharp.NativeAssets.Win32": "3.119.4-preview.1.1",
@@ -525,6 +534,17 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SteamStorefrontAPI/2.0.1.1371": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.4"
+        },
+        "runtime": {
+          "lib/net8.0/SteamStorefrontAPI.dll": {
+            "assemblyVersion": "2.0.1.1371",
+            "fileVersion": "2.0.1.1371"
           }
         }
       },
@@ -828,6 +848,13 @@
       "path": "microsoft.io.recyclablememorystream/3.0.1",
       "hashPath": "microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512"
     },
+    "Newtonsoft.Json/13.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A==",
+      "path": "newtonsoft.json/13.0.4",
+      "hashPath": "newtonsoft.json.13.0.4.nupkg.sha512"
+    },
     "SkiaSharp/3.119.4-preview.1.1": {
       "type": "package",
       "serviceable": true,
@@ -862,6 +889,13 @@
       "sha512": "sha512-BYwNLG02IAYMsBPgU9lM37xJgCM3B/2X5z1FQEBR34dmn+Hxvcw8X83PInY2rzix7mlbcv7OF8UHjf7yMbsDaA==",
       "path": "skiasharp.nativeassets.win32/3.119.4-preview.1.1",
       "hashPath": "skiasharp.nativeassets.win32.3.119.4-preview.1.1.nupkg.sha512"
+    },
+    "SteamStorefrontAPI/2.0.1.1371": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rdgRgRhNN4d75cjshWykXyqQ4VneM0jlxg/ZeAVbD5/YpigbGdvcEORsRclF8cIWuYRKt1zyFfAS8IHDVngqWw==",
+      "path": "steamstorefrontapi/2.0.1.1371",
+      "hashPath": "steamstorefrontapi.2.0.1.1371.nupkg.sha512"
     },
     "System.CodeDom/10.0.8": {
       "type": "package",

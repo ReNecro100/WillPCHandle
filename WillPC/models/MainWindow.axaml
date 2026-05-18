@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="768" d:DesignHeight="1024"
         x:Class="WillPC.MainWindow"
+		Foreground="White"
         Background="#15212C"
         Width="1024"
         Height="768"
@@ -12,42 +13,76 @@
         Title="WillPC">
 
 	<Window.Styles>
+
+		<!-- Ð¡Ñ‚Ð¸Ð»ÑŒ ÐºÐ½Ð¾Ð¿ÐºÐ¸ -->
 		<Style Selector="Button.MybuttonStyle">
-			<Setter Property="Background" Value="#58A6FF"></Setter>
-			<Setter Property="CornerRadius" Value="8"></Setter>
-			<Setter Property="Padding" Value="15,8"></Setter>
-		</Style>
+			<Setter Property="Background" Value="#2F80ED"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Padding" Value="16,10"/>
 
-		<Style Selector="Button.MybuttonStyle:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-			<Setter Property="Background" Value="#79B8FF"/>
-		</Style>
-
-
-		<Style Selector="Border.GameCard">
-			<Setter Property="Background" Value="#334E68"></Setter>
-			<Setter Property="CornerRadius" Value="15"></Setter>
-			<Setter Property="ClipToBounds" Value="True"/>
-			<Setter Property="Margin" Value="15"/>
-			<Setter Property="Width" Value="180"/>
-			<Setter Property="Height" Value="240"/>
-			<!--ïëàâíûé ïåðåõîä ôîíà  -->
 			<Setter Property="Transitions">
 				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.2"/>
+					<BrushTransition Property="Background" Duration="0:0:0.15" Easing="CubicEaseOut"/>
 				</Transitions>
 			</Setter>
 		</Style>
 
-		<!-- ýôôåêò íàâåäåíèÿ  -->
-		<Style Selector="Border.GameCard:pointerover">
-			<Setter Property="Background" Value="#416284"/>
-
-			<Setter Property="Cursor" Value="Hand"/>
-			<!-- Êóðñîð ìåíÿåòñÿ íà ðóêó -->
+		<!-- ÐšÐ½Ð¾Ð¿ÐºÐ°: ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð¼Ñ‹ÑˆÐ¸ -->
+		<Style Selector="Button.MybuttonStyle:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#4EA2FF"/>
+			<Setter Property="Foreground" Value="White"/>
 		</Style>
 
+		<!-- ÐšÐ½Ð¾Ð¿ÐºÐ°: ÐÐ°Ð¶Ð°Ñ‚Ð¸Ðµ -->
 		<Style Selector="Button.MybuttonStyle:pressed /template/ ContentPresenter#PART_ContentPresenter">
-			<Setter Property="Background" Value="#4685CC"/>
+			<Setter Property="Background" Value="#1B59B3"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+
+		<Style Selector="Border.GameCard">
+			<!-- Ð‘Ð°Ð·Ð¾Ð²Ñ‹Ðµ Ñ€Ð°Ð·Ð¼ÐµÑ€Ñ‹ Ð¸ Ð³ÐµÐ¾Ð¼ÐµÑ‚Ñ€Ð¸Ñ -->
+			<Setter Property="Width" Value="180"/>
+			<Setter Property="Height" Value="240"/>
+			<Setter Property="Margin" Value="15"/>
+			<Setter Property="CornerRadius" Value="14"/>
+
+			<!-- Ð”Ð˜Ð—ÐÐ™Ð: Ð“Ð»ÑƒÐ±Ð¾ÐºÐ¸Ð¹ Ñ„Ð¾Ð½ Ð¸ Ð°ÐºÐºÑƒÑ€Ð°Ñ‚Ð½Ð°Ñ Ñ€Ð°Ð¼ÐºÐ° -->
+			<Setter Property="Background" Value="#1A2836"/>
+			<Setter Property="BorderBrush" Value="#2D4357"/>
+			<Setter Property="BorderThickness" Value="1.2"/>
+
+			<!-- ÐžÑ‚ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ ClipToBounds Ð´Ð»Ñ ÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾Ð³Ð¾ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ Ñ‚ÐµÐ½Ð¸ Ð¸ Ð¼Ð°ÑÑˆÑ‚Ð°Ð±Ð° -->
+			<Setter Property="ClipToBounds" Value="False"/>
+			<Setter Property="BoxShadow" Value="0 4 12 0 #30000000"/>
+
+			<!-- ÐÐ°Ñ‡Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð¼Ð°ÑÑˆÑ‚Ð°Ð± -->
+			<Setter Property="RenderTransform" Value="scale(1.0)"/>
+			<Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+
+			<!-- ÐŸÐµÑ€ÐµÑ…Ð¾Ð´Ñ‹ (ÐžÐ¿ÐµÑ‡Ð°Ñ‚ÐºÐ° Ð¸ÑÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð° Ð½Ð° BoxShadowsTransition) -->
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<BrushTransition Property="BorderBrush" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<!-- Ð˜Ð¡ÐŸÐ ÐÐ’Ð›Ð•ÐÐž: Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð° Ð±ÑƒÐºÐ²Ð° 's' Ð² BoxShadowsTransition -->
+					<BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<!-- ÐšÐ°Ñ€Ñ‚Ð¾Ñ‡ÐºÐ°: Ð­Ñ„Ñ„ÐµÐºÑ‚ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ -->
+		<Style Selector="Border.GameCard:pointerover">
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="ZIndex" Value="10"/>
+
+			<Setter Property="Background" Value="#223547"/>
+			<Setter Property="BorderBrush" Value="#2F80ED"/>
+			<Setter Property="RenderTransform" Value="scale(1.05)"/>
+			<Setter Property="BoxShadow" Value="0 8 24 0 #352F80ED"/>
 		</Style>
 	</Window.Styles>
 
@@ -60,7 +95,7 @@
 			<Grid>
 			<TextBlock Grid.Row="0" Text="Will PC Handle?" Foreground="White" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				<Button Click="OpenSteam" Background="Transparent" BorderThickness="0" Padding="0"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,15,30,5">
-					<Image Source="D:\WillPcHandleGUI\WillPCHandle\Steam_logo.svg"
+					<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\Steam_logo.svg"
 					  Width="50"
 					  Height="50"
 					  HorizontalAlignment="Right"
@@ -77,27 +112,27 @@
 						 VerticalAlignment="Top"
 						 Margin="0,20,0,0">
 
-				<!-- ÊÀÐÒÎ×ÊÀ 1 -->
+				<!-- ÐšÐÐ Ð¢ÐžÐ§ÐšÐ 1 -->
 				<Border Classes="GameCard">
 					<Grid RowDefinitions="140, *">
-						<!-- Âåðõíÿÿ ÷àñòü: Êàðòèíêà -->
+						<!-- Ð’ÐµÑ€Ñ…Ð½ÑÑ Ñ‡Ð°ÑÑ‚ÑŒ: ÐšÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ° -->
 						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
 							<Panel Background="#1F2A38">
-								<Image Source="D:\WillPcHandleGUI\WillPCHandle\farcry4.webp" Stretch="UniformToFill"/>
+								<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\farcry4.webp" Stretch="UniformToFill"/>
 							</Panel>
 						</Border>
 
-						<!-- Íèæíÿÿ ÷àñòü: Òåêñò -->
+						<!-- ÐÐ¸Ð¶Ð½ÑÑ Ñ‡Ð°ÑÑ‚ÑŒ: Ð¢ÐµÐºÑÑ‚ -->
 						<Border Grid.Row="1" Padding="12">
 							<Grid RowDefinitions="*, Auto">
-								<!-- Áëîê ñ îïèñàíèåì -->
+								<!-- Ð‘Ð»Ð¾Ðº Ñ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸ÐµÐ¼ -->
 								<StackPanel Grid.Row="0" Spacing="2">
 									<TextBlock Text="Far Cry 4" FontSize="14" FontWeight="Bold" Foreground="White"/>
 									<TextBlock Text="Shooter" FontSize="12" Foreground="#8B949E"/>
 									<TextBlock Text="The best Shooter" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
 								</StackPanel>
 
-								<!-- Ñòðîêà ñòàòóñà -->
+								<!-- Ð¡Ñ‚Ñ€Ð¾ÐºÐ° ÑÑ‚Ð°Ñ‚ÑƒÑÐ° -->
 								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
 									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
 									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
@@ -107,27 +142,27 @@
 					</Grid>
 				</Border>
 
-				<!-- ÊÀÐÒÎ×ÊÀ 2 -->
+				<!-- ÐšÐÐ Ð¢ÐžÐ§ÐšÐ 2 -->
 				<Border Classes="GameCard">
 					<Grid RowDefinitions="140, *">
-						<!-- Âåðõíÿÿ ÷àñòü: Êàðòèíêà -->
+						<!-- Ð’ÐµÑ€Ñ…Ð½ÑÑ Ñ‡Ð°ÑÑ‚ÑŒ: ÐšÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ° -->
 						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
 							<Panel Background="#1F2A38">
-								<Image Source="D:\WillPcHandleGUI\WillPCHandle\nfsmw.webp" Stretch="UniformToFill"/>
+								<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\nfsmw.webp" Stretch="UniformToFill"/>
 							</Panel>
 						</Border>
 
-						<!-- Íèæíÿÿ ÷àñòü: Òåêñò -->
+						<!-- ÐÐ¸Ð¶Ð½ÑÑ Ñ‡Ð°ÑÑ‚ÑŒ: Ð¢ÐµÐºÑÑ‚ -->
 						<Border Grid.Row="1" Padding="12">
 							<Grid RowDefinitions="*, Auto">
-								<!-- Áëîê ñ îïèñàíèåì -->
+								<!-- Ð‘Ð»Ð¾Ðº Ñ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸ÐµÐ¼ -->
 								<StackPanel Grid.Row="0" Spacing="2">
 									<TextBlock Text="NFS MW" FontSize="14" FontWeight="Bold" Foreground="White"/>
 									<TextBlock Text="Race" FontSize="12" Foreground="#8B949E"/>
 									<TextBlock Text="The best race game" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
 								</StackPanel>
 
-								<!-- Ñòðîêà ñòàòóñà -->
+								<!-- Ð¡Ñ‚Ñ€Ð¾ÐºÐ° ÑÑ‚Ð°Ñ‚ÑƒÑÐ° -->
 								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
 									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
 									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
@@ -137,27 +172,27 @@
 					</Grid>
 				</Border>
 
-				<!-- ÊÀÐÒÎ×ÊÀ 3 -->
+				<!-- ÐšÐÐ Ð¢ÐžÐ§ÐšÐ 3 -->
 				<Border Classes="GameCard">
 					<Grid RowDefinitions="140, *">
-						<!-- Âåðõíÿÿ ÷àñòü: Êàðòèíêà -->
+						<!-- Ð’ÐµÑ€Ñ…Ð½ÑÑ Ñ‡Ð°ÑÑ‚ÑŒ: ÐšÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ° -->
 						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
 							<Panel Background="#1F2A38">
-								<Image Source="D:\WillPcHandleGUI\WillPCHandle\1234.png" Stretch="UniformToFill"/>
+								<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\1234.png" Stretch="UniformToFill"/>
 							</Panel>
 						</Border>
 
-						<!-- Íèæíÿÿ ÷àñòü: Òåêñò -->
+						<!-- ÐÐ¸Ð¶Ð½ÑÑ Ñ‡Ð°ÑÑ‚ÑŒ: Ð¢ÐµÐºÑÑ‚ -->
 						<Border Grid.Row="1" Padding="12">
 							<Grid RowDefinitions="*, Auto">
-								<!-- Áëîê ñ îïèñàíèåì -->
+								<!-- Ð‘Ð»Ð¾Ðº Ñ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸ÐµÐ¼ -->
 								<StackPanel Grid.Row="0" Spacing="2">
 									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
 									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
 									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
 								</StackPanel>
 
-								<!-- Ñòðîêà ñòàòóñà -->
+								<!-- Ð¡Ñ‚Ñ€Ð¾ÐºÐ° ÑÑ‚Ð°Ñ‚ÑƒÑÐ° -->
 								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
 									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
 									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
@@ -166,6 +201,8 @@
 						</Border>
 					</Grid>
 				</Border>
+				
+				
 
 				
 

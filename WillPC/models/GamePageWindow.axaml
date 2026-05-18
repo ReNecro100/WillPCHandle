@@ -5,7 +5,9 @@
         Width="1024"
         Height="768"
         CanResize="False"
+		Foreground ="White"
         WindowStartupLocation="CenterScreen"
+		
         Title="Game Page">
         
         
@@ -18,6 +20,9 @@
                 <Setter Property="Margin" Value="20,16,0,0"/>
                 <Setter Property="Width" Value="405"/>
                 <Setter Property="Height" Value="300"/>
+
+
+
               
                 <!--плавный переход фона  -->
                 <Setter Property="Transitions">
@@ -26,34 +31,57 @@
                         </Transitions>
                 </Setter>
         </Style>
+
+
+
+			<!--Стиль подвала-->
+			<Style Selector="Border.Footer">
+				<Setter Property="VerticalAlignment" Value="Bottom"/>
+				<Setter Property="Background" Value="#334E68"></Setter>
+				<Setter Property="Width" Value="1100"/>
+				<Setter Property="Height" Value="60"/>
+				<Setter Property ="CornerRadius" Value="15"/>
+			</Style>
+
+
+			<!---->
+			<Style Selector="Border.PhotoCard:pointerover">
+				<Setter Property="Background" Value="#416284"/>
+			</Style>
                 
                 
                 <Style Selector="Border.PhotoCard">
                         <Setter Property="HorizontalAlignment" Value="Right"></Setter>
-                        <Setter Property="VerticalAlignment" Value="Top"></Setter> 
-                        <Setter Property="Background" Value="#334E68"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+					    <Setter Property="Background" Value="Red"></Setter>
                         <Setter Property="CornerRadius" Value="15"></Setter>
                         <Setter Property="ClipToBounds" Value="True"/>
                         <Setter Property="Margin" Value="15"/>
                         <Setter Property="Width" Value="145"/>
                         <Setter Property="Height" Value="300"/>
+					    <Setter Property="RenderTransform" Value="scale(1.0)"/>
+					    <Setter Property= "RenderTransformOrigin" Value="50%, 50%"/>
+					    <Setter Property="Transitions">
+						<Transitions>
+							<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+						</Transitions>
+					</Setter>
+					<Style Selector="^:pointerover">
+						<Setter Property="RenderTransform" Value="scale(1.05)" />
+					</Style>
+				</Style>
+					
                         
-                        <!--плавный переход фона  -->
-                        <Setter Property="Transitions">
-                                <Transitions>
-                                        <BrushTransition Property="Background" Duration="0:0:0.2"/>
-                                </Transitions>
-                        </Setter>
-                </Style>
+                    
                 
         </Window.Styles>
-    
+	
         <Grid RowDefinitions="Auto, *, Auto">
                 <Border Grid.Row="0"
                         Height="245"
                         ClipToBounds="True">
                         <Grid>
-                                <Image Source="D:\WillPcHandleGUI\WillPCHandle\testhat.webp"
+                                <Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\testhat.webp"
                                        Stretch="UniformToFill"
                                        HorizontalAlignment="Stretch"
                                        VerticalAlignment="Center"/>
@@ -69,7 +97,7 @@
                 </Border>
                 
                 <Border Classes="GameCard"   Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <TextBlock TextWrapping="Wrap" Padding="5, 5,0,0">
+                        <TextBlock TextWrapping="Wrap" Padding="10, 5,0,0">
                                 <Run Text="В этом высокоскоростном научно-фантастическом шутере от первого лица вам предстоит примерить на себя роль оперативника элитного подразделения, заброшенного в самое сердце полуразрушенного мегаполиса будущего. Эксперимент с квантовой энергией вышел из-под контроля, открыв разломы в иные измерения, и теперь улицы наводнили легионы безжалостных тварей и искаженных мутантов"></Run>
                                 <LineBreak/>
                                 <Run Text="Системные требования:"/> 
@@ -93,14 +121,14 @@
                                         Columns="3"
                                         VerticalAlignment="Center">
                                         
-                                        <Border Classes="PhotoCard">
-                                                <Image Source="D:\WillPcHandleGUI\WillPCHandle\testhat.webp" Stretch="UniformToFill"></Image>
+                                        <Border Classes="PhotoCard"  >
+                                                <Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\testhat.webp" Stretch="UniformToFill"></Image>
                                         </Border>
                                         <Border Classes="PhotoCard">
-                                                <Image Source="D:\WillPcHandleGUI\WillPCHandle\testhat.webp" Stretch="UniformToFill"></Image>
+                                                <Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\testhat.webp" Stretch="UniformToFill"></Image>
                                         </Border>
-                                        <Border Classes="PhotoCard">
-                                                <Image Source="D:\WillPcHandleGUI\WillPCHandle\testhat.webp" Stretch="UniformToFill"></Image>
+                                        <Border Classes="PhotoCard" >
+                                                <Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\testhat.webp" Stretch="UniformToFill"></Image>
                                         </Border>
                                        
                                        
@@ -108,9 +136,15 @@
                         </ScrollViewer>
                         
                 </Border>
+			<Border Grid.Row="1" Classes="Footer">
+				<TextBlock Text="© 2026 WillPC Games. Все права защищены. Торговые марки Steam и Valve принадлежат их правообладателям." VerticalAlignment="Center" HorizontalAlignment="Center">
+					
+				</TextBlock>
+			</Border>
                 
                
         </Grid>
+	
         
         
         

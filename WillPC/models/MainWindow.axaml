@@ -12,6 +12,7 @@
         WindowStartupLocation="CenterScreen"
         Title="WillPC">
 
+	
 	<Window.Styles>
 
 		<!-- Стиль кнопки -->
@@ -91,8 +92,10 @@
 
 
 	<Grid RowDefinitions="Auto, *">
+		
 		<Border Grid.Row="0" Padding="10, 15" Background ="#1F2E3D"  ZIndex="1">
 			<Grid>
+				
 			<TextBlock Grid.Row="0" Text="Will PC Handle?" Foreground="White" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				<Button Click="OpenSteam" Background="Transparent" BorderThickness="0" Padding="0"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,15,30,5">
 					<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\Steam_logo.svg"
@@ -107,6 +110,7 @@
 	<Border Grid.Row="1"  Padding="20,0,20,20">
 		<ScrollViewer VerticalScrollBarVisibility="Auto" >
 			<UniformGrid
+				
 						 Columns="4"
 						 HorizontalAlignment="Center"
 						 VerticalAlignment="Top"
@@ -201,10 +205,40 @@
 						</Border>
 					</Grid>
 				</Border>
-				
+
+
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\1234.png" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
 				
 
-				
+		
 
 			</UniformGrid>
 		</ScrollViewer>

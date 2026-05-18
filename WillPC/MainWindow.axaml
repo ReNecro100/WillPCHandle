@@ -7,6 +7,6 @@
         Title="WillPC">
 	<StackPanel>
 		<TextBlock Name="Dat" HorizontalAlignment="Center"/>
-		<TextBlock Name="Response" HorizontalAlignment="Center"/>
+		<TextBlock Name="Response" HorizontalAlignment="Left"/>
 	</StackPanel>
 </Window>

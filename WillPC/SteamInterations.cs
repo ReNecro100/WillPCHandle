@@ -49,6 +49,7 @@ class SteamInterations
     {
         //https://feed.nuget.org/packages/SteamStorefrontAPI
         FeaturedApps featured = await Featured.GetAsync();
+        List<AppInfo> apps = featured.FeaturedWin;
         //Полезные поля:
         //Id
         //Name
@@ -56,7 +57,7 @@ class SteamInterations
         //LargeCapsuleImage
         //SmallCapsuleImage
         List<AppCardInfo> featuredGames = new List<AppCardInfo>();
-        foreach (var item in featured.FeaturedWin)
+        foreach (var item in apps)
         {
             AppCardInfo featuredGame = new AppCardInfo(item.Id, item.Name, item.LargeCapsuleImage);
             featuredGames.Add(featuredGame);

@@ -1,19 +1,21 @@
-﻿using SteamStorefrontAPI;
+﻿using Avalonia.Controls;
+using SteamStorefrontAPI;
 using SteamStorefrontAPI.Classes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WillPC;
 
 class AppCardInfo
 {
-    public int Id; //Айдишник отображаемого на главном экране приложения
-    public string Name; //Название приложения
-    public string Image; //Превьюшка приложения
-    public string Genre; //Жанр игры
+    public int Id { get; set; } //Айдишник отображаемого на главном экране приложения
+    public string Name { get; set; } //Название приложения
+    public string Image { get; set; } //Превьюшка приложения
+    public string Genre { get; set; } //Жанр игры
 
     public AppCardInfo(int id, string name, string image, string genre)
     {
@@ -25,14 +27,16 @@ class AppCardInfo
 }
 class AppTotalInfo
 {
-    public string HeaderImage; //Главный скрин
-    public string Name; //Название
-    public string Description; //Описание
-    public string MinimalRequirements; //Минимальные требования
-    public string RecommendedRequirements; //Рекомендованные требования
-    public List<Screenshot> Screenshots; //Скрины
-    public AppTotalInfo(string headerImage, string name, string description, string minimalRequirements, string recommendedRequirements, List<Screenshot> screenshots)
+    public int Id { get; set; } //Айдишник отображаемого приложения
+    public string HeaderImage { get; set; } //Главный скрин
+    public string Name { get; set; } //Название
+    public string Description { get; set; } //Описание
+    public string MinimalRequirements { get; set; } //Минимальные требования
+    public string RecommendedRequirements { get; set; } //Рекомендованные требования
+    public List<Screenshot> Screenshots { get; set; } //Скрины
+    public AppTotalInfo(int id, string headerImage, string name, string description, string? minimalRequirements, string? recommendedRequirements, List<Screenshot> screenshots)
     {
+        Id = id;
         HeaderImage = headerImage;
         Name = name;
         Description = description;
@@ -50,37 +54,51 @@ class SteamInterations
     public async Task<List<AppCardInfo>> GetFeaturedAppsList()
     {
         //https://feed.nuget.org/packages/SteamStorefrontAPI
-        try
+        List<AppCardInfo>? featuredGames = ManagerJSON.DeSerialize<AppCardInfo>("cache/featuredGames.json");
+        if (featuredGames is null)
         {
             FeaturedApps featured = await Featured.GetAsync();
             List<AppInfo> apps = featured.FeaturedWin;
 
-            List<AppCardInfo> featuredGames = new List<AppCardInfo>();
+            featuredGames = new List<AppCardInfo>();
             foreach (var item in apps)
             {
                 SteamApp app = await AppDetails.GetAsync(item.Id);
                 AppCardInfo featuredGame = new AppCardInfo(item.Id, item.Name, item.LargeCapsuleImage, app.Genres[0].ToString());
                 featuredGames.Add(featuredGame);
             }
-            ManagerJSON.Serialize<AppCardInfo>(featuredGames, "cache/featuredGames.json");
-            return featuredGames;
+            RefreshFeaturedAppsList(featuredGames);
         }
-        catch
-        {
-            return ManagerJSON.DeSerialize<AppCardInfo>("cache/featuredGames.json");
-        }
+        return featuredGames;
+    }
+    public void RefreshFeaturedAppsList(List<AppCardInfo> FeaturedAppsList)
+    {
+        ManagerJSON.Serialize<AppCardInfo>(FeaturedAppsList, "cache/featuredGames.json");
     }
     public async Task<AppTotalInfo> GetAppTotalInfo(int gameId)
     {
-        SteamApp app = await AppDetails.GetAsync(gameId);
-        AppTotalInfo game = new AppTotalInfo(
-            app.HeaderImage,
-            app.Name,
-            app.ShortDescription,
-            app.PcRequirements.Minimum,
-            app.PcRequirements.Recommended,
-            app.Screenshots
-            );
-        return game;
+        try
+        {
+            return ManagerJSON.DeSerialize<AppTotalInfo>($"cache/steamGame_{gameId}.json")[0];
+        }
+        catch
+        {
+            SteamApp app = await AppDetails.GetAsync(gameId);
+            AppTotalInfo game = new AppTotalInfo(
+                gameId,
+                app.HeaderImage,
+                app.Name,
+                app.ShortDescription,
+                Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum, "<[^>]*>", ""),
+                Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended, "<[^>]*>", ""),
+                app.Screenshots
+                );
+            RefreshAppTotalInfo(game);
+            return game;
+        }
+    }
+    public void RefreshAppTotalInfo(AppTotalInfo app)
+    {
+        ManagerJSON.Serialize<AppTotalInfo>(new List<AppTotalInfo> () { app }, $"cache/steamGame_{app.Id}.json");
     }
 }

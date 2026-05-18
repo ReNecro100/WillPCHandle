@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using System.Collections.Generic;
 
 namespace WillPC
 {
@@ -12,12 +13,16 @@ namespace WillPC
         }
         public async void Yes()
         {
-            Dat.Text = HardWareInteractons.GetPCData();
-            //SteamInterations steamInterations = new SteamInterations();
-            //foreach (var item in await steamInterations.GetFeaturedAppsList())
-            //{
-            //    Response.Text += item.Name;
-            //}
+            HardWareInteractons hardWareInteractons = new HardWareInteractons();
+            Dat.Text = hardWareInteractons.GetPCData();
+            SteamInterations steamInterations = new SteamInterations();
+            List<AppCardInfo> featuredGames = await steamInterations.GetFeaturedAppsList();
+            List<AppTotalInfo> gamesInfos = new List<AppTotalInfo>();
+            foreach (var item in featuredGames)
+            {
+                AppTotalInfo app = await steamInterations.GetAppTotalInfo(item.Id);
+                Response.Text += app.Name + "   - - - >   " + app.Description + '\n';
+            }
         }
         public void GetGigachatResponse()
         {

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 class HardWareInteractons
 {
-    public static string GetPCData()
+    public string GetPCData()
     {
         string PCdata = File.ReadAllText("cache/PCdata.txt");
         if (PCdata.Length<3)
@@ -40,13 +40,13 @@ class HardWareInteractons
                 PCdata += RuntimeInformation.OSDescription + '\n';
             }
             PCdata += "Версия DirectX: " + GetDirectXVersion() + '\n';
-            File.WriteAllText("cache/PCdata.txt", PCdata);
+            WritePCData(PCdata);
         }
         return PCdata;
     }
-    public void WritePCData()
+    public void WritePCData(string PCdata)
     {
-        File.WriteAllText("cache/PCdata.txt", GetPCData());
+        File.WriteAllText("cache/PCdata.txt", PCdata);
     }
     public static string GetDirectXVersion()
     {

@@ -13,11 +13,11 @@ namespace WillPC
         public async void Yes()
         {
             Dat.Text = HardWareInteractons.GetPCData();
-            SteamInterations steamInterations = new SteamInterations();
-            foreach (var item in await steamInterations.GetFeaturedAppsList())
-            {
-                Response.Text += item.Name;
-            }
+            //SteamInterations steamInterations = new SteamInterations();
+            //foreach (var item in await steamInterations.GetFeaturedAppsList())
+            //{
+            //    Response.Text += item.Name;
+            //}
         }
         public void GetGigachatResponse()
         {

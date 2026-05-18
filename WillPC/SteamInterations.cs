@@ -13,12 +13,14 @@ class AppCardInfo
     public int Id; //Айдишник отображаемого на главном экране приложения
     public string Name; //Название приложения
     public string Image; //Превьюшка приложения
+    public string Genre; //Жанр игры
 
-    public AppCardInfo(int id, string name, string image)
+    public AppCardInfo(int id, string name, string image, string genre)
     {
         Id = id;
         Name = name;
         Image = image;
+        Genre = genre;
     }
 }
 class AppTotalInfo
@@ -48,21 +50,25 @@ class SteamInterations
     public async Task<List<AppCardInfo>> GetFeaturedAppsList()
     {
         //https://feed.nuget.org/packages/SteamStorefrontAPI
-        FeaturedApps featured = await Featured.GetAsync();
-        List<AppInfo> apps = featured.FeaturedWin;
-        //Полезные поля:
-        //Id
-        //Name
-        //HeaderImage
-        //LargeCapsuleImage
-        //SmallCapsuleImage
-        List<AppCardInfo> featuredGames = new List<AppCardInfo>();
-        foreach (var item in apps)
+        try
         {
-            AppCardInfo featuredGame = new AppCardInfo(item.Id, item.Name, item.LargeCapsuleImage);
-            featuredGames.Add(featuredGame);
+            FeaturedApps featured = await Featured.GetAsync();
+            List<AppInfo> apps = featured.FeaturedWin;
+
+            List<AppCardInfo> featuredGames = new List<AppCardInfo>();
+            foreach (var item in apps)
+            {
+                SteamApp app = await AppDetails.GetAsync(item.Id);
+                AppCardInfo featuredGame = new AppCardInfo(item.Id, item.Name, item.LargeCapsuleImage, app.Genres[0].ToString());
+                featuredGames.Add(featuredGame);
+            }
+            ManagerJSON.Serialize<AppCardInfo>(featuredGames, "cache/featuredGames.json");
+            return featuredGames;
         }
-        return featuredGames;
+        catch
+        {
+            return ManagerJSON.DeSerialize<AppCardInfo>("cache/featuredGames.json");
+        }
     }
     public async Task<AppTotalInfo> GetAppTotalInfo(int gameId)
     {

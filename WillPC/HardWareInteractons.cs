@@ -10,10 +10,10 @@ using System.Runtime.InteropServices;
 class HardWareInteractons
 {
     private string PCdata;
-    public string GetPCData()
+    public string GetPCData(bool toUpdate = false)
     {
         PCdata = File.ReadAllText("cache/PCdata.txt");
-        if (PCdata.Length<3)
+        if (PCdata.Length<3 || toUpdate)
         {
             ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
             ManagementObjectSearcher gpu = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
@@ -41,13 +41,9 @@ class HardWareInteractons
                 PCdata += RuntimeInformation.OSDescription + '\n';
             }
             PCdata += "Версия DirectX: " + GetDirectXVersion() + '\n';
-            WritePCData(PCdata);
+            File.WriteAllText("cache/PCdata.txt", PCdata);
         }
         return PCdata;
-    }
-    public void WritePCData(string PCdata)
-    {
-        File.WriteAllText("cache/PCdata.txt", PCdata);
     }
     public static string GetDirectXVersion()
     {

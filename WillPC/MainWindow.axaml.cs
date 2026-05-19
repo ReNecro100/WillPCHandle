@@ -17,7 +17,7 @@ namespace WillPC
         //await steamInterations.GetAppTotalInfo(item.Id);
         //
         //Для получения конфигурации ПК:
-        //WritePCData()
+        //GetPCData(true)
         //
         //Ну, пользователя как-нибудь создашь
         //

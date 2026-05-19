@@ -16,13 +16,15 @@ class AppCardInfo
     public string Name { get; set; } //Название приложения
     public string Image { get; set; } //Превьюшка приложения
     public string Genre { get; set; } //Жанр игры
+    public string CompatibilityIndicator { get; set; } //Индикатор совместимости (ЗЕЛЁНЫЙ, ЖЁЛТЫЙ, КРАСНЫЙ, СЕРЫЙ)
 
-    public AppCardInfo(int id, string name, string image, string genre)
+    public AppCardInfo(int id, string name, string image, string genre,string compatibilityIndicator)
     {
         Id = id;
         Name = name;
         Image = image;
         Genre = genre;
+        CompatibilityIndicator = compatibilityIndicator;
     }
 }
 class AppTotalInfo
@@ -34,14 +36,14 @@ class AppTotalInfo
     public string MinimalRequirements { get; set; } //Минимальные требования
     public string RecommendedRequirements { get; set; } //Рекомендованные требования
     public List<Screenshot> Screenshots { get; set; } //Скрины
-    public AppTotalInfo(int id, string headerImage, string name, string description, string? minimalRequirements, string? recommendedRequirements, List<Screenshot> screenshots)
+    public AppTotalInfo(int id, string headerImage, string name, string description, string minimalRequirements, string recommendedRequirements, List<Screenshot> screenshots)
     {
         Id = id;
         HeaderImage = headerImage;
         Name = name;
         Description = description;
-        if (minimalRequirements is null) MinimalRequirements = "No requirements"; else MinimalRequirements = minimalRequirements;
-        if (recommendedRequirements is null) RecommendedRequirements = "No requirements"; else RecommendedRequirements = recommendedRequirements;
+        MinimalRequirements = minimalRequirements;
+        RecommendedRequirements = recommendedRequirements;
         Screenshots = screenshots;
     }
 }
@@ -64,7 +66,31 @@ class SteamInterations
             foreach (var item in apps)
             {
                 SteamApp app = await AppDetails.GetAsync(item.Id);
-                AppCardInfo featuredGame = new AppCardInfo(item.Id, item.Name, item.LargeCapsuleImage, app.Genres[0].ToString());
+
+                HardWareInteractons hardWareInteractons = new HardWareInteractons();
+                GigaChatInteractions gigaChatInteractions = new GigaChatInteractions();
+
+                string minimalRequirements = Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum, "<[^>]*>", "");
+                string recommendedRequirements = Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended, "<[^>]*>", "");
+                string compatibilityIndicator = gigaChatInteractions.GetGigaChatResponse(
+                    "Тебе нужно определить, подходит ли мой компьютер под минимальные или рекомендованные требования игры:\n" +
+                    $"Конфигурация моего компьютера: {hardWareInteractons.GetPCData()}\n" +
+                    $"Минимальные требования игры: {minimalRequirements}\n" +
+                    $"Рекомендованные требования игры: {recommendedRequirements}\n" +
+                    $"Формат ответа - только одно из четырёх слов:\n" +
+                    $"ЗЕЛЁНЫЙ - совместимость и с минимальными, и с рекомендованными требованиями игры\n" +
+                    $"ЖЁЛТЫЙ - совместимость только с минимальными требованиями игры\n" +
+                    $"КРАСНЫЙ - отсутствие совместимости\n" +
+                    $"СЕРЫЙ - требования не заданы" +
+                    "Если отсутствуют либо минимальные, либо рекомендованные требования, оценку совместимости проводи по тем требованиям, которые имеются. В таком случае ЗЕЛЁНЫЙ будет означать совместимость, а КРАСНЫЙ - её отсутствие\n"
+                );
+
+                AppCardInfo featuredGame = new AppCardInfo(
+                    item.Id, 
+                    item.Name, 
+                    item.LargeCapsuleImage, 
+                    app.Genres[0].ToString(),
+                    compatibilityIndicator);
                 featuredGames.Add(featuredGame);
             }
             RefreshFeaturedAppsList(featuredGames);

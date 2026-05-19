@@ -8,27 +8,44 @@ namespace WillPC
         public MainWindow()
         {
             InitializeComponent();
-            Yes();
-            GetGigachatResponse();
+            ShowMainPageCards();
         }
-        public async void Yes()
+
+        //Функции для кнопок:
+        //
+        //Для перехода на страницу с игрой (там функция инфу нужную возвращает):
+        //await steamInterations.GetAppTotalInfo(item.Id);
+        //
+        //Для получения конфигурации ПК:
+        //WritePCData()
+        //
+        //Ну, пользователя как-нибудь создашь
+        //
+        //Функция вывода карточек:
+        public async void ShowMainPageCards()
         {
-            HardWareInteractons hardWareInteractons = new HardWareInteractons();
-            Dat.Text = hardWareInteractons.GetPCData();
             SteamInterations steamInterations = new SteamInterations();
+            HardWareInteractons hardWareInteractons = new HardWareInteractons();
             List<AppCardInfo> featuredGames = await steamInterations.GetFeaturedAppsList();
-            List<AppTotalInfo> gamesInfos = new List<AppTotalInfo>();
             foreach (var item in featuredGames)
             {
-                AppTotalInfo app = await steamInterations.GetAppTotalInfo(item.Id);
-                Response.Text += app.Name + "   - - - >   " + app.Description + '\n';
+                //Тут бери информацию о карточках и выводи её:
+                //Name - Название приложения
+                //Image - Превьюшка приложения
+                //Genre - Жанр игры
+
+                //CompatibilityIndicator - одно из этих четырёх слов:
+                //- КРАСНЫЙ
+                //- ЖЁЛТЫЙ
+                //- ЗЕЛЁНЫЙ
+                //- СЕРЫЙ
+                //Тебе нужно  будет просто сделать так, чтобы индикатор подсвечивался соответствующим цветов. Я верю в тебя!!!1!1!!!!1!11!!!
+
+                //Собственно говоря, тут пиши алгоритм для изменения цвета индикатора
             }
+            Dat.Text = hardWareInteractons.GetPCData();
         }
-        public void GetGigachatResponse()
-        {
-            GigaChatInteractions gigaChatInteractions = new GigaChatInteractions();
-            //Response.Text = gigaChatInteractions.GetGigaChatResponse("Почему трава красная?");
-        }
+        //А какие ещё должны быть функции?
 
     }
 }

@@ -9,9 +9,10 @@ using System.Runtime.InteropServices;
 
 class HardWareInteractons
 {
+    private string PCdata;
     public string GetPCData()
     {
-        string PCdata = File.ReadAllText("cache/PCdata.txt");
+        PCdata = File.ReadAllText("cache/PCdata.txt");
         if (PCdata.Length<3)
         {
             ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");

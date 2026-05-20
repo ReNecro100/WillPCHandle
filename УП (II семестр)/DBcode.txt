@@ -1,0 +1,82 @@
+-- 1. Таблица GPU
+CREATE TABLE GPU (
+    id INT PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL,
+    RAM NVARCHAR(255)
+);
+
+-- 2. Таблица CPU
+CREATE TABLE CPU (
+    id INT PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL,
+    Cores INT,
+    Speed NVARCHAR(50)
+);
+
+-- 3. Таблица DirectX
+CREATE TABLE DirectX (
+    id INT PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL
+);
+
+-- 4. Таблица Config
+CREATE TABLE Config (
+    id INT PRIMARY KEY,
+    GPU INT,
+    CPU INT,
+    RAM NVARCHAR(255),
+    OS NVARCHAR(255),
+    DirectX INT,
+    FOREIGN KEY (GPU) REFERENCES GPU(id),
+    FOREIGN KEY (CPU) REFERENCES CPU(id),
+    FOREIGN KEY (DirectX) REFERENCES DirectX(id)
+);
+
+-- 5. Таблица HDD
+CREATE TABLE HDD (
+    id INT PRIMARY KEY,
+    Config INT NOT NULL,
+    Name NVARCHAR(255) NOT NULL,
+    FreeSpace NVARCHAR(255),
+    FOREIGN KEY (Config) REFERENCES Config(id)
+);
+
+-- 6. Таблица User
+CREATE TABLE [User] (
+    id INT PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL,
+    SteamLink NVARCHAR(500),
+    Config INT,
+    FOREIGN KEY (Config) REFERENCES Config(id)
+);
+
+-- 7. Таблица ApptotalInfo (основная информация об игре)
+CREATE TABLE ApptotalInfo (
+    id INT PRIMARY KEY,
+    HeaderImage NVARCHAR(500),
+    Name NVARCHAR(255) NOT NULL,
+    Description NVARCHAR(2096),
+    MinimalRequirements INT,
+    RecommendedRequirements INT
+);
+
+-- 8. Таблица AppCardInfo (карточка приложения) - связь 1:1 с ApptotalInfo
+CREATE TABLE AppCardInfo (
+    id INT PRIMARY KEY,
+    ApptotalInfoId INT NOT NULL UNIQUE,  -- UNIQUE обеспечивает связь 1:1
+    [User] INT NOT NULL,
+    Name NVARCHAR(255) NOT NULL,
+    Image NVARCHAR(500),
+    Genre NVARCHAR(255),
+    CompatibilityIndicator NVARCHAR(255),
+    FOREIGN KEY (ApptotalInfoId) REFERENCES ApptotalInfo(id),
+    FOREIGN KEY ([User]) REFERENCES [User](id)
+);
+
+-- 9. Таблица Screenshots
+CREATE TABLE Screenshots (
+    id INT PRIMARY KEY,
+    SteamGame INT NOT NULL,
+    [Path] NVARCHAR(500) NOT NULL,
+    FOREIGN KEY (SteamGame) REFERENCES ApptotalInfo(id)
+);

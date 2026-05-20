@@ -9,6 +9,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WillPC;
+using System.IO;
+using System.Net.Http;
 
 class AppCardInfo
 {
@@ -35,8 +37,8 @@ class AppTotalInfo
     public string Description { get; set; } //Описание
     public string MinimalRequirements { get; set; } //Минимальные требования
     public string RecommendedRequirements { get; set; } //Рекомендованные требования
-    public List<Screenshot> Screenshots { get; set; } //Скрины
-    public AppTotalInfo(int id, string headerImage, string name, string description, string minimalRequirements, string recommendedRequirements, List<Screenshot> screenshots)
+    public List<string> Screenshots { get; set; } //Скрины
+    public AppTotalInfo(int id, string headerImage, string name, string description, string minimalRequirements, string recommendedRequirements, List<string> screenshots)
     {
         Id = id;
         HeaderImage = headerImage;
@@ -110,6 +112,12 @@ class SteamInterations
         catch
         {
             SteamApp app = await AppDetails.GetAsync(gameId);
+            List<string> screenshots = new List<string>();
+            for (int i = 0; i < 3; i++)
+            {
+                GetAppScreenshots(app.Screenshots[i].PathFull, gameId, i+1);
+                screenshots.Add($"cache/{gameId}_{i+1}.jpg");
+            }
             AppTotalInfo game = new AppTotalInfo(
                 gameId,
                 app.HeaderImage,
@@ -117,7 +125,7 @@ class SteamInterations
                 app.ShortDescription,
                 Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum, "<[^>]*>", ""),
                 Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended, "<[^>]*>", ""),
-                app.Screenshots
+                screenshots
                 );
             RefreshAppTotalInfo(game);
             return game;
@@ -126,5 +134,13 @@ class SteamInterations
     public void RefreshAppTotalInfo(AppTotalInfo app)
     {
         ManagerJSON.Serialize<AppTotalInfo>(new List<AppTotalInfo> () { app }, $"cache/steamGame_{app.Id}.json");
+    }
+    public async void GetAppScreenshots(string fileURL, int gameId, int screenshotId)
+    {
+        using var httpClient = new HttpClient();
+        using var stream = await httpClient.GetStreamAsync(fileURL);
+        using var file = File.OpenWrite($"cache/{gameId}_{screenshotId}.jpg");
+
+        await stream.CopyToAsync(file);
     }
 }

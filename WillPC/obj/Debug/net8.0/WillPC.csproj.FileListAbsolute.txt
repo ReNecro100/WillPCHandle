@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 D:\Olszewski\WillPCHandle\WillPC\bin\Debug\net8.0\WillPC.exe
 D:\Olszewski\WillPCHandle\WillPC\bin\Debug\net8.0\WillPC.deps.json
 D:\Olszewski\WillPCHandle\WillPC\bin\Debug\net8.0\WillPC.runtimeconfig.json
@@ -213,7 +212,6 @@ C:\Users\Andrzej\Desktop\Всё за колледж фр\3 курс\УП (II с�
 C:\Users\Andrzej\Desktop\Всё за колледж фр\3 курс\УП (II семестр)\WillPCHandle\WillPC\bin\Debug\net8.0\SteamStorefrontAPI.dll
 D:\Olszewski\WillPCHandle\WillPC\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\Olszewski\WillPCHandle\WillPC\bin\Debug\net8.0\SteamStorefrontAPI.dll
-=======
 D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\WillPC\bin\Debug\net8.0\WillPC.exe
 D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\WillPC\bin\Debug\net8.0\WillPC.dll
 D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\WillPC\bin\Debug\net8.0\Avalonia.Base.dll
@@ -400,4 +398,3 @@ D:\WillPcHandleGUI\WillPCHandle\WillPC\obj\Debug\net8.0\refint\WillPC.dll
 D:\WillPcHandleGUI\WillPCHandle\WillPC\obj\Debug\net8.0\WillPC.pdb
 D:\WillPcHandleGUI\WillPCHandle\WillPC\obj\Debug\net8.0\WillPC.genruntimeconfig.cache
 D:\WillPcHandleGUI\WillPCHandle\WillPC\obj\Debug\net8.0\ref\WillPC.dll
->>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08

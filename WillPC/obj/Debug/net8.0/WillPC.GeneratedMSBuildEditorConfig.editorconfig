@@ -30,7 +30,7 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/Olszewski/WillPCHandle/WillPC/models/GamePageWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/Olszewski/WillPCHandle/WillPC/models/MainWindow.axaml]
+[D:/Olszewski/WillPCHandle/WillPC/models/MainWindowTest.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/Olszewski/WillPCHandle/WillPC/models/UserAgreementWindow.axaml]

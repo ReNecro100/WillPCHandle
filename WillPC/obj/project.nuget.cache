@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "GBLIIT1I2ow=",
   "success": true,
   "projectFilePath": "D:\\Olszewski\\WillPCHandle\\WillPC\\WillPC.csproj",
-=======
-  "dgSpecHash": "Ujpf5rS+RIo=",
-  "success": true,
-  "projectFilePath": "D:\\KarapetyanAA\\WillPCHandleProject\\WillPCHandle\\WillPC\\WillPC.csproj",
->>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
   "expectedPackageFiles": [
     "C:\\Users\\Ольшевскийав\\.nuget\\packages\\avalonia\\12.0.3\\avalonia.12.0.3.nupkg.sha512",
     "C:\\Users\\Ольшевскийав\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.25547.20250602\\avalonia.angle.windows.natives.2.1.25547.20250602.nupkg.sha512",
@@ -51,5 +45,15 @@
     "C:\\Users\\Ольшевскийав\\.nuget\\packages\\system.threading.accesscontrol\\10.0.8\\system.threading.accesscontrol.10.0.8.nupkg.sha512",
     "C:\\Users\\Ольшевскийав\\.nuget\\packages\\tmds.dbus.protocol\\0.92.0\\tmds.dbus.protocol.0.92.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "message": "Ошибка чтения файла кэша D:\\Olszewski\\WillPCHandle\\WillPC\\obj\\project.nuget.cache: '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
+      "projectPath": "D:\\Olszewski\\WillPCHandle\\WillPC\\WillPC.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\Olszewski\\WillPCHandle\\WillPC\\WillPC.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

@@ -5,9 +5,9 @@ using System.Diagnostics;
 
 namespace WillPC
 {
-    public partial class MainWindow : Window
+    public partial class MainWindowTest : Window
     {
-        public MainWindow()
+        public MainWindowTest()
         {
             InitializeComponent();
         }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WillPC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c846338ddd21bc5361a2068857672b9784ee6b0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11931113d18c69bf6d5b5df8234a5e2cf1496b83")]
 [assembly: System.Reflection.AssemblyProductAttribute("WillPC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WillPC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\WillPcHandle\\WillPC\\WillPC\\WillPC.csproj": {}
+    "D:\\Olszewski\\WillPCHandle\\WillPC\\WillPC.csproj": {}
   },
   "projects": {
-    "D:\\WillPcHandle\\WillPC\\WillPC\\WillPC.csproj": {
+    "D:\\Olszewski\\WillPCHandle\\WillPC\\WillPC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WillPcHandle\\WillPC\\WillPC\\WillPC.csproj",
+        "projectUniqueName": "D:\\Olszewski\\WillPCHandle\\WillPC\\WillPC.csproj",
         "projectName": "WillPC",
-        "projectPath": "D:\\WillPcHandle\\WillPC\\WillPC\\WillPC.csproj",
-        "packagesPath": "C:\\Users\\КарапетянАА\\.nuget\\packages\\",
-        "outputPath": "D:\\WillPcHandle\\WillPC\\WillPC\\obj\\",
+        "projectPath": "D:\\Olszewski\\WillPCHandle\\WillPC\\WillPC.csproj",
+        "packagesPath": "C:\\Users\\Ольшевскийав\\.nuget\\packages\\",
+        "outputPath": "D:\\Olszewski\\WillPCHandle\\WillPC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\КарапетянАА\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ольшевскийав\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -69,6 +69,18 @@
             "AvaloniaUI.DiagnosticsSupport": {
               "target": "Package",
               "version": "[2.2.1, )"
+            },
+            "SteamStorefrontAPI": {
+              "target": "Package",
+              "version": "[2.0.1.1371, )"
+            },
+            "System.Diagnostics.PerformanceCounter": {
+              "target": "Package",
+              "version": "[10.0.8, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[10.0.8, )"
             }
           },
           "imports": [

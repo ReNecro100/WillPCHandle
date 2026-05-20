@@ -1,6 +1,5 @@
 using Avalonia.Controls;
-using System;
-using System.Management;
+using System.Collections.Generic;
 
 namespace WillPC
 {
@@ -9,26 +8,44 @@ namespace WillPC
         public MainWindow()
         {
             InitializeComponent();
-            Yes();
+            ShowMainPageCards();
         }
-        public void Yes()
+
+        //Функции для кнопок:
+        //
+        //Для перехода на страницу с игрой (там функция инфу нужную возвращает):
+        //await steamInterations.GetAppTotalInfo(item.Id);
+        //
+        //Для получения конфигурации ПК:
+        //GetPCData(true)
+        //
+        //Ну, пользователя как-нибудь создашь
+        //
+        //Функция вывода карточек:
+        public async void ShowMainPageCards()
         {
-            ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            ManagementObjectSearcher gpu = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
-
-            foreach (ManagementObject c in cpu.Get())
+            SteamInterations steamInterations = new SteamInterations();
+            HardWareInteractons hardWareInteractons = new HardWareInteractons();
+            List<AppCardInfo> featuredGames = await steamInterations.GetFeaturedAppsList();
+            foreach (var item in featuredGames)
             {
-                Dat.Text = "Процессор: " + c["Name"] + '\n' + "Количество ядер: " + c["NumberOfCores"] + "Частота: " + c["MaxClockSpeed"] + " МГц" +'\n';
-            }
-            foreach (ManagementObject g in gpu.Get())
-            {
-                Dat.Text += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt32(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб"; //Name, Caption, VideoProcessor
-            }
-            //Для получения информации о жестких дисках(SELECT * FROM Win32_LogicalDisk)
+                //Тут бери информацию о карточках и выводи её:
+                //Name - Название приложения
+                //Image - Превьюшка приложения
+                //Genre - Жанр игры
 
-            //PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-            //Console.WriteLine("Свободная оперативная память: " + ramCounter.NextValue() + " МБ");
-            //Console.ReadLine();
+                //CompatibilityIndicator - одно из этих четырёх слов:
+                //- КРАСНЫЙ
+                //- ЖЁЛТЫЙ
+                //- ЗЕЛЁНЫЙ
+                //- СЕРЫЙ
+                //Тебе нужно  будет просто сделать так, чтобы индикатор подсвечивался соответствующим цветов. Я верю в тебя!!!1!1!!!!1!11!!!
+
+                //Собственно говоря, тут пиши алгоритм для изменения цвета индикатора
+            }
+            Dat.Text = hardWareInteractons.GetPCData();
         }
+        //А какие ещё должны быть функции?
+
     }
 }

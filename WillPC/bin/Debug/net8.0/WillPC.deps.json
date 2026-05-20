@@ -12,10 +12,14 @@
           "Avalonia.Desktop": "12.0.3",
           "Avalonia.Fonts.Inter": "12.0.3",
           "Avalonia.Themes.Fluent": "12.0.3",
+<<<<<<< HEAD
           "AvaloniaUI.DiagnosticsSupport": "2.2.1",
           "SteamStorefrontAPI": "2.0.1.1371",
           "System.Diagnostics.PerformanceCounter": "10.0.8",
           "System.Management": "10.0.8"
+=======
+          "AvaloniaUI.DiagnosticsSupport": "2.2.1"
+>>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
         },
         "runtime": {
           "WillPC.dll": {}
@@ -404,6 +408,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "Newtonsoft.Json/13.0.4": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -412,6 +417,8 @@
           }
         }
       },
+=======
+>>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
       "SkiaSharp/3.119.4-preview.1.1": {
         "dependencies": {
           "SkiaSharp.NativeAssets.Win32": "3.119.4-preview.1.1",
@@ -537,6 +544,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "SteamStorefrontAPI/2.0.1.1371": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.4"
@@ -610,6 +618,8 @@
           }
         }
       },
+=======
+>>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
       "System.IO.Pipelines/8.0.0": {
         "runtime": {
           "lib/net8.0/System.IO.Pipelines.dll": {
@@ -618,6 +628,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "System.Management/10.0.8": {
         "dependencies": {
           "System.CodeDom": "10.0.8"
@@ -661,6 +672,8 @@
           }
         }
       },
+=======
+>>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
       "Tmds.DBus.Protocol/0.92.0": {
         "dependencies": {
           "System.IO.Pipelines": "8.0.0"
@@ -848,6 +861,7 @@
       "path": "microsoft.io.recyclablememorystream/3.0.1",
       "hashPath": "microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Newtonsoft.Json/13.0.4": {
       "type": "package",
       "serviceable": true,
@@ -855,6 +869,8 @@
       "path": "newtonsoft.json/13.0.4",
       "hashPath": "newtonsoft.json.13.0.4.nupkg.sha512"
     },
+=======
+>>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
     "SkiaSharp/3.119.4-preview.1.1": {
       "type": "package",
       "serviceable": true,
@@ -890,6 +906,7 @@
       "path": "skiasharp.nativeassets.win32/3.119.4-preview.1.1",
       "hashPath": "skiasharp.nativeassets.win32.3.119.4-preview.1.1.nupkg.sha512"
     },
+<<<<<<< HEAD
     "SteamStorefrontAPI/2.0.1.1371": {
       "type": "package",
       "serviceable": true,
@@ -925,6 +942,8 @@
       "path": "system.diagnostics.performancecounter/10.0.8",
       "hashPath": "system.diagnostics.performancecounter.10.0.8.nupkg.sha512"
     },
+=======
+>>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
     "System.IO.Pipelines/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -932,6 +951,7 @@
       "path": "system.io.pipelines/8.0.0",
       "hashPath": "system.io.pipelines.8.0.0.nupkg.sha512"
     },
+<<<<<<< HEAD
     "System.Management/10.0.8": {
       "type": "package",
       "serviceable": true,
@@ -953,6 +973,8 @@
       "path": "system.threading.accesscontrol/10.0.8",
       "hashPath": "system.threading.accesscontrol.10.0.8.nupkg.sha512"
     },
+=======
+>>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
     "Tmds.DBus.Protocol/0.92.0": {
       "type": "package",
       "serviceable": true,

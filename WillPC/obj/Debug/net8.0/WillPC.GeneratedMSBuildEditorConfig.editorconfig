@@ -26,3 +26,12 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/Olszewski/WillPCHandle/WillPC/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Olszewski/WillPCHandle/WillPC/models/GamePageWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Olszewski/WillPCHandle/WillPC/models/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Olszewski/WillPCHandle/WillPC/models/UserAgreementWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "GBLIIT1I2ow=",
   "success": true,
   "projectFilePath": "D:\\Olszewski\\WillPCHandle\\WillPC\\WillPC.csproj",
+=======
+  "dgSpecHash": "Ujpf5rS+RIo=",
+  "success": true,
+  "projectFilePath": "D:\\KarapetyanAA\\WillPCHandleProject\\WillPCHandle\\WillPC\\WillPC.csproj",
+>>>>>>> d1bf9b84cde148003697c7b192612e2fa7189a08
   "expectedPackageFiles": [
     "C:\\Users\\Ольшевскийав\\.nuget\\packages\\avalonia\\12.0.3\\avalonia.12.0.3.nupkg.sha512",
     "C:\\Users\\Ольшевскийав\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.25547.20250602\\avalonia.angle.windows.natives.2.1.25547.20250602.nupkg.sha512",

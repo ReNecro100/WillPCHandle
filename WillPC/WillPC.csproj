@@ -20,4 +20,11 @@
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.8" />
     <PackageReference Include="System.Management" Version="10.0.8" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="models\MainWindow.axaml.cs">
+      <DependentUpon>MainWindow.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

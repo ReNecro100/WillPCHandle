@@ -19,6 +19,7 @@ namespace WillPC
             }
 
             base.OnFrameworkInitializationCompleted();
+
         }
     }
-}
+    }

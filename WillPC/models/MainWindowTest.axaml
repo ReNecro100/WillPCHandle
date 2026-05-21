@@ -1,0 +1,247 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="768" d:DesignHeight="1024"
+        x:Class="WillPC.MainWindowTest"
+		Foreground="White"
+        Background="#15212C"
+        Width="1024"
+        Height="768"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Title="WillPC">
+
+	
+	<Window.Styles>
+
+		<!-- Стиль кнопки -->
+		<Style Selector="Button.MybuttonStyle">
+			<Setter Property="Background" Value="#2F80ED"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Padding" Value="16,10"/>
+
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.15" Easing="CubicEaseOut"/>
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<!-- Кнопка: Наведение мыши -->
+		<Style Selector="Button.MybuttonStyle:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#4EA2FF"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+		<!-- Кнопка: Нажатие -->
+		<Style Selector="Button.MybuttonStyle:pressed /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#1B59B3"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+
+		<Style Selector="Border.GameCard">
+			<!-- Базовые размеры и геометрия -->
+			<Setter Property="Width" Value="180"/>
+			<Setter Property="Height" Value="240"/>
+			<Setter Property="Margin" Value="15"/>
+			<Setter Property="CornerRadius" Value="14"/>
+
+			<!-- ДИЗАЙН: Глубокий фон и аккуратная рамка -->
+			<Setter Property="Background" Value="#1A2836"/>
+			<Setter Property="BorderBrush" Value="#2D4357"/>
+			<Setter Property="BorderThickness" Value="1.2"/>
+
+			<!-- Отключаем ClipToBounds для корректного отображения тени и масштаба -->
+			<Setter Property="ClipToBounds" Value="False"/>
+			<Setter Property="BoxShadow" Value="0 4 12 0 #30000000"/>
+
+			<!-- Начальный масштаб -->
+			<Setter Property="RenderTransform" Value="scale(1.0)"/>
+			<Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+
+			<!-- Переходы (Опечатка исправлена на BoxShadowsTransition) -->
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<BrushTransition Property="BorderBrush" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<!-- ИСПРАВЛЕНО: Добавлена буква 's' в BoxShadowsTransition -->
+					<BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<!-- Карточка: Эффект наведения -->
+		<Style Selector="Border.GameCard:pointerover">
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="ZIndex" Value="10"/>
+
+			<Setter Property="Background" Value="#223547"/>
+			<Setter Property="BorderBrush" Value="#2F80ED"/>
+			<Setter Property="RenderTransform" Value="scale(1.05)"/>
+			<Setter Property="BoxShadow" Value="0 8 24 0 #352F80ED"/>
+		</Style>
+	</Window.Styles>
+
+
+
+
+
+	<Grid RowDefinitions="Auto, *">
+		
+		<Border Grid.Row="0" Padding="10, 15" Background ="#1F2E3D"  ZIndex="1">
+			<Grid>
+				
+			<TextBlock Grid.Row="0" Text="Will PC Handle?" Foreground="White" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				<Button Click="OpenSteam" Background="Transparent" BorderThickness="0" Padding="0"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,15,30,5">
+					<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\Steam_logo.svg"
+					  Width="50"
+					  Height="50"
+					  HorizontalAlignment="Right"
+					  VerticalAlignment="Center"/>
+				</Button>
+			
+			</Grid>
+		</Border>
+	<Border Grid.Row="1"  Padding="20,0,20,20">
+		<ScrollViewer VerticalScrollBarVisibility="Auto" >
+			<UniformGrid
+				
+						 Columns="4"
+						 HorizontalAlignment="Center"
+						 VerticalAlignment="Top"
+						 Margin="0,20,0,0">
+
+				<!-- КАРТОЧКА 1 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\farcry4.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Far Cry 4" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Shooter" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best Shooter" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+
+				<!-- КАРТОЧКА 2 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\nfsmw.webp" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="NFS MW" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Race" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best race game" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\1234.png" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+
+
+				<!-- КАРТОЧКА 3 -->
+				<Border Classes="GameCard">
+					<Grid RowDefinitions="140, *">
+						<!-- Верхняя часть: Картинка -->
+						<Border Grid.Row="0" CornerRadius="16,16,0,0" ClipToBounds="True">
+							<Panel Background="#1F2A38">
+								<Image Source="D:\KarapetyanAA\WillPCHandleProject\WillPCHandle\1234.png" Stretch="UniformToFill"/>
+							</Panel>
+						</Border>
+
+						<!-- Нижняя часть: Текст -->
+						<Border Grid.Row="1" Padding="12">
+							<Grid RowDefinitions="*, Auto">
+								<!-- Блок с описанием -->
+								<StackPanel Grid.Row="0" Spacing="2">
+									<TextBlock Text="Geometry Dash" FontSize="14" FontWeight="Bold" Foreground="White"/>
+									<TextBlock Text="Indi" FontSize="12" Foreground="#8B949E"/>
+									<TextBlock Text="The best indi game in the word" FontSize="11" Foreground="#8B949E" TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+
+								<!-- Строка статуса -->
+								<Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+									<TextBlock Grid.Column="0" Text="Status Indicator" FontSize="11" Foreground="#8B949E" VerticalAlignment="Center"/>
+									<Ellipse Grid.Column="1" Width="8" Height="8" Fill="#2ECC71" VerticalAlignment="Center"/>
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
+				
+
+		
+
+			</UniformGrid>
+		</ScrollViewer>
+</Border>
+	</Grid>
+</Window>

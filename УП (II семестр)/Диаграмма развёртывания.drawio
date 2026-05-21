@@ -1,0 +1,40 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram name="Страница — 1" id="-oLkC2WPyd8XbFoJFNXZ">
+    <mxGraphModel dx="1426" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Nyt6wrkEjaiMcptMLvrQ-1" value="&amp;lt;&amp;lt;Интерфейс&amp;gt;&amp;gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Доступ пользователя, отправка информации&lt;/div&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="350" y="420" width="140" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Nyt6wrkEjaiMcptMLvrQ-2" value="&amp;lt;&amp;lt;Steam API&amp;gt;&amp;gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Получение информации об играх&lt;/div&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="190" y="290" width="120" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Nyt6wrkEjaiMcptMLvrQ-3" value="&amp;lt;&amp;lt;Gigachat AI&amp;gt;&amp;gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Обработка информации об играх и компьютере, вывод результата&lt;/div&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="400" y="170" width="147" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Nyt6wrkEjaiMcptMLvrQ-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=90;exitDy=65;exitPerimeter=0;entryX=0;entryY=0;entryDx=60;entryDy=140;entryPerimeter=0;endArrow=none;startFill=0;" parent="1" source="Nyt6wrkEjaiMcptMLvrQ-2" target="Nyt6wrkEjaiMcptMLvrQ-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Nyt6wrkEjaiMcptMLvrQ-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=45;exitPerimeter=0;entryX=0;entryY=0;entryDx=110;entryDy=78.5;entryPerimeter=0;startArrow=none;startFill=0;endArrow=none;" parent="1" source="Nyt6wrkEjaiMcptMLvrQ-1" target="Nyt6wrkEjaiMcptMLvrQ-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r9n3Ld0nUmuHxWcFe9l3-4" value="&amp;lt;&amp;lt;Компьютер&amp;gt;&amp;gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="240" y="585" width="360" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Nyt6wrkEjaiMcptMLvrQ-7" value="&amp;lt;&amp;lt;Железо&amp;gt;&amp;gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Получение информации о конфигурации компьютера&lt;/div&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="270" y="635" width="140" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="r9n3Ld0nUmuHxWcFe9l3-1" value="&amp;lt;&amp;lt;База данных&amp;gt;&amp;gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Хранение кеша и данных пользователя&lt;/div&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="440" y="635" width="140" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="r9n3Ld0nUmuHxWcFe9l3-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=110;exitDy=75;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=175;entryPerimeter=0;endArrow=none;startFill=0;" parent="1" source="Nyt6wrkEjaiMcptMLvrQ-1" target="r9n3Ld0nUmuHxWcFe9l3-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="480" as="sourcePoint" />
+            <mxPoint x="365" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

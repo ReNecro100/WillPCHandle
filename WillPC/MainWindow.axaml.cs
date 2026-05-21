@@ -26,7 +26,7 @@ namespace WillPC
         {
             SteamInterations steamInterations = new SteamInterations();
             HardWareInteractons hardWareInteractons = new HardWareInteractons();
-            List<AppCardInfo> featuredGames = await steamInterations.GetFeaturedAppsList();
+            List<GameInfo> featuredGames = await steamInterations.GetFeaturedAppsList();
             foreach (var item in featuredGames)
             {
                 //Тут бери информацию о карточках и выводи её:

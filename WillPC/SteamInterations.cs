@@ -57,7 +57,7 @@ class SteamInterations
             featuredGames = new List<GameInfo>();
             foreach (var item in apps)
             {
-                await GetGameInfo(item.Id);
+                featuredGames.Add(await GetGameInfo(item.Id));
             }
             RefreshFeaturedAppsList(featuredGames);
         }
@@ -90,18 +90,18 @@ class SteamInterations
 
             string minimalRequirements = Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum.Replace("<li>", "\n"), "<[^>]*>", "");
             string recommendedRequirements = Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended.Replace("<li>", "\n"), "<[^>]*>", "");
-            string compatibilityIndicator = gigaChatInteractions.GetGigaChatResponse(
-                "Тебе нужно определить, подходит ли мой компьютер под минимальные или рекомендованные требования игры:\n" +
-                $"Конфигурация моего компьютера: {hardWareInteractons.GetPCData()}\n" +
-                $"Минимальные требования игры: {minimalRequirements}\n" +
-                $"Рекомендованные требования игры: {recommendedRequirements}\n" +
-                $"Формат ответа - только одно из четырёх слов:\n" +
-                $"ЗЕЛЁНЫЙ - совместимость и с минимальными, и с рекомендованными требованиями игры\n" +
-                $"ЖЁЛТЫЙ - совместимость только с минимальными требованиями игры\n" +
-                $"КРАСНЫЙ - отсутствие совместимости\n" +
+            string prompt = "Тебе нужно определить, подходит ли мой компьютер под минимальные или рекомендованные требования игры:" +
+                $"Конфигурация моего компьютера: {hardWareInteractons.GetPCData().Replace("\n", "")}" +
+                $"Минимальные требования игры: {minimalRequirements.Replace("\n", "")}" +
+                $"Рекомендованные требования игры: {recommendedRequirements.Replace("\n", "")}" +
+                $"Формат ответа - ТОЛЬКО ОДНО из приведённых ниже четырёх слов (без дополнительного описания):" +
+                $"ЗЕЛЁНЫЙ - совместимость и с минимальными, и с рекомендованными требованиями игры" +
+                $"ЖЁЛТЫЙ - совместимость только с минимальными требованиями игры" +
+                $"КРАСНЫЙ - отсутствие совместимости" +
                 $"СЕРЫЙ - требования не заданы" +
-                "Если отсутствуют либо минимальные, либо рекомендованные требования, оценку совместимости проводи по тем требованиям, которые имеются. В таком случае ЗЕЛЁНЫЙ будет означать совместимость, а КРАСНЫЙ - её отсутствие\n"
-            );
+                "Если отсутствуют либо минимальные, либо рекомендованные требования, оценку совместимости проводи по тем требованиям, которые имеются. В таком случае ЗЕЛЁНЫЙ будет означать совместимость, а КРАСНЫЙ - её отсутствие";
+            Trace.WriteLine(prompt);    
+            string compatibilityIndicator = gigaChatInteractions.GetGigaChatResponse(prompt);
 
             //Получение скринов
             List<string> screenshots = new List<string>();

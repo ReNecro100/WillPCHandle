@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -10,6 +11,11 @@ class GigaChatInteractions
     private const string ResponseUrl = "https://gigachat.devices.sberbank.ru";
     private string secretToken = "MDE5YTc4MTUtYjEwNS03ZDg2LThmMGQtNzYxMjgzYmFhMGRkOmU5N2NmZDI5LWEwYjQtNDMxZC1iYTI0LTQzYTYxODgzMjU2ZQ==";
 
+    public GigaChatInteractions()
+    {
+        Trace.Listeners.Add(new TextWriterTraceListener("log_neuro.txt"));
+        Trace.AutoFlush = true;
+    }
     public string GetGigaChatToken(string basicAuthToken)
     {
         var handler = new HttpClientHandler
@@ -77,12 +83,22 @@ class GigaChatInteractions
         using var response = client.Send(request);
         string resultText = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
+        Trace.WriteLine(resultText);
+
         using var jsonDoc = JsonDocument.Parse(resultText);
-        string content = jsonDoc.RootElement
+        string content;
+        try
+        {
+            content = jsonDoc.RootElement
             .GetProperty("choices")[0]
             .GetProperty("message")
             .GetProperty("content")
             .GetString() ?? string.Empty;
+        }
+        catch
+        {
+            content = "ERROR";
+        }
         return content;
     }
 }

@@ -12,36 +12,43 @@ class HardWareInteractons
     private string PCdata;
     public string GetPCData(bool toUpdate = false)
     {
-        PCdata = File.ReadAllText("cache/PCdata.txt");
-        if (PCdata.Length<3 || toUpdate)
+        try
         {
-            ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            ManagementObjectSearcher gpu = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
-            ManagementObjectSearcher hdd = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
+            PCdata = File.ReadAllText("cache/PCdata.txt");
+        }
+        catch
+        {
+            PCdata = "a";
+            if (PCdata.Length < 3 || toUpdate)
+            {
+                ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+                ManagementObjectSearcher gpu = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
+                ManagementObjectSearcher hdd = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
 
-            foreach (ManagementObject c in cpu.Get())
-            {
-                PCdata = "Процессор: " + c["Name"] + '\n' + "Количество ядер: " + c["NumberOfCores"] + '\n' + "Частота: " + c["MaxClockSpeed"] + " ГГц" + '\n';
-            }
-            foreach (ManagementObject g in gpu.Get())
-            {
-                PCdata += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб" + '\n'; //Name, Caption, VideoProcessor
-            }
-            foreach (ManagementObject h in hdd.Get())
-            {
-                PCdata += $"Место на диске {h["Name"]} " + Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + " Гб" + '\n'; //Name, Caption, VideoProcessor
-            }
-            //Для получения информации о жестких дисках(SELECT * FROM Win32_LogicalDisk)
+                foreach (ManagementObject c in cpu.Get())
+                {
+                    PCdata = "Процессор: " + c["Name"] + '\n' + "Количество ядер: " + c["NumberOfCores"] + '\n' + "Частота: " + c["MaxClockSpeed"] + " ГГц" + '\n';
+                }
+                foreach (ManagementObject g in gpu.Get())
+                {
+                    PCdata += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб" + '\n'; //Name, Caption, VideoProcessor
+                }
+                foreach (ManagementObject h in hdd.Get())
+                {
+                    PCdata += $"Место на диске {h["Name"]} " + Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + " Гб" + '\n'; //Name, Caption, VideoProcessor
+                }
+                //Для получения информации о жестких дисках(SELECT * FROM Win32_LogicalDisk)
 
-            PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-            PCdata += "Свободная оперативная память: " + ramCounter.NextValue() + " МБ" + '\n';
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
-            foreach (ManagementObject os in searcher.Get())
-            {
-                PCdata += RuntimeInformation.OSDescription + '\n';
+                PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+                PCdata += "Свободная оперативная память: " + ramCounter.NextValue() + " МБ" + '\n';
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
+                foreach (ManagementObject os in searcher.Get())
+                {
+                    PCdata += RuntimeInformation.OSDescription + '\n';
+                }
+                PCdata += "Версия DirectX: " + GetDirectXVersion() + '\n';
+                File.WriteAllText("cache/PCdata.txt", PCdata);
             }
-            PCdata += "Версия DirectX: " + GetDirectXVersion() + '\n';
-            File.WriteAllText("cache/PCdata.txt", PCdata);
         }
         return PCdata;
     }

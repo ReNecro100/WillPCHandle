@@ -1,32 +1,32 @@
 -- 1. Таблица GPU
 CREATE TABLE GPU (
-    id INT PRIMARY KEY,
-    Name NVARCHAR(255) NOT NULL,
-    RAM NVARCHAR(255)
+    id INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL,
+    RAM TEXT
 );
 
 -- 2. Таблица CPU
 CREATE TABLE CPU (
-    id INT PRIMARY KEY,
-    Name NVARCHAR(255) NOT NULL,
-    Cores INT,
-    Speed NVARCHAR(50)
+    id INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL,
+    Cores INTEGER,
+    Speed TEXT
 );
 
 -- 3. Таблица DirectX
 CREATE TABLE DirectX (
-    id INT PRIMARY KEY,
-    Name NVARCHAR(255) NOT NULL
+    id INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL
 );
 
 -- 4. Таблица Config
 CREATE TABLE Config (
-    id INT PRIMARY KEY,
-    GPU INT,
-    CPU INT,
-    RAM NVARCHAR(255),
-    OS NVARCHAR(255),
-    DirectX INT,
+    id INTEGER PRIMARY KEY,
+    GPU INTEGER,
+    CPU INTEGER,
+    RAM TEXT,
+    OS TEXT,
+    DirectX INTEGER,
     FOREIGN KEY (GPU) REFERENCES GPU(id),
     FOREIGN KEY (CPU) REFERENCES CPU(id),
     FOREIGN KEY (DirectX) REFERENCES DirectX(id)
@@ -34,49 +34,41 @@ CREATE TABLE Config (
 
 -- 5. Таблица HDD
 CREATE TABLE HDD (
-    id INT PRIMARY KEY,
-    Config INT NOT NULL,
-    Name NVARCHAR(255) NOT NULL,
-    FreeSpace NVARCHAR(255),
+    id INTEGER PRIMARY KEY,
+    Config INTEGER NOT NULL,
+    Name TEXT NOT NULL,
+    FreeSpace TEXT,
     FOREIGN KEY (Config) REFERENCES Config(id)
 );
 
 -- 6. Таблица User
 CREATE TABLE [User] (
-    id INT PRIMARY KEY,
-    Name NVARCHAR(255) NOT NULL,
-    SteamLink NVARCHAR(500),
-    Config INT,
+    id INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL,
+    Password TEXT NOT NULL,
+    SteamLink TEXT,
+    Config INTEGER,
     FOREIGN KEY (Config) REFERENCES Config(id)
 );
 
--- 7. Таблица ApptotalInfo (основная информация об игре)
+-- 7. Таблица ApptotalInfo
 CREATE TABLE ApptotalInfo (
-    id INT PRIMARY KEY,
-    HeaderImage NVARCHAR(500),
-    Name NVARCHAR(255) NOT NULL,
-    Description NVARCHAR(2096),
-    MinimalRequirements INT,
-    RecommendedRequirements INT
-);
-
--- 8. Таблица AppCardInfo (карточка приложения) - связь 1:1 с ApptotalInfo
-CREATE TABLE AppCardInfo (
-    id INT PRIMARY KEY,
-    ApptotalInfoId INT NOT NULL UNIQUE,  -- UNIQUE обеспечивает связь 1:1
-    [User] INT NOT NULL,
-    Name NVARCHAR(255) NOT NULL,
-    Image NVARCHAR(500),
-    Genre NVARCHAR(255),
-    CompatibilityIndicator NVARCHAR(255),
-    FOREIGN KEY (ApptotalInfoId) REFERENCES ApptotalInfo(id),
+    id INTEGER PRIMARY KEY,
+    [User] INTEGER NOT NULL,
+    HeaderImage TEXT,
+    Name TEXT NOT NULL,
+    Description TEXT,
+    Genre TEXT,
+    MinimalRequirements INTEGER,
+    RecommendedRequirements INTEGER,
+    CompatibilityIndicator TEXT,
     FOREIGN KEY ([User]) REFERENCES [User](id)
 );
 
--- 9. Таблица Screenshots
+-- 8. Таблица Screenshots
 CREATE TABLE Screenshots (
-    id INT PRIMARY KEY,
-    SteamGame INT NOT NULL,
-    [Path] NVARCHAR(500) NOT NULL,
+    id INTEGER PRIMARY KEY,
+    SteamGame INTEGER NOT NULL,
+    [Path] TEXT NOT NULL,
     FOREIGN KEY (SteamGame) REFERENCES ApptotalInfo(id)
 );

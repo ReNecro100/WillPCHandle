@@ -52,6 +52,7 @@ class AppTotalInfo
 class SteamInterations
 {
     public SteamInterations() {
+        Directory.CreateDirectory("cache");
         Trace.Listeners.Add(new TextWriterTraceListener("log_steam.txt"));
         Trace.AutoFlush = true;
     }
@@ -113,15 +114,24 @@ class SteamInterations
         {
             SteamApp app = await AppDetails.GetAsync(gameId);
             List<string> screenshots = new List<string>();
-            GetAppScreenshots(app.HeaderImage, gameId, 0);
-            for (int i = 0; i < 3; i++)
+            string headerImagePath = $"cache/{gameId}_0.jpg";
+            await GetAppScreenshots(app.HeaderImage, gameId, 0);
+
+            int screenshotsCount = app.Screenshots is null ? 0 : Math.Min(3, app.Screenshots.Count);
+            for (int i = 0; i < screenshotsCount; i++)
             {
                 await GetAppScreenshots(app.Screenshots[i].PathFull, gameId, i+1);
                 screenshots.Add($"cache/{gameId}_{i+1}.jpg");
             }
+
+            while (screenshots.Count < 3)
+            {
+                screenshots.Add(headerImagePath);
+            }
+
             AppTotalInfo game = new AppTotalInfo(
                 gameId,
-                $"cache/{gameId}_0.jpg",
+                headerImagePath,
                 app.Name,
                 app.ShortDescription,
                 Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum.Replace("<li>", "\n"), "<[^>]*>", ""),
@@ -140,7 +150,7 @@ class SteamInterations
     {
         using var httpClient = new HttpClient();
         using var stream = await httpClient.GetStreamAsync(fileURL);
-        using var file = File.OpenWrite($"cache/{gameId}_{screenshotId}.jpg");
+        using var file = File.Create($"cache/{gameId}_{screenshotId}.jpg");
 
         await stream.CopyToAsync(file);
     }

@@ -1,0 +1,3 @@
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SteamInterations.GetAppTotalInfo(Int32 gameId) in D:\WillPcHandleGUI\WillPCHandle\WillPC\SteamInterations.cs:line 118
+   at WillPC.GamePageWindow.ShowAppTotalInfo() in D:\WillPcHandleGUI\WillPCHandle\WillPC\models\GamePageWindow.axaml.cs:line 24

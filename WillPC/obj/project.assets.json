@@ -2108,28 +2108,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Andrzej\\.nuget\\packages\\": {}
+    "C:\\Users\\Arseniy\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Andrzej\\Desktop\\Всё за колледж фр\\3 курс\\УП (II семестр)\\WillPCHandle\\WillPC\\WillPC.csproj",
+      "projectUniqueName": "D:\\WillPcHandleGUI\\WillPCHandle\\WillPC\\WillPC.csproj",
       "projectName": "WillPC",
-      "projectPath": "C:\\Users\\Andrzej\\Desktop\\Всё за колледж фр\\3 курс\\УП (II семестр)\\WillPCHandle\\WillPC\\WillPC.csproj",
-      "packagesPath": "C:\\Users\\Andrzej\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Andrzej\\Desktop\\Всё за колледж фр\\3 курс\\УП (II семестр)\\WillPCHandle\\WillPC\\obj\\",
+      "projectPath": "D:\\WillPcHandleGUI\\WillPCHandle\\WillPC\\WillPC.csproj",
+      "packagesPath": "C:\\Users\\Arseniy\\.nuget\\packages\\",
+      "outputPath": "D:\\WillPcHandleGUI\\WillPCHandle\\WillPC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Andrzej\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Arseniy\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.pkg.github.com/ReNecro100/index.json": {}
+        "https://nuget.pkg.github.com/USERNAME/index.json": {},
+        "https://nuget.pkg.github.com/geshtalt111/index.json": {}
       },
       "frameworks": {
         "net8.0": {
@@ -2202,7 +2201,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

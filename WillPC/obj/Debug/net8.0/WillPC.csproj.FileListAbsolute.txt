@@ -398,3 +398,17 @@ D:\WillPcHandleGUI\WillPCHandle\WillPC\obj\Debug\net8.0\refint\WillPC.dll
 D:\WillPcHandleGUI\WillPCHandle\WillPC\obj\Debug\net8.0\WillPC.pdb
 D:\WillPcHandleGUI\WillPCHandle\WillPC\obj\Debug\net8.0\WillPC.genruntimeconfig.cache
 D:\WillPcHandleGUI\WillPCHandle\WillPC\obj\Debug\net8.0\ref\WillPC.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\SteamStorefrontAPI.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\System.CodeDom.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\System.Diagnostics.PerformanceCounter.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\System.Management.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\System.Threading.AccessControl.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.PerformanceCounter.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Management.dll
+D:\WillPcHandleGUI\WillPCHandle\WillPC\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Threading.AccessControl.dll

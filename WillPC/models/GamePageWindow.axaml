@@ -134,7 +134,7 @@
                         Height="245"
                         ClipToBounds="True">
                         <Grid>
-                                <Image Source="D:\Olszewski\WillPCHandle\WillPC\pics\testhat.webp"
+                                <Image Name="AppTotalInfoHeaderImage"
                                        Stretch="UniformToFill"
                                        HorizontalAlignment="Stretch"
                                        VerticalAlignment="Center"/>
@@ -160,14 +160,14 @@
                                         Columns="3"
                                         VerticalAlignment="Center">
                                         
-                                        <Border Classes="PhotoCard" ClipToBounds="False"  >
-                                                <Image Source="D:\Olszewski\WillPCHandle\WillPC\pics\testhat.webp" Stretch="UniformToFill"></Image>
+                                        <Border Classes="PhotoCard" ClipToBounds="False" >
+                                                <Image Name="AppTotalInfoScreenshot1" Stretch="UniformToFill"></Image>
                                         </Border>
                                         <Border Classes="PhotoCard">
-                                                <Image Source="D:\Olszewski\WillPCHandle\WillPC\pics\testhat.webp" Stretch="UniformToFill"></Image>
+												<Image Name="AppTotalInfoScreenshot2" Stretch="UniformToFill"></Image>
                                         </Border>
                                         <Border Classes="PhotoCard" >
-                                                <Image Source="D:\Olszewski\WillPCHandle\WillPC\pics\testhat.webp" Stretch="UniformToFill"></Image>
+                                                <Image Name="AppTotalInfoScreenshot3" Stretch="UniformToFill"></Image>
                                         </Border>
                                        
                                        

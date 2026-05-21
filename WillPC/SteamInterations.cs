@@ -71,9 +71,9 @@ class SteamInterations
 
                 HardWareInteractons hardWareInteractons = new HardWareInteractons();
                 GigaChatInteractions gigaChatInteractions = new GigaChatInteractions();
-
-                string minimalRequirements = Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum, "<[^>]*>", "");
-                string recommendedRequirements = Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended, "<[^>]*>", "");
+                
+                string minimalRequirements = Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum.Replace("<li>", "\n"), "<[^>]*>", "");
+                string recommendedRequirements = Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended.Replace("<li>", "\n"), "<[^>]*>", "");
                 string compatibilityIndicator = gigaChatInteractions.GetGigaChatResponse(
                     "Тебе нужно определить, подходит ли мой компьютер под минимальные или рекомендованные требования игры:\n" +
                     $"Конфигурация моего компьютера: {hardWareInteractons.GetPCData()}\n" +
@@ -113,18 +113,19 @@ class SteamInterations
         {
             SteamApp app = await AppDetails.GetAsync(gameId);
             List<string> screenshots = new List<string>();
+            GetAppScreenshots(app.HeaderImage, gameId, 0);
             for (int i = 0; i < 3; i++)
             {
-                GetAppScreenshots(app.Screenshots[i].PathFull, gameId, i+1);
+                await GetAppScreenshots(app.Screenshots[i].PathFull, gameId, i+1);
                 screenshots.Add($"cache/{gameId}_{i+1}.jpg");
             }
             AppTotalInfo game = new AppTotalInfo(
                 gameId,
-                app.HeaderImage,
+                $"cache/{gameId}_0.jpg",
                 app.Name,
                 app.ShortDescription,
-                Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum, "<[^>]*>", ""),
-                Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended, "<[^>]*>", ""),
+                Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum.Replace("<li>", "\n"), "<[^>]*>", ""),
+                Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended.Replace("<li>", "\n"), "<[^>]*>", ""),
                 screenshots
                 );
             RefreshAppTotalInfo(game);
@@ -135,7 +136,7 @@ class SteamInterations
     {
         ManagerJSON.Serialize<AppTotalInfo>(new List<AppTotalInfo> () { app }, $"cache/steamGame_{app.Id}.json");
     }
-    public async void GetAppScreenshots(string fileURL, int gameId, int screenshotId)
+    public async Task GetAppScreenshots(string fileURL, int gameId, int screenshotId)
     {
         using var httpClient = new HttpClient();
         using var stream = await httpClient.GetStreamAsync(fileURL);

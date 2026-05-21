@@ -1,15 +1,1 @@
-[
-    {
-        "Id": 1602000,
-        "HeaderImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1602000/cbc94ceae1a9ff656798b6248b0d197c3eb23856/header_alt_assets_8.jpg?t=1778839230",
-        "Name": "Hotel Architect",
-        "Description": "Step into the shoes of a hotel owner as you design, build, and manage grand hotels around the world. Juggle demanding guests, frantic logistics, and plenty of unexpected surprises in Hotel Architect; the ultimate hotel construction and tycoon management game!",
-        "MinimalRequirements": "Minimum:Requires a 64-bit processor and operating systemOS: Windows 10Processor: Intel Core i5-7500, AMD Ryzen 5 1600Memory: 8 GB RAMGraphics: Intel Iris Xe Graphics, NVIDIA GeForce GTX 1050, AMD Radeon R9 280DirectX: Version 12Storage: 5 GB available spaceAdditional Notes: 30 FPS Average, 1080p. DirectX12 Required",
-        "RecommendedRequirements": "Recommended:Requires a 64-bit processor and operating systemOS: Windows 11Processor: Intel Core i7-7700, AMD Ryzen 5 7500FMemory: 16 GB RAMGraphics: Intel ARC A750, NVIDIA GeForce RTX 2070, AMD Radeon RX 6600-XTDirectX: Version 12Storage: 5 GB available spaceAdditional Notes: 60 FPS Average, 4K, DirectX12 Required",
-        "Screenshots": [
-            "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1602000/5d9c10bf44e5e3a920690642c5347c5ca1c8250a/ss_5d9c10bf44e5e3a920690642c5347c5ca1c8250a.600x338.jpg?t=1778839230",
-            "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1602000/5d9c10bf44e5e3a920690642c5347c5ca1c8250a/ss_5d9c10bf44e5e3a920690642c5347c5ca1c8250a.600x338.jpg?t=1778839230",
-            "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1602000/5d9c10bf44e5e3a920690642c5347c5ca1c8250a/ss_5d9c10bf44e5e3a920690642c5347c5ca1c8250a.600x338.jpg?t=1778839230"
-        ]
-    }
-]
+[{"Id":1602000,"HeaderImage":"cache/1602000_0.jpg","Name":"Hotel Architect","Description":"Step into the shoes of a hotel owner as you design, build, and manage grand hotels around the world. Juggle demanding guests, frantic logistics, and plenty of unexpected surprises in Hotel Architect; the ultimate hotel construction and tycoon management game!","MinimalRequirements":"Minimum:\nRequires a 64-bit processor and operating system\nOS: Windows 10\nProcessor: Intel Core i5-7500, AMD Ryzen 5 1600\nMemory: 8 GB RAM\nGraphics: Intel Iris Xe Graphics, NVIDIA GeForce GTX 1050, AMD Radeon R9 280\nDirectX: Version 12\nStorage: 5 GB available space\nAdditional Notes: 30 FPS Average, 1080p. DirectX12 Required","RecommendedRequirements":"Recommended:\nRequires a 64-bit processor and operating system\nOS: Windows 11\nProcessor: Intel Core i7-7700, AMD Ryzen 5 7500F\nMemory: 16 GB RAM\nGraphics: Intel ARC A750, NVIDIA GeForce RTX 2070, AMD Radeon RX 6600-XT\nDirectX: Version 12\nStorage: 5 GB available space\nAdditional Notes: 60 FPS Average, 4K, DirectX12 Required","Screenshots":["cache/1602000_1.jpg","cache/1602000_2.jpg","cache/1602000_3.jpg"]}]

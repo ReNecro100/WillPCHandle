@@ -3,6 +3,8 @@ using Avalonia.Controls.Documents;
 using Avalonia.Interactivity;
 using System;
 using System.Diagnostics;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace WillPC
 {
@@ -19,6 +21,10 @@ namespace WillPC
             AppTotalInfo game = await steamInterations.GetAppTotalInfo(1602000);
             AppTotalInfoName.Text = game.Name;
             AppTotalInfoDescription.Text = game.Description + '\n'+game.MinimalRequirements +'\n' +game.RecommendedRequirements;
+            AppTotalInfoScreenshot1.Source = new Bitmap(game.Screenshots[0]);
+            AppTotalInfoScreenshot2.Source = new Bitmap(game.Screenshots[1]);
+            AppTotalInfoScreenshot3.Source = new Bitmap(game.Screenshots[2]);
+            AppTotalInfoHeaderImage.Source = new Bitmap(game.HeaderImage);
         }
         //<Run Text = "В этом высокоскоростном научно-фантастическом шутере от первого лица вам предстоит примерить на себя роль оперативника элитного подразделения, заброшенного в самое сердце полуразрушенного мегаполиса будущего. Эксперимент с квантовой энергией вышел из-под контроля, открыв разломы в иные измерения, и теперь улицы наводнили легионы безжалостных тварей и искаженных мутантов" ></ Run >
         //                        < LineBreak />

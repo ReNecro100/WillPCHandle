@@ -91,9 +91,9 @@ class SteamInterations
             string minimalRequirements = Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum.Replace("<li>", "\n"), "<[^>]*>", "");
             string recommendedRequirements = Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended.Replace("<li>", "\n"), "<[^>]*>", "");
             string prompt = "Тебе нужно определить, подходит ли мой компьютер под минимальные или рекомендованные требования игры:" +
-                $"Конфигурация моего компьютера: {hardWareInteractons.GetPCData().Replace("\n", "")}" +
-                $"Минимальные требования игры: {minimalRequirements.Replace("\n", "")}" +
-                $"Рекомендованные требования игры: {recommendedRequirements.Replace("\n", "")}" +
+                $"Конфигурация моего компьютера: {hardWareInteractons.GetPCData(1)}" +
+                $"Минимальные требования игры: {minimalRequirements}" +
+                $"Рекомендованные требования игры: {recommendedRequirements}" +
                 $"Формат ответа - ТОЛЬКО ОДНО из приведённых ниже четырёх слов (без дополнительного описания):" +
                 $"ЗЕЛЁНЫЙ - совместимость и с минимальными, и с рекомендованными требованиями игры" +
                 $"ЖЁЛТЫЙ - совместимость только с минимальными требованиями игры" +

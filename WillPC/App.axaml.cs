@@ -15,7 +15,7 @@ namespace WillPC
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindowTest();//GamePageWindow
+                desktop.MainWindow = new MainWindow();//GamePageWindow
             }
 
             base.OnFrameworkInitializationCompleted();

@@ -71,7 +71,7 @@ class GigaChatInteractions
             ""messages"": [
                 {{
                     ""role"": ""user"",
-                    ""content"": ""{prompt}""
+                    ""content"": ""{prompt.Replace("\n", "")}""
                 }}
             ],
             ""stream"": false,

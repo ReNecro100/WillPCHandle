@@ -26,24 +26,8 @@ namespace WillPC
         {
             SteamInterations steamInterations = new SteamInterations();
             HardWareInteractons hardWareInteractons = new HardWareInteractons();
-            List<GameInfo> featuredGames = await steamInterations.GetFeaturedAppsList();
-            foreach (var item in featuredGames)
-            {
-                //Тут бери информацию о карточках и выводи её:
-                //Name - Название приложения
-                //Image - Превьюшка приложения
-                //Genre - Жанр игры
-
-                //CompatibilityIndicator - одно из этих четырёх слов:
-                //- КРАСНЫЙ
-                //- ЖЁЛТЫЙ
-                //- ЗЕЛЁНЫЙ
-                //- СЕРЫЙ
-                //Тебе нужно  будет просто сделать так, чтобы индикатор подсвечивался соответствующим цветов. Я верю в тебя!!!1!1!!!!1!11!!!
-
-                //Собственно говоря, тут пиши алгоритм для изменения цвета индикатора
-            }
-            Dat.Text = hardWareInteractons.GetPCData();
+            
+            Dat.Text = hardWareInteractons.GetPCData(1);
         }
         //А какие ещё должны быть функции?
 

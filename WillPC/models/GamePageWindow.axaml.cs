@@ -1,53 +1,91 @@
 using Avalonia.Controls;
-using Avalonia.Controls.Documents;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
 using Avalonia.Media.Transformation;
-using Avalonia.Platform;
 using Avalonia.Threading;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace WillPC
 {
     public partial class GamePageWindow : Window
     {
-        public GamePageWindow()
+        private readonly int _gameId;
+        private readonly SteamInterations _steamInterations = new();
+
+        public GamePageWindow() : this(730)
         {
-            InitializeComponent();
-            ShowAppTotalInfo();
         }
-        public async void ShowAppTotalInfo()
+
+        public GamePageWindow(int gameId)
+        {
+            _gameId = gameId;
+            InitializeComponent();
+            _ = ShowAppTotalInfoAsync();
+        }
+
+        private async Task ShowAppTotalInfoAsync()
         {
             try
             {
-                SteamInterations steamInterations = new SteamInterations();
-                AppTotalInfo game = await steamInterations.GetAppTotalInfo(2483190);
+                AppTotalInfo game = await _steamInterations.GetAppTotalInfo(_gameId);
+
                 AppTotalInfoName.Text = game.Name;
-                AppTotalInfoDescription.Text = game.Description + '\n'+game.MinimalRequirements +'\n' +game.RecommendedRequirements;
+                AppTotalInfoDescription.Text =
+                    game.Description + "\n\n" +
+                    "Минимальные требования:\n" + game.MinimalRequirements + "\n\n" +
+                    "Рекомендованные требования:\n" + game.RecommendedRequirements;
+
+                AppTotalInfoHeaderImage.Source = new Bitmap(game.HeaderImage);
                 AppTotalInfoScreenshot1.Source = new Bitmap(game.Screenshots[0]);
                 AppTotalInfoScreenshot2.Source = new Bitmap(game.Screenshots[1]);
                 AppTotalInfoScreenshot3.Source = new Bitmap(game.Screenshots[2]);
-                AppTotalInfoHeaderImage.Source = new Bitmap(game.HeaderImage);
+
+                string compatibility = await Task.Run(() => _steamInterations.GetCompatibilityIndicator(game));
+                SetCompatibilityBadge(compatibility);
             }
             catch (Exception ex)
             {
                 File.WriteAllText("game_page_error.txt", ex.ToString());
                 AppTotalInfoName.Text = "Ошибка загрузки";
                 AppTotalInfoDescription.Text = ex.Message;
+                SetCompatibilityBadge("СЕРЫЙ");
             }
         }
-        //<Run Text = "� ���� ���������������� ������-�������������� ������ �� ������� ���� ��� ��������� ��������� �� ���� ���� ������������ �������� �������������, ������������ � ����� ������ ���������������� ���������� ��������. ����������� � ��������� �������� ����� ��-��� ��������, ������ ������� � ���� ���������, � ������ ����� ��������� ������� ������������ ������ � ���������� ��������" ></ Run >
-        //                        < LineBreak />
-        //                        < Run Text="��������� ����������:"/> 
-        //                        <Run Text = "10 (64-���)" />
-        //                        < LineBreak />
-        //                        < Run Text ="���������: Intel Core i5-750 (2.6 ���) ��� AMD Phenom II X4 955 (3.2 ���)"/>
-        //                        <LineBreak/>
+
+        private void BackToMain(object? sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+            if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow = mainWindow;
+            }
+
+            mainWindow.Show();
+            Close();
+        }
+
+        private void SetCompatibilityBadge(string compatibility)
+        {
+            string normalized = SteamInterations.NormalizeCompatibilityIndicator(compatibility);
+            CompatibilityText.Text = normalized;
+
+            CompatibilityBadge.Background = normalized switch
+            {
+                "ЗЕЛЁНЫЙ" => Brush.Parse("#2BD66F"),
+                "ЖЁЛТЫЙ" => Brush.Parse("#FFD166"),
+                "КРАСНЫЙ" => Brush.Parse("#FF4D4D"),
+                _ => Brush.Parse("#7E8A96")
+            };
+
+            CompatibilityText.Foreground = normalized == "ЖЁЛТЫЙ"
+                ? Brush.Parse("#15212C")
+                : Brushes.White;
+        }
 
         private void OpenPhotoPreview(object? sender, PointerPressedEventArgs e)
         {
@@ -100,13 +138,5 @@ namespace WillPC
             PhotoPreviewOverlay.IsVisible = false;
             PhotoPreviewImage.Source = null;
         }
-        //                        <Run Text = "����������� ������: 4 �� ���" />
-        //                        < LineBreak />
-        //                        ����������: NVIDIA GeForce GTX 460 ��� AMD Radeon HD 5850 (1 �� VRAM)
-        //                        <LineBreak/>
-        //                        DirectX: ������ 11
-        //                        <LineBreak/>
-        //                        ����� �� �����: 30 �� ���������� ������������"
-        //                        <LineBreak/>
     }
 }

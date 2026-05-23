@@ -1,75 +1,99 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="768" d:DesignHeight="1024"
         x:Class="WillPC.UserAgreementWindow"
         Background="#15212C"
         Width="1024"
         Height="768"
         Foreground="White"
         CanResize="False"
-        SystemDecorations="None"
+        WindowDecorations="None"
         WindowStartupLocation="CenterScreen"
         Title="WillPC">
 
-	<Window.Styles>
-		<Style Selector="Button.Agree">
-			<Setter Property="Background" Value="#2F80ED"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="FontWeight" Value="SemiBold"/>
-			<Setter Property="CornerRadius" Value="8"/>
-			<Setter Property="Padding" Value="16,10"/>
-			<Setter Property="Transitions">
-				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.5" Easing="CubicEaseOut"/>
-				</Transitions>
-			</Setter>
-		</Style>
-		<Style Selector="Button.Agree:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-			<Setter Property="Background" Value="White"/>
-		</Style>
-		<Style Selector="Button.Decline:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-			<Setter Property="Background" Value="White"/>
-		</Style>
-		<Style Selector="Button.Decline">
-			<Setter Property="Background" Value="Red"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="FontWeight" Value="SemiBold"/>
-			<Setter Property="CornerRadius" Value="8"/>
-			<Setter Property="Padding" Value="16,10"/>
-			<Setter Property="Transitions">
-				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.15" Easing="CubicEaseOut"/>
-				</Transitions>
-			</Setter>
-		</Style>
-	</Window.Styles>
+    <Window.Styles>
+        <Style Selector="Button.Agree">
+            <Setter Property="Background" Value="#2F80ED"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="18,10"/>
+        </Style>
 
-	<Grid RowDefinitions="Auto, *, Auto">
-		<!-- Заголовок -->
-		<TextBlock Text="Personal Agreement" Foreground="White"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   Margin="10,10,0,16"/>
+        <Style Selector="Button.Agree:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#4EA2FF"/>
+        </Style>
 
-		<!-- Область с текстом соглашения -->
-		<Border Grid.Row="1" Background="#1F2E3D" Margin="10,0,10,0" CornerRadius="8">
-			<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10">
-										<TextBlock Text="Пользовательское соглашение на использование Программного продукта Настоящий документ «Пользовательское соглашение на использование Программного продукта» (далее – Соглашение) представляет собой предложение Общества 
-												   с ограниченной ответственностью «Соушал Веб Сервисес» (далее – «Правообладатель») заключить соглашение на изложенных ниже условиях. Перед использованием Программного продукта, пожалуйста, ознакомьтесь с условиями настоящего Соглашения.
-												   1. Общие положения 1.1. Использование Пользователем Программного продукта любым способом и в любой форме в пределах его объявленных функциональных возможностей, включая: просмотр Контента, регистрацию и/или авторизация в Личном кабинете,
-												   размещение или отображение на Сайте любых материалов, включая, но не ограничиваясь такими как: тексты, сведения и/или иная информация (данные), создаёт договор между Правообладателем и Пользователем на условиях настоящего Соглашения и 
-												   составляющих его неотъемлемую часть приложений. 1.2. Пользуясь Программным продуктом, Пользователь соглашается с тем, что: а) Пользователь ознакомился с условиями настоящего Соглашения в полном объёме до начала использования Программного продукта. б) Начало использования
-												   Пользователем Программного продукта в любой форме означает, что Пользователь принимает все условия настоящего Соглашения в полном объёме без каких-либо изъятий и ограничений. Использование Программного продукта на иных условиях не допускается. в) Если Пользователь не согласен
-												   с условиями настоящего Соглашения или не имеет права на его заключение, Пользователю следует незамедлительно прекратить любое использование Программного продукта. г) Соглашение (в том числе любая из его частей) может быть изменено Правообладателем без какого-либо специального уведомления. Новая редакция Соглашения вступает в силу с момента её размещения на Сайте Правообладателя, если иное не предусмотрено новой редакцией. 1.3. Во всём, что не предусмотрено настоящим Соглашением в связи с использованием Программного продукта, регламентируется Политикой конфиденциальности (ylink.me/law/privacy.pdf). 1.4. Используемые в настоящем Соглашении слова и выражения имеют следующие значения, если иное прямо не определено далее по тексту: Аккаунт – совокупность данных о Пользователе, предназначенная для идентификации Пользователя в каком-либо программном продукте\приложении\онлайн-сервисе\веб-сайте. Соглашение – настоящее Соглашение на использование Программного продукта. Личный кабинет – персональный раздел Программного продукта, к которому при наличии технической возможности Пользователь получает доступ после прохождения регистрации и/или авторизации. Правообладатель – Общество с ограниченной ответственностью «Соушал Веб Сервисес», ОГРН 1112225008290. Программный продукт – каждый из принадлежащих Правообладателю программных комплексов, объединяющих в своём составе программы для ЭВМ, а также все последующие их обновления и модификации, интегрированные с Сайтом Правообладателя, доступ к которым предоставляется Пользователям с использованием Сайта Правообладателя. Перечисленные в настоящем абзаце программные комплексы, приложения именуются «Программный продукт» совместно или по отдельности. Пользователь – лицо, заключившее настоящее Соглашение с Правообладателем в своём или чужом интересе в соответствии с требованиями действующего законодательства и настоящего Соглашения."
-                         TextWrapping="Wrap" />
-			</ScrollViewer>
-		</Border>
+        <Style Selector="Button.Decline">
+            <Setter Property="Background" Value="#D83B3B"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="18,10"/>
+        </Style>
 
-		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,20,30" Spacing="10">
-			<Button Classes="Decline" Content="Отказаться" Padding="18,8" Foreground="White" Click="DeclineAccept"/>
-			<Button Classes="Agree" Content="Принять" Padding="18,8" Foreground="White" Click="AcceptAgreement"/>
-		</StackPanel>
-	</Grid>
+        <Style Selector="Button.Decline:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#F05A5A"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="28">
+        <StackPanel Grid.Row="0" Spacing="6" Margin="0,0,0,18">
+            <TextBlock Text="Пользовательское соглашение"
+                       FontSize="28"
+                       FontWeight="Bold"/>
+            <TextBlock Text="Перед запуском WillPC нужно принять условия использования."
+                       Foreground="#BFD1E0"
+                       FontSize="15"/>
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                Background="#1F2E3D"
+                CornerRadius="10"
+                BorderBrush="#2D4357"
+                BorderThickness="1"
+                Padding="20">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBlock TextWrapping="Wrap"
+                           LineHeight="23"
+                           Foreground="#EDF5FC">
+                    <Run Text="1. Общие положения"/>
+                    <LineBreak/>
+                    <Run Text="WillPC помогает получить сведения об играх из Steam и приблизительно оценить, подходит ли конфигурация компьютера под системные требования выбранной игры."/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="2. Данные компьютера"/>
+                    <LineBreak/>
+                    <Run Text="Приложение может считывать сведения о процессоре, видеокарте, оперативной памяти, свободном месте на диске, версии операционной системы и DirectX. Эти данные используются для оценки совместимости."/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="3. Сторонние сервисы"/>
+                    <LineBreak/>
+                    <Run Text="Информация об играх загружается через API Steam. Для формирования оценки совместимости может использоваться GigaChat. Ответ ИИ носит справочный характер и не является гарантией запуска игры."/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="4. Ответственность пользователя"/>
+                    <LineBreak/>
+                    <Run Text="Пользователь самостоятельно принимает решение об установке или покупке игры. WillPC не несет ответственности за изменения системных требований, ошибки сторонних сервисов, сетевые сбои или некорректные данные, полученные из внешних источников."/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Text="5. Принятие условий"/>
+                    <LineBreak/>
+                    <Run Text="Нажимая кнопку «Принять», пользователь подтверждает, что ознакомился с соглашением и согласен использовать приложение на указанных условиях. При отказе приложение будет закрыто."/>
+                </TextBlock>
+            </ScrollViewer>
+        </Border>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,20,0,0"
+                    Spacing="10">
+            <Button Classes="Decline"
+                    Content="Отказаться"
+                    Click="DeclineAccept"/>
+            <Button Classes="Agree"
+                    Content="Принять"
+                    Click="AcceptAgreement"/>
+        </StackPanel>
+    </Grid>
 </Window>

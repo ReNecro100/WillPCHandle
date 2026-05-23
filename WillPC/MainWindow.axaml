@@ -1,12 +1,245 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WillPC.MainWindow"
+        Background="#15212C"
+        Foreground="White"
+        Width="1024"
+        Height="768"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
         Title="WillPC">
-	<StackPanel>
-		<TextBlock Name="Dat" HorizontalAlignment="Center"/>
-		<TextBlock Name="Response" HorizontalAlignment="Left"/>
-	</StackPanel>
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PanelBrush" Color="#1C2B38"/>
+        <SolidColorBrush x:Key="CardBrush" Color="#263B4E"/>
+        <SolidColorBrush x:Key="CardHoverBrush" Color="#334E68"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#2F80ED"/>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="Button.TopButton">
+            <Setter Property="Background" Value="#2F80ED"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="16,9"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style Selector="Button.TopButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#4EA2FF"/>
+        </Style>
+
+        <Style Selector="Border.GameTile">
+            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
+            <Setter Property="BorderBrush" Value="#304A60"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+            <Setter Property="BoxShadow" Value="0 8 20 0 #30000000"/>
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.18"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.18"/>
+                    <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.18"/>
+                </Transitions>
+            </Setter>
+
+            <Style Selector="^:pointerover">
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Background" Value="{StaticResource CardHoverBrush}"/>
+                <Setter Property="RenderTransform" Value="scale(1.025)"/>
+                <Setter Property="BoxShadow" Value="0 0 22 1 #552F80ED"/>
+            </Style>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*">
+        <Border Grid.Row="0" Background="#0B1219" Padding="28,22">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel Spacing="4">
+                    <TextBlock Text="WillPC"
+                               FontSize="34"
+                               FontWeight="Bold"/>
+                    <TextBlock Text="Подбор игр и проверка совместимости с твоим ПК"
+                               Foreground="#BFD1E0"
+                               FontSize="15"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            Spacing="10"
+                            VerticalAlignment="Center">
+                    <Button Classes="TopButton"
+                            Content="Обновить ПК"
+                            Click="RefreshPcInfo"/>
+                    <Button Classes="TopButton"
+                            Content="Steam"
+                            Click="OpenSteam"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1"
+              RowDefinitions="Auto,*"
+              Margin="28,24,28,26"
+              RowSpacing="22">
+            <Border Grid.Row="0"
+                    Background="{StaticResource PanelBrush}"
+                    CornerRadius="12"
+                    Padding="18,14"
+                    BorderBrush="#2A4054"
+                    BorderThickness="1">
+                <Grid ColumnDefinitions="Auto,*">
+                    <Ellipse Width="12"
+                             Height="12"
+                             Fill="{StaticResource AccentBrush}"
+                             VerticalAlignment="Top"
+                             Margin="0,5,12,0"/>
+                    <TextBlock Grid.Column="1"
+                               Name="PcInfoText"
+                               Text="Загрузка данных ПК..."
+                               TextWrapping="Wrap"
+                               Foreground="#DDEAF5"
+                               FontSize="13"
+                               LineHeight="18"/>
+                </Grid>
+            </Border>
+
+            <UniformGrid Grid.Row="1"
+                         Columns="3"
+                         HorizontalAlignment="Stretch">
+                <Border Name="GameCard1"
+                        Classes="GameTile"
+                        Margin="0,0,12,0"
+                        PointerPressed="OpenGameCard">
+                    <Grid RowDefinitions="160,*">
+                        <Image Name="GameImage1"
+                               Stretch="UniformToFill"/>
+
+                        <Grid Grid.Row="1"
+                              RowDefinitions="Auto,Auto,*,Auto"
+                              Margin="16,14,16,16">
+                            <TextBlock Name="GameTitle1"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Row="1"
+                                       Name="GameGenre1"
+                                       Foreground="#92A9BA"
+                                       Margin="0,4,0,0"/>
+                            <TextBlock Grid.Row="2"
+                                       Name="GameDescription1"
+                                       Foreground="#D7E4EF"
+                                       TextWrapping="Wrap"
+                                       Margin="0,12,0,0"
+                                       MaxLines="4"/>
+                            <StackPanel Grid.Row="3"
+                                        Orientation="Horizontal"
+                                        Spacing="8"
+                                        VerticalAlignment="Center"
+                                        Margin="0,14,0,0">
+                                <Ellipse Name="GameIndicator1"
+                                         Width="12"
+                                         Height="12"
+                                         Fill="#7E8A96"/>
+                                <TextBlock Name="GameIndicatorText1"
+                                           Text="Проверка..."
+                                           FontWeight="SemiBold"
+                                           Foreground="#DDEAF5"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Border Name="GameCard2"
+                        Classes="GameTile"
+                        Margin="6,0,6,0"
+                        PointerPressed="OpenGameCard">
+                    <Grid RowDefinitions="160,*">
+                        <Image Name="GameImage2"
+                               Stretch="UniformToFill"/>
+
+                        <Grid Grid.Row="1"
+                              RowDefinitions="Auto,Auto,*,Auto"
+                              Margin="16,14,16,16">
+                            <TextBlock Name="GameTitle2"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Row="1"
+                                       Name="GameGenre2"
+                                       Foreground="#92A9BA"
+                                       Margin="0,4,0,0"/>
+                            <TextBlock Grid.Row="2"
+                                       Name="GameDescription2"
+                                       Foreground="#D7E4EF"
+                                       TextWrapping="Wrap"
+                                       Margin="0,12,0,0"
+                                       MaxLines="4"/>
+                            <StackPanel Grid.Row="3"
+                                        Orientation="Horizontal"
+                                        Spacing="8"
+                                        VerticalAlignment="Center"
+                                        Margin="0,14,0,0">
+                                <Ellipse Name="GameIndicator2"
+                                         Width="12"
+                                         Height="12"
+                                         Fill="#7E8A96"/>
+                                <TextBlock Name="GameIndicatorText2"
+                                           Text="Проверка..."
+                                           FontWeight="SemiBold"
+                                           Foreground="#DDEAF5"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Border Name="GameCard3"
+                        Classes="GameTile"
+                        Margin="12,0,0,0"
+                        PointerPressed="OpenGameCard">
+                    <Grid RowDefinitions="160,*">
+                        <Image Name="GameImage3"
+                               Stretch="UniformToFill"/>
+
+                        <Grid Grid.Row="1"
+                              RowDefinitions="Auto,Auto,*,Auto"
+                              Margin="16,14,16,16">
+                            <TextBlock Name="GameTitle3"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Row="1"
+                                       Name="GameGenre3"
+                                       Foreground="#92A9BA"
+                                       Margin="0,4,0,0"/>
+                            <TextBlock Grid.Row="2"
+                                       Name="GameDescription3"
+                                       Foreground="#D7E4EF"
+                                       TextWrapping="Wrap"
+                                       Margin="0,12,0,0"
+                                       MaxLines="4"/>
+                            <StackPanel Grid.Row="3"
+                                        Orientation="Horizontal"
+                                        Spacing="8"
+                                        VerticalAlignment="Center"
+                                        Margin="0,14,0,0">
+                                <Ellipse Name="GameIndicator3"
+                                         Width="12"
+                                         Height="12"
+                                         Fill="#7E8A96"/>
+                                <TextBlock Name="GameIndicatorText3"
+                                           Text="Проверка..."
+                                           FontWeight="SemiBold"
+                                           Foreground="#DDEAF5"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </UniformGrid>
+        </Grid>
+    </Grid>
 </Window>

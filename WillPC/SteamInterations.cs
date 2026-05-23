@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using WillPC;
 using System.IO;
 using System.Net.Http;
+using System.Net;
 
 class AppCardInfo
 {
@@ -70,29 +71,15 @@ class SteamInterations
             {
                 SteamApp app = await AppDetails.GetAsync(item.Id);
 
-                HardWareInteractons hardWareInteractons = new HardWareInteractons();
-                GigaChatInteractions gigaChatInteractions = new GigaChatInteractions();
-                
-                string minimalRequirements = Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum.Replace("<li>", "\n"), "<[^>]*>", "");
-                string recommendedRequirements = Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended.Replace("<li>", "\n"), "<[^>]*>", "");
-                string compatibilityIndicator = gigaChatInteractions.GetGigaChatResponse(
-                    "Тебе нужно определить, подходит ли мой компьютер под минимальные или рекомендованные требования игры:\n" +
-                    $"Конфигурация моего компьютера: {hardWareInteractons.GetPCData()}\n" +
-                    $"Минимальные требования игры: {minimalRequirements}\n" +
-                    $"Рекомендованные требования игры: {recommendedRequirements}\n" +
-                    $"Формат ответа - только одно из четырёх слов:\n" +
-                    $"ЗЕЛЁНЫЙ - совместимость и с минимальными, и с рекомендованными требованиями игры\n" +
-                    $"ЖЁЛТЫЙ - совместимость только с минимальными требованиями игры\n" +
-                    $"КРАСНЫЙ - отсутствие совместимости\n" +
-                    $"СЕРЫЙ - требования не заданы" +
-                    "Если отсутствуют либо минимальные, либо рекомендованные требования, оценку совместимости проводи по тем требованиям, которые имеются. В таком случае ЗЕЛЁНЫЙ будет означать совместимость, а КРАСНЫЙ - её отсутствие\n"
-                );
+                string minimalRequirements = CleanRequirements(app.PcRequirements?.Minimum);
+                string recommendedRequirements = CleanRequirements(app.PcRequirements?.Recommended);
+                string compatibilityIndicator = GetCompatibilityIndicator(minimalRequirements, recommendedRequirements);
 
                 AppCardInfo featuredGame = new AppCardInfo(
                     item.Id, 
                     item.Name, 
                     item.LargeCapsuleImage, 
-                    app.Genres[0].ToString(),
+                    app.Genres is not null && app.Genres.Count > 0 ? app.Genres[0].ToString() : "Game",
                     compatibilityIndicator);
                 featuredGames.Add(featuredGame);
             }
@@ -106,41 +93,41 @@ class SteamInterations
     }
     public async Task<AppTotalInfo> GetAppTotalInfo(int gameId)
     {
-        try
+        List<AppTotalInfo>? cachedGame = ManagerJSON.DeSerialize<AppTotalInfo>($"cache/steamGame_{gameId}.json");
+        if (cachedGame is not null && cachedGame.Count > 0)
         {
-            return ManagerJSON.DeSerialize<AppTotalInfo>($"cache/steamGame_{gameId}.json")[0];
+            return cachedGame[0];
         }
-        catch
+
+        SteamApp app = await AppDetails.GetAsync(gameId);
+        List<string> screenshots = new List<string>();
+        string headerImagePath = $"cache/{gameId}_0.jpg";
+        await GetAppScreenshots(app.HeaderImage, gameId, 0);
+
+        var appScreenshots = app.Screenshots;
+        int screenshotsCount = appScreenshots is null ? 0 : Math.Min(3, appScreenshots.Count);
+        for (int i = 0; i < screenshotsCount; i++)
         {
-            SteamApp app = await AppDetails.GetAsync(gameId);
-            List<string> screenshots = new List<string>();
-            string headerImagePath = $"cache/{gameId}_0.jpg";
-            await GetAppScreenshots(app.HeaderImage, gameId, 0);
-
-            int screenshotsCount = app.Screenshots is null ? 0 : Math.Min(3, app.Screenshots.Count);
-            for (int i = 0; i < screenshotsCount; i++)
-            {
-                await GetAppScreenshots(app.Screenshots[i].PathFull, gameId, i+1);
-                screenshots.Add($"cache/{gameId}_{i+1}.jpg");
-            }
-
-            while (screenshots.Count < 3)
-            {
-                screenshots.Add(headerImagePath);
-            }
-
-            AppTotalInfo game = new AppTotalInfo(
-                gameId,
-                headerImagePath,
-                app.Name,
-                app.ShortDescription,
-                Regex.Replace(app.PcRequirements.Minimum is null ? "No requirements" : app.PcRequirements.Minimum.Replace("<li>", "\n"), "<[^>]*>", ""),
-                Regex.Replace(app.PcRequirements.Recommended is null ? "No requirements" : app.PcRequirements.Recommended.Replace("<li>", "\n"), "<[^>]*>", ""),
-                screenshots
-                );
-            RefreshAppTotalInfo(game);
-            return game;
+            await GetAppScreenshots(appScreenshots![i].PathFull, gameId, i + 1);
+            screenshots.Add($"cache/{gameId}_{i + 1}.jpg");
         }
+
+        while (screenshots.Count < 3)
+        {
+            screenshots.Add(headerImagePath);
+        }
+
+        AppTotalInfo game = new AppTotalInfo(
+            gameId,
+            headerImagePath,
+            app.Name,
+            app.ShortDescription,
+            CleanRequirements(app.PcRequirements?.Minimum),
+            CleanRequirements(app.PcRequirements?.Recommended),
+            screenshots
+            );
+        RefreshAppTotalInfo(game);
+        return game;
     }
     public void RefreshAppTotalInfo(AppTotalInfo app)
     {
@@ -153,5 +140,82 @@ class SteamInterations
         using var file = File.Create($"cache/{gameId}_{screenshotId}.jpg");
 
         await stream.CopyToAsync(file);
+    }
+
+    public string GetCompatibilityIndicator(AppTotalInfo app)
+    {
+        return GetCompatibilityIndicator(app.MinimalRequirements, app.RecommendedRequirements);
+    }
+
+    public string GetCompatibilityIndicator(string minimalRequirements, string recommendedRequirements)
+    {
+        if (IsRequirementsEmpty(minimalRequirements) && IsRequirementsEmpty(recommendedRequirements))
+        {
+            return "СЕРЫЙ";
+        }
+
+        try
+        {
+            HardWareInteractons hardWareInteractons = new HardWareInteractons();
+            GigaChatInteractions gigaChatInteractions = new GigaChatInteractions();
+
+            string compatibilityIndicator = gigaChatInteractions.GetGigaChatResponse(
+                "Тебе нужно определить, подходит ли мой компьютер под минимальные или рекомендованные требования игры.\n" +
+                "Отвечай только одним словом из списка: ЗЕЛЁНЫЙ, ЖЁЛТЫЙ, КРАСНЫЙ, СЕРЫЙ.\n\n" +
+                "ЗЕЛЁНЫЙ - компьютер подходит под рекомендованные требования.\n" +
+                "ЖЁЛТЫЙ - компьютер подходит только под минимальные требования.\n" +
+                "КРАСНЫЙ - компьютер не подходит даже под минимальные требования.\n" +
+                "СЕРЫЙ - требования игры не заданы или данных недостаточно.\n\n" +
+                $"Конфигурация моего компьютера:\n{hardWareInteractons.GetPCData()}\n" +
+                $"Минимальные требования игры:\n{minimalRequirements}\n" +
+                $"Рекомендованные требования игры:\n{recommendedRequirements}\n"
+            );
+
+            return NormalizeCompatibilityIndicator(compatibilityIndicator);
+        }
+        catch (Exception ex)
+        {
+            Trace.WriteLine(ex);
+            return "СЕРЫЙ";
+        }
+    }
+
+    public static string NormalizeCompatibilityIndicator(string? compatibilityIndicator)
+    {
+        string upper = (compatibilityIndicator ?? string.Empty).Trim().ToUpperInvariant();
+
+        if (upper.Contains("ЗЕЛ"))
+        {
+            return "ЗЕЛЁНЫЙ";
+        }
+
+        if (upper.Contains("ЖЕЛ") || upper.Contains("ЖЁЛ"))
+        {
+            return "ЖЁЛТЫЙ";
+        }
+
+        if (upper.Contains("КРАС"))
+        {
+            return "КРАСНЫЙ";
+        }
+
+        return "СЕРЫЙ";
+    }
+
+    private static string CleanRequirements(string? requirements)
+    {
+        if (string.IsNullOrWhiteSpace(requirements))
+        {
+            return "No requirements";
+        }
+
+        string text = WebUtility.HtmlDecode(requirements.Replace("<li>", "\n"));
+        return Regex.Replace(text, "<[^>]*>", "").Trim();
+    }
+
+    private static bool IsRequirementsEmpty(string? requirements)
+    {
+        return string.IsNullOrWhiteSpace(requirements) ||
+               requirements.Trim().Equals("No requirements", StringComparison.OrdinalIgnoreCase);
     }
 }

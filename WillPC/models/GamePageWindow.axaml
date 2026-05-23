@@ -24,6 +24,16 @@
 	</Window.Resources>
 
 	<Window.Styles>
+		<Style Selector="Button.NavButton">
+			<Setter Property="Background" Value="#AA000000"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="BorderBrush" Value="#66FFFFFF"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Padding" Value="14,8"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+		</Style>
+
 		<!-- ==================== КНОПКИ ==================== -->
 		<Style Selector="Button.MybuttonStyle">
 			<!-- Здесь можно указать базовые свойства кнопки, если необходимо -->
@@ -141,6 +151,26 @@
 
                                 <Border Background="#80000000"/>
 
+                                <Button Classes="NavButton"
+                                        Content="Назад"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Margin="24,20,0,0"
+                                        Click="BackToMain"/>
+
+                                <Border Name="CompatibilityBadge"
+                                        Background="#7E8A96"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Margin="0,0,24,22"
+                                        CornerRadius="12"
+                                        Padding="14,7">
+                                        <TextBlock Name="CompatibilityText"
+                                                   Text="Проверка..."
+                                                   Foreground="White"
+                                                   FontWeight="Bold"/>
+                                </Border>
+
                                 <TextBlock Name="AppTotalInfoName"
                                            Foreground="White"
                                            FontSize="40"
@@ -231,8 +261,7 @@
                                         <Image Name="PhotoPreviewImage"
                                                Stretch="UniformToFill"/>
 
-                                        <Button Content="X"
-                                                Width="36"
+                                        <Button Width="36"
                                                 Height="36"
                                                 Padding="0"
                                                 HorizontalAlignment="Right"
@@ -242,12 +271,18 @@
                                                 Margin="0,12,12,0"
                                                 Background="#AA000000"
                                                 Foreground="White"
-                                                FontSize="14"
-                                                FontWeight="Bold"
                                                 BorderBrush="#66FFFFFF"
                                                 BorderThickness="1"
                                                 CornerRadius="18"
-                                                Click="ClosePhotoPreviewButton"/>
+                                                Click="ClosePhotoPreviewButton">
+                                                <TextBlock Text="X"
+                                                           FontSize="16"
+                                                           LineHeight="16"
+                                                           FontWeight="Bold"
+                                                           TextAlignment="Center"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                        </Button>
                                 </Grid>
                         </Border>
                 </Grid>

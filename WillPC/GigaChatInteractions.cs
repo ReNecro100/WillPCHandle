@@ -60,21 +60,25 @@ class GigaChatInteractions
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("Authorization", "Bearer " + GetGigaChatToken(secretToken));
 
-        string jsonData = $@"{{
-            ""model"": ""GigaChat"",
-            ""messages"": [
-                {{
-                    ""role"": ""user"",
-                    ""content"": ""{prompt}""
-                }}
-            ],
-            ""stream"": false,
-            ""repetition_penalty"": 1
-        }}";
+        string jsonData = JsonSerializer.Serialize(new
+        {
+            model = "GigaChat",
+            messages = new[]
+            {
+                new
+                {
+                    role = "user",
+                    content = prompt
+                }
+            },
+            stream = false,
+            repetition_penalty = 1
+        });
 
         request.Content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
         using var response = client.Send(request);
+        response.EnsureSuccessStatusCode();
         string resultText = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
         using var jsonDoc = JsonDocument.Parse(resultText);

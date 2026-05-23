@@ -9,10 +9,12 @@ using System.Runtime.InteropServices;
 
 class HardWareInteractons
 {
-    private string PCdata;
+    private string PCdata = string.Empty;
     public string GetPCData(bool toUpdate = false)
     {
-        PCdata = File.ReadAllText("cache/PCdata.txt");
+        Directory.CreateDirectory("cache");
+        PCdata = File.Exists("cache/PCdata.txt") ? File.ReadAllText("cache/PCdata.txt") : string.Empty;
+
         if (PCdata.Length<3 || toUpdate)
         {
             ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
@@ -50,12 +52,12 @@ class HardWareInteractons
         string registryPath = @"SOFTWARE\Microsoft\DirectX";
         string registryPath32On64 = @"SOFTWARE\Wow6432Node\Microsoft\DirectX";
 
-        using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registryPath) ??
+        using (RegistryKey? key = Registry.LocalMachine.OpenSubKey(registryPath) ??
                                  Registry.LocalMachine.OpenSubKey(registryPath32On64))
         {
             if (key != null)
             {
-                string version = key.GetValue("Version") as string;
+                string? version = key.GetValue("Version") as string;
                 if (!string.IsNullOrEmpty(version))
                 {
                     return ParseDirectXVersion(version);

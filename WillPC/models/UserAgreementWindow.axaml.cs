@@ -7,6 +7,8 @@ namespace WillPC
     public partial class UserAgreementWindow : Window
     {
         private bool _canClose;
+        public bool Accepted { get; private set; }
+
         public UserAgreementWindow()
         {
             
@@ -23,6 +25,7 @@ namespace WillPC
         }
         private void AcceptAgreement(object sender, RoutedEventArgs e)
         {
+            Accepted = true;
             _canClose = true;
             Close();
         }

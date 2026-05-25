@@ -24,6 +24,16 @@
 	</Window.Resources>
 
 	<Window.Styles>
+		<Style Selector="Button.NavButton">
+			<Setter Property="Background" Value="#AA000000"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="BorderBrush" Value="#66FFFFFF"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Padding" Value="14,8"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+		</Style>
+
 		<!-- ==================== КНОПКИ ==================== -->
 		<Style Selector="Button.MybuttonStyle">
 			<!-- Здесь можно указать базовые свойства кнопки, если необходимо -->
@@ -93,11 +103,11 @@
 		<Style Selector="Border.PhotoCard">
 			<Setter Property="HorizontalAlignment" Value="Right"/>
 			<Setter Property="VerticalAlignment" Value="Top"/>
-			<Setter Property="Background" Value="Red"/>
+			<Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="#40000000"/>
 			<Setter Property="BorderThickness" Value="1.2"/>
 			<Setter Property="CornerRadius" Value="15"/>
-			<Setter Property="ClipToBounds" Value="False"/>
+			<Setter Property="ClipToBounds" Value="True"/>
 			<!-- Исправлено для отображения неона -->
 			<Setter Property="Margin" Value="15"/>
 			<Setter Property="Width" Value="145"/>
@@ -141,6 +151,26 @@
 
                                 <Border Background="#80000000"/>
 
+                                <Button Classes="NavButton"
+                                        Content="Назад"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Margin="24,20,0,0"
+                                        Click="BackToMain"/>
+
+                                <Border Name="CompatibilityBadge"
+                                        Background="#7E8A96"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Margin="0,0,24,22"
+                                        CornerRadius="12"
+                                        Padding="14,7">
+                                        <TextBlock Name="CompatibilityText"
+                                                   Text="Проверка..."
+                                                   Foreground="White"
+                                                   FontWeight="Bold"/>
+                                </Border>
+
                                 <TextBlock Name="AppTotalInfoName"
                                            Foreground="White"
                                            FontSize="40"
@@ -160,14 +190,23 @@
                                         Columns="3"
                                         VerticalAlignment="Center">
                                         
-                                        <Border Classes="PhotoCard" ClipToBounds="False" >
-                                                <Image Name="AppTotalInfoScreenshot1" Stretch="UniformToFill"></Image>
+                                        <Border Classes="PhotoCard">
+                                                <Image Name="AppTotalInfoScreenshot1"
+                                                       Stretch="UniformToFill"
+                                                       Cursor="Hand"
+                                                       PointerPressed="OpenPhotoPreview"></Image>
                                         </Border>
                                         <Border Classes="PhotoCard">
-												<Image Name="AppTotalInfoScreenshot2" Stretch="UniformToFill"></Image>
+												<Image Name="AppTotalInfoScreenshot2"
+                                                       Stretch="UniformToFill"
+                                                       Cursor="Hand"
+                                                       PointerPressed="OpenPhotoPreview"></Image>
                                         </Border>
                                         <Border Classes="PhotoCard" >
-                                                <Image Name="AppTotalInfoScreenshot3" Stretch="UniformToFill"></Image>
+                                                <Image Name="AppTotalInfoScreenshot3"
+                                                       Stretch="UniformToFill"
+                                                       Cursor="Hand"
+                                                       PointerPressed="OpenPhotoPreview"></Image>
                                         </Border>
                                        
                                        
@@ -180,6 +219,73 @@
 					
 				</TextBlock>
 			</Border>
+
+                <Grid Name="PhotoPreviewOverlay"
+                      Grid.RowSpan="3"
+                      ZIndex="100"
+                      Background="#B0000000"
+                      IsVisible="False"
+                      Opacity="0"
+                      PointerPressed="ClosePhotoPreview">
+                        <Grid.Transitions>
+                                <Transitions>
+                                        <DoubleTransition Property="Opacity"
+                                                          Duration="0:0:0.18"
+                                                          Easing="CubicEaseOut"/>
+                                </Transitions>
+                        </Grid.Transitions>
+
+                        <Border Name="PhotoPreviewCard"
+                                Width="760"
+                                Height="460"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{StaticResource CardBackgroundBrush}"
+                                BorderBrush="{StaticResource NeonPhotoBrush}"
+                                BorderThickness="1.5"
+                                CornerRadius="16"
+                                ClipToBounds="True"
+                                BoxShadow="0 12 42 0 #90000000"
+                                RenderTransform="scale(0.92)"
+                                RenderTransformOrigin="50%, 50%"
+                                PointerPressed="KeepPhotoPreviewOpen">
+                                <Border.Transitions>
+                                        <Transitions>
+                                                <TransformOperationsTransition Property="RenderTransform"
+                                                                               Duration="0:0:0.18"
+                                                                               Easing="CubicEaseOut"/>
+                                        </Transitions>
+                                </Border.Transitions>
+
+                                <Grid>
+                                        <Image Name="PhotoPreviewImage"
+                                               Stretch="UniformToFill"/>
+
+                                        <Button Width="36"
+                                                Height="36"
+                                                Padding="0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center"
+                                                Margin="0,12,12,0"
+                                                Background="#AA000000"
+                                                Foreground="White"
+                                                BorderBrush="#66FFFFFF"
+                                                BorderThickness="1"
+                                                CornerRadius="18"
+                                                Click="ClosePhotoPreviewButton">
+                                                <TextBlock Text="X"
+                                                           FontSize="16"
+                                                           LineHeight="16"
+                                                           FontWeight="Bold"
+                                                           TextAlignment="Center"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                        </Button>
+                                </Grid>
+                        </Border>
+                </Grid>
                 
                
         </Grid>

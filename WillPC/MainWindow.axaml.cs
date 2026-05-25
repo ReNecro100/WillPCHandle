@@ -27,7 +27,7 @@ namespace WillPC
             SteamInterations steamInterations = new SteamInterations();
             HardWareInteractons hardWareInteractons = new HardWareInteractons();
             
-            Dat.Text = hardWareInteractons.GetPCData(1);
+            Dat.Text = hardWareInteractons.GetPCData(2);
         }
         //А какие ещё должны быть функции?
 

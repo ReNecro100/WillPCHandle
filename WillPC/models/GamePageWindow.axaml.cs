@@ -18,7 +18,7 @@ namespace WillPC
         public async void ShowAppTotalInfo()
         {
             SteamInterations steamInterations = new SteamInterations();
-            GameInfo game = await steamInterations.GetGameInfo(1602000);
+            GameInfo game = await steamInterations.GetGameInfo(3871390);
             AppTotalInfoName.Text = game.Name;
             AppTotalInfoDescription.Text = game.Description + '\n' + game.MinimalRequirements + '\n' + game.RecommendedRequirements;
             AppTotalInfoScreenshot1.Source = new Bitmap(game.Screenshots[0]);

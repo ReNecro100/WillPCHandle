@@ -157,7 +157,7 @@ namespace WillPC
             string normalized = displayText;
             label.Text = displayText ?? normalized;
 
-            indicator.Fill = normalized switch
+            indicator.Fill = compatibility switch
             {
                 "ЗЕЛЁНЫЙ" => Brush.Parse("#2BD66F"),
                 "ЖЁЛТЫЙ" => Brush.Parse("#FFD166"),

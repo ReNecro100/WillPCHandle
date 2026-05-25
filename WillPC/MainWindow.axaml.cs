@@ -6,6 +6,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -14,25 +15,21 @@ namespace WillPC
 {
     public partial class MainWindow : Window
     {
-        private readonly SteamInterations _steamInterations = new();
-        private readonly HardWareInteractons _hardWareInteractons = new();
-
-        private readonly GamePreview[] _games =
-        [
-            new GamePreview(730, "Командный шутер"),
-            new GamePreview(570, "MOBA"),
-            new GamePreview(413150, "Фермерская RPG")
-        ];
-
+        SteamInterations steamInterations = new SteamInterations();
+        HardWareInteractons hardWareInteractons = new HardWareInteractons();
         public MainWindow()
         {
+
             InitializeComponent();
             _ = ShowMainPageCardsAsync();
         }
 
-        private async Task ShowMainPageCardsAsync()
+        
+        public async Task ShowMainPageCardsAsync()
         {
-            await RefreshPcInfoAsync();
+            
+        List<GameInfo> games = await steamInterations.GetFeaturedAppsList();
+        await RefreshPcInfoAsync();
 
             await LoadGameCardAsync(
                 GameCard1,
@@ -42,7 +39,7 @@ namespace WillPC
                 GameDescription1,
                 GameIndicator1,
                 GameIndicatorText1,
-                _games[0]);
+                games[0]);
 
             await LoadGameCardAsync(
                 GameCard2,
@@ -52,7 +49,7 @@ namespace WillPC
                 GameDescription2,
                 GameIndicator2,
                 GameIndicatorText2,
-                _games[1]);
+                games[1]);
 
             await LoadGameCardAsync(
                 GameCard3,
@@ -62,7 +59,7 @@ namespace WillPC
                 GameDescription3,
                 GameIndicator3,
                 GameIndicatorText3,
-                _games[2]);
+                games[2]);
         }
 
         private async Task LoadGameCardAsync(
@@ -73,7 +70,7 @@ namespace WillPC
             TextBlock description,
             Ellipse indicator,
             TextBlock indicatorText,
-            GamePreview preview)
+            GameInfo preview)
         {
             card.Tag = preview.Id;
             title.Text = "Загрузка...";
@@ -83,7 +80,7 @@ namespace WillPC
 
             try
             {
-                GameInfo game = await _steamInterations.GetGameInfo(preview.Id);
+                GameInfo game = await steamInterations.GetGameInfo(preview.Id);
 
                 title.Text = game.Name;
                 description.Text = ShortenText(game.Description, 170);
@@ -116,7 +113,7 @@ namespace WillPC
 
             try
             {
-                string pcData = _hardWareInteractons.GetPCData(1);
+                string pcData = hardWareInteractons.GetPCData(1);
                 PcInfoText.Text = pcData;
             }
             catch (Exception ex)

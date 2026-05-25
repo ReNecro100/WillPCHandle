@@ -32,19 +32,7 @@ namespace WillPC
 
         private async Task ShowMainPageCardsAsync()
         {
-<<<<<<< HEAD
-            SteamInterations steamInterations = new SteamInterations();
-            HardWareInteractons hardWareInteractons = new HardWareInteractons();
-            List<GameInfo> featuredGames = await steamInterations.GetFeaturedAppsList();
-            foreach (var item in featuredGames)
-            {
-                //Тут бери информацию о карточках и выводи её:
-                //Name - Название приложения
-                //Image - Превьюшка приложения
-                //Genre - Жанр игры
-=======
             await RefreshPcInfoAsync();
->>>>>>> GUI
 
             await LoadGameCardAsync(
                 GameCard1,
@@ -95,7 +83,7 @@ namespace WillPC
 
             try
             {
-                AppTotalInfo game = await _steamInterations.GetAppTotalInfo(preview.Id);
+                GameInfo game = await _steamInterations.GetGameInfo(preview.Id);
 
                 title.Text = game.Name;
                 description.Text = ShortenText(game.Description, 170);
@@ -105,7 +93,7 @@ namespace WillPC
                     image.Source = new Bitmap(game.HeaderImage);
                 }
 
-                string compatibility = await Task.Run(() => _steamInterations.GetCompatibilityIndicator(game));
+                string compatibility = game.CompatibilityIndicator;
                 SetCompatibilityIndicator(indicator, indicatorText, compatibility);
             }
             catch (Exception ex)
@@ -128,7 +116,7 @@ namespace WillPC
 
             try
             {
-                string pcData = await Task.Run(() => _hardWareInteractons.GetPCData(forceUpdate));
+                string pcData = _hardWareInteractons.GetPCData(1);
                 PcInfoText.Text = pcData;
             }
             catch (Exception ex)
@@ -169,7 +157,7 @@ namespace WillPC
             string compatibility,
             string? displayText = null)
         {
-            string normalized = SteamInterations.NormalizeCompatibilityIndicator(compatibility);
+            string normalized = displayText;
             label.Text = displayText ?? normalized;
 
             indicator.Fill = normalized switch

@@ -1,0 +1,147 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="WillPC.ProfileWindow"
+        Background="#15212C"
+        Width="1024"
+        Height="768"
+        CanResize="False"
+		Foreground ="White"
+        WindowStartupLocation="CenterScreen"
+		
+        Title="Profile Page">
+
+
+	<Window.Resources>
+		<!-- Базовая палитра -->
+		<SolidColorBrush x:Key="CardBackgroundBrush" Color="#334E68"/>
+		<SolidColorBrush x:Key="CardHoverBackgroundBrush" Color="#416284"/>
+
+		<!-- Цвета для неонового свечения -->
+		<SolidColorBrush x:Key="NeonGameBrush" Color="#2F80ED"/>
+		<!-- Ярко-синий неон -->
+		<SolidColorBrush x:Key="NeonPhotoBrush" Color="#FF2E93"/>
+		<!-- Насыщенный розовый неон -->
+	</Window.Resources>
+
+	<Window.Styles>
+		<!-- ==================== КНОПКИ ==================== -->
+		<Style Selector="Button.MybuttonStyle">
+			<!-- Здесь можно указать базовые свойства кнопки, если необходимо -->
+			<Setter Property="Width" Value="300"/>
+			<Setter Property="Height" Value="50"/>
+			<Setter Property="Margin" Value="16,16,16,16"/>
+			<!-- Кнопка: Наведение мыши -->
+			<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+				<Setter Property="Background" Value="#4EA2FF"/>
+				<Setter Property="Foreground" Value="White"/>
+			</Style>
+
+			<!-- Кнопка: Нажатие -->
+			<Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+				<Setter Property="Background" Value="#1B59B3"/>
+				<Setter Property="Foreground" Value="White"/>
+			</Style>
+		</Style>
+
+		<!-- ==================== КАРТОЧКА ИГРЫ ==================== -->
+		<Style Selector="Border.GameCard">
+			<Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>
+			<Setter Property="BorderBrush" Value="#2D4357"/>
+			<Setter Property="BorderThickness" Value="1.2"/>
+			<Setter Property="CornerRadius" Value="15"/>
+			<!-- Отключаем обрезку, чтобы была видна неоновая тень и масштаб -->
+			<Setter Property="ClipToBounds" Value="False"/>
+			<Setter Property="Margin" Value="20,16,0,0"/>
+			<Setter Property="Width" Value="405"/>
+			<Setter Property="Height" Value="300"/>
+
+			<!-- Начальное состояние трансформации и тени -->
+			<Setter Property="RenderTransform" Value="scale(1.0)"/>
+			<Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
+			<Setter Property="BoxShadow" Value="0 4 12 0 #30000000"/>
+
+			<!-- Полный набор плавных переходов -->
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<BrushTransition Property="BorderBrush" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+					<BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+				</Transitions>
+			</Setter>
+
+			<!-- Эффект наведения: Увеличение + Синий Неон -->
+			<Style Selector="^:pointerover">
+				<Setter Property="Cursor" Value="Hand"/>
+				<Setter Property="ZIndex" Value="10"/>
+				<Setter Property="Background" Value="{StaticResource CardHoverBackgroundBrush}"/>
+				<Setter Property="BorderBrush" Value="{StaticResource NeonGameBrush}"/>
+				<Setter Property="RenderTransform" Value="scale(1.03)"/>
+				<!-- Синяя неоновая подсветка (смещение 0 0, размытие 20, цвет #45 + Hex-код синего) -->
+				<Setter Property="BoxShadow" Value="0 0 20 2 #452F80ED"/>
+			</Style>
+		</Style>
+
+		<!-- ==================== СТИЛЬ ПОДВАЛА ==================== -->
+		<Style Selector="Border.Footer">
+			<Setter Property="VerticalAlignment" Value="Bottom"/>
+			<Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>
+			<Setter Property="Width" Value="1100"/>
+			<Setter Property="Height" Value="60"/>
+			<Setter Property="CornerRadius" Value="15"/>
+		</Style>
+	</Window.Styles>
+        <Grid RowDefinitions="Auto, *, Auto">
+                <Border Grid.Row="0"
+                        Height="150"
+                        ClipToBounds="True">
+                        <Grid>
+                                <Image Name="AppTotalInfoHeaderImage"
+									   Source="D:\Olszewski\WillPCHandle\WillPC\pics\profileBG.png"
+                                       Stretch="UniformToFill"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Center"/>
+
+                                <Border Background="#80000000"/>
+
+                                <TextBlock Name="UserName"
+										   Text="UserName"
+                                           Foreground="White"
+                                           FontSize="40"
+                                           VerticalAlignment="Center"
+                                           Margin="44,0,0,0"/>
+                        </Grid>
+                </Border>
+			<Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,1,15,0">
+				<Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="100">
+					<Border Classes="GameCard"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top">
+						<TextBlock TextWrapping="Wrap" Padding="10, 5,0,0" Name="PCData">
+
+						</TextBlock>
+					</Border>
+					<Border Classes="GameCard"  Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center">
+						<Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+							<Button Classes="MybuttonStyle" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
+								<TextBlock TextWrapping="Wrap" Padding="0,0,0,0" Text="Change Username" HorizontalAlignment="Center" VerticalAlignment="Center"
+										  Foreground="White"/>
+							</Button>
+							<Button Classes="MybuttonStyle" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center">
+								<TextBlock TextWrapping="Wrap" Padding="0,0,0,0" Text="Change Password" HorizontalAlignment="Center" VerticalAlignment="Center"
+										   Foreground="White"/>
+							</Button>
+							<Button Classes="MybuttonStyle" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center">
+								<TextBlock TextWrapping="Wrap" Padding="0,0,0,0" Text="Change account" HorizontalAlignment="Center" VerticalAlignment="Center"
+										   Foreground="White"/>
+							</Button>
+						</Grid>
+					</Border>
+				</Grid>
+			</Border>
+                
+			
+			<Border Grid.Row="2" Classes="Footer">
+				<TextBlock Text="© 2026 WillPC Games. Все права защищены. Торговые марки Steam и Valve принадлежат их правообладателям." VerticalAlignment="Center" HorizontalAlignment="Center">
+				</TextBlock>
+			</Border>
+        </Grid>
+</Window>

@@ -15,9 +15,6 @@ namespace WillPC
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-<<<<<<< HEAD
-                desktop.MainWindow = new MainWindowTest();//GamePageWindow
-=======
                 var agreementWindow = new UserAgreementWindow();
 
                 agreementWindow.Closed += (_, _) =>
@@ -33,7 +30,6 @@ namespace WillPC
                 };
 
                 desktop.MainWindow = agreementWindow;
->>>>>>> GUI
             }
 
             base.OnFrameworkInitializationCompleted();

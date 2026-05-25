@@ -30,19 +30,9 @@ namespace WillPC
 
         private async Task ShowAppTotalInfoAsync()
         {
-<<<<<<< HEAD
-            SteamInterations steamInterations = new SteamInterations();
-            GameInfo game = await steamInterations.GetGameInfo(1602000);
-            AppTotalInfoName.Text = game.Name;
-            AppTotalInfoDescription.Text = game.Description + '\n' + game.MinimalRequirements + '\n' + game.RecommendedRequirements;
-            AppTotalInfoScreenshot1.Source = new Bitmap(game.Screenshots[0]);
-            AppTotalInfoScreenshot2.Source = new Bitmap(game.Screenshots[1]);
-            AppTotalInfoScreenshot3.Source = new Bitmap(game.Screenshots[2]);
-            AppTotalInfoHeaderImage.Source = new Bitmap(game.HeaderImage);
-=======
             try
             {
-                AppTotalInfo game = await _steamInterations.GetAppTotalInfo(_gameId);
+                GameInfo game = await _steamInterations.GetGameInfo(_gameId);
 
                 AppTotalInfoName.Text = game.Name;
                 AppTotalInfoDescription.Text =
@@ -55,7 +45,7 @@ namespace WillPC
                 AppTotalInfoScreenshot2.Source = new Bitmap(game.Screenshots[1]);
                 AppTotalInfoScreenshot3.Source = new Bitmap(game.Screenshots[2]);
 
-                string compatibility = await Task.Run(() => _steamInterations.GetCompatibilityIndicator(game));
+                string compatibility = game.CompatibilityIndicator;
                 SetCompatibilityBadge(compatibility);
             }
             catch (Exception ex)
@@ -81,7 +71,7 @@ namespace WillPC
 
         private void SetCompatibilityBadge(string compatibility)
         {
-            string normalized = SteamInterations.NormalizeCompatibilityIndicator(compatibility);
+            string normalized = compatibility;
             CompatibilityText.Text = normalized;
 
             CompatibilityBadge.Background = normalized switch
@@ -147,7 +137,6 @@ namespace WillPC
 
             PhotoPreviewOverlay.IsVisible = false;
             PhotoPreviewImage.Source = null;
->>>>>>> GUI
         }
     }
 }

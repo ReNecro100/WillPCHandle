@@ -19,20 +19,27 @@ CREATE TABLE DirectX (
     Name TEXT NOT NULL
 );
 
--- 4. Таблица Config
+-- 4. Таблица OS
+CREATE TABLE OS (
+	id INTEGER PRIMARY KEY,
+	Name TEXT NOT NULL
+);
+
+-- 5. Таблица Config
 CREATE TABLE Config (
     id INTEGER PRIMARY KEY,
     GPU INTEGER,
     CPU INTEGER,
     RAM TEXT,
-    OS TEXT,
+    OS INTEGER,
     DirectX INTEGER,
     FOREIGN KEY (GPU) REFERENCES GPU(id),
     FOREIGN KEY (CPU) REFERENCES CPU(id),
-    FOREIGN KEY (DirectX) REFERENCES DirectX(id)
+    FOREIGN KEY (DirectX) REFERENCES DirectX(id),
+    FOREIGN KEY (OS) REFERENCES OS(id)
 );
 
--- 5. Таблица HDD
+-- 6. Таблица HDD
 CREATE TABLE HDD (
     id INTEGER PRIMARY KEY,
     Config INTEGER NOT NULL,
@@ -41,7 +48,7 @@ CREATE TABLE HDD (
     FOREIGN KEY (Config) REFERENCES Config(id)
 );
 
--- 6. Таблица User
+-- 7. Таблица User
 CREATE TABLE [User] (
     id INTEGER PRIMARY KEY,
     Name TEXT NOT NULL,
@@ -51,7 +58,7 @@ CREATE TABLE [User] (
     FOREIGN KEY (Config) REFERENCES Config(id)
 );
 
--- 7. Таблица ApptotalInfo
+-- 8. Таблица ApptotalInfo
 CREATE TABLE ApptotalInfo (
     id INTEGER PRIMARY KEY,
     [User] INTEGER NOT NULL,
@@ -65,7 +72,7 @@ CREATE TABLE ApptotalInfo (
     FOREIGN KEY ([User]) REFERENCES [User](id)
 );
 
--- 8. Таблица Screenshots
+-- 9. Таблица Screenshots
 CREATE TABLE Screenshots (
     id INTEGER PRIMARY KEY,
     SteamGame INTEGER NOT NULL,

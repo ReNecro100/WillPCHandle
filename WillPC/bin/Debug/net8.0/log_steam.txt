@@ -2637,3 +2637,5 @@ System.Net.Http.HttpRequestException: Подключение не установ
 [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #52991666)
 [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #2722332)
 [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #26487069)
+[Control] PlatformImpl is null, couldn't handle input. (PresentationSource #23900756)
+[Control] PlatformImpl is null, couldn't handle input. (PresentationSource #33628036)

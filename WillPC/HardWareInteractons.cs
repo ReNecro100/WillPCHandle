@@ -10,12 +10,13 @@ using System.Runtime.InteropServices;
 class HardWareInteractons
 {
     private string PCdata = string.Empty;
+
     public string GetPCData(bool toUpdate = false)
     {
         Directory.CreateDirectory("cache");
         PCdata = File.Exists("cache/PCdata.txt") ? File.ReadAllText("cache/PCdata.txt") : string.Empty;
 
-        if (PCdata.Length<3 || toUpdate)
+        if (PCdata.Length < 3 || toUpdate)
         {
             ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
             ManagementObjectSearcher gpu = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
@@ -23,30 +24,56 @@ class HardWareInteractons
 
             foreach (ManagementObject c in cpu.Get())
             {
-                PCdata = "Процессор: " + c["Name"] + '\n' + "Количество ядер: " + c["NumberOfCores"] + '\n' + "Частота: " + c["MaxClockSpeed"] + " ГГц" + '\n';
+                PCdata = "Процессор: " + c["Name"] + '\n' +
+                         "Количество ядер: " + c["NumberOfCores"] + '\n' +
+                         "Частота: " + c["MaxClockSpeed"] + " ГГц" + '\n';
             }
+
             foreach (ManagementObject g in gpu.Get())
             {
-                PCdata += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб" + '\n'; //Name, Caption, VideoProcessor
+                PCdata += "Видеокарта: " + g["Name"] + '\n' +
+                          "Видеопамять: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб" + '\n';
             }
+
             foreach (ManagementObject h in hdd.Get())
             {
-                PCdata += $"Место на диске {h["Name"]} " + Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + " Гб" + '\n'; //Name, Caption, VideoProcessor
+                if (h["FreeSpace"] != null)
+                {
+                    PCdata += $"Место на диске {h["Name"]} " +
+                              Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) +
+                              " Гб" + '\n';
+                }
             }
-            //Для получения информации о жестких дисках(SELECT * FROM Win32_LogicalDisk)
 
+            // ПОЛНЫЙ ОБЪЕМ ОПЕРАТИВНОЙ ПАМЯТИ
+            ManagementObjectSearcher ram = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+
+            foreach (ManagementObject r in ram.Get())
+            {
+                PCdata += "Оперативная память: " +
+                          Math.Round(Convert.ToDouble(r["TotalPhysicalMemory"]) / Math.Pow(2, 30), 2) +
+                          " Гб" + '\n';
+            }
+
+            // СВОБОДНАЯ ОПЕРАТИВНАЯ ПАМЯТЬ
             PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
             PCdata += "Свободная оперативная память: " + ramCounter.NextValue() + " МБ" + '\n';
+
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
+
             foreach (ManagementObject os in searcher.Get())
             {
                 PCdata += RuntimeInformation.OSDescription + '\n';
             }
+
             PCdata += "Версия DirectX: " + GetDirectXVersion() + '\n';
+
             File.WriteAllText("cache/PCdata.txt", PCdata);
         }
+
         return PCdata;
     }
+
     public static string GetDirectXVersion()
     {
         string registryPath = @"SOFTWARE\Microsoft\DirectX";
@@ -58,6 +85,7 @@ class HardWareInteractons
             if (key != null)
             {
                 string? version = key.GetValue("Version") as string;
+
                 if (!string.IsNullOrEmpty(version))
                 {
                     return ParseDirectXVersion(version);
@@ -71,6 +99,7 @@ class HardWareInteractons
     private static string ParseDirectXVersion(string registryVersion)
     {
         var parts = registryVersion.Split('.');
+
         if (parts.Length >= 2)
         {
             int major = int.Parse(parts[1]);
@@ -83,19 +112,27 @@ class HardWareInteractons
                 case 5: return "DirectX 5.0";
                 case 6: return "DirectX 6.0";
                 case 7: return "DirectX 7.0";
+
                 case 8:
-                    if (parts.Length >= 3 && parts[2] == "01") return "DirectX 8.1";
+                    if (parts.Length >= 3 && parts[2] == "01")
+                        return "DirectX 8.1";
+
                     return "DirectX 8.0";
+
                 case 9:
                     if (parts.Length >= 4)
                     {
                         int build = int.Parse(parts[3]);
+
                         if (build <= 0900) return "DirectX 9.0";
                         if (build <= 0901) return "DirectX 9.0a";
                         if (build <= 0902) return "DirectX 9.0b";
+
                         return "DirectX 9.0c";
                     }
+
                     return "DirectX 9.0";
+
                 default:
                     return $"DirectX {major} (оценка)";
             }

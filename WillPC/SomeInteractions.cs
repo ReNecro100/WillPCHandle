@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
+using Tmds.DBus.Protocol;
 
 
 public static class ManagerJSON
@@ -37,3 +40,66 @@ public static class ManagerJSON
     }
 }
 
+public class User
+{
+    public string Name { get; set; }
+    public string Password { get; set; }
+    public string SteamLink { get; set; }
+    public User() { }
+    public User(string name, string password, string steamLink)
+    {
+        Name = name;
+        Password = password;
+        SteamLink = steamLink;
+    }
+    public void PushToDB()
+    {
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = connection;
+            command.CommandText = $"INSERT INTO User(Name, Password, SteamLink) VALUES ('{Name}', '{Password}', '{SteamLink}')";
+            command.ExecuteNonQuery();
+        }
+    }
+    public List<String> PullFromDB(int userId) 
+    {
+        string sqlExpression = $"select * from user where id = {userId}";
+        List<String> list = new List<String>();
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand(sqlExpression, connection);
+            using (SqliteDataReader readerConfig = command.ExecuteReader())
+            {
+                if (readerConfig.HasRows)
+                {
+                    while (readerConfig.Read())
+                    {
+                        list.Add(readerConfig.GetString(1));
+                        list.Add(readerConfig.GetString(2));
+                        list.Add(readerConfig.GetString(3));
+                    }
+                }
+                else
+                {
+                    throw new Exception("no rows");
+                }
+            }
+        }
+        return list;
+    }
+    public void UpdateConfig(int userId, int newConfig)
+    {
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = connection;
+            command.CommandText = $"update user set config = {newConfig} where id = {userId}";
+            command.ExecuteNonQuery();
+        }
+    }
+}

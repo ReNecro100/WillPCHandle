@@ -15,21 +15,30 @@ namespace WillPC
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var agreementWindow = new UserAgreementWindow();
-
-                agreementWindow.Closed += (_, _) =>
+                //Nakatitj logiku z JSON
+                bool isAgreed = true;
+                if (isAgreed)
                 {
-                    if (!agreementWindow.Accepted)
+                    desktop.MainWindow = new ProfileWindow();
+                }
+                else
+                {
+                    var agreementWindow = new UserAgreementWindow();
+
+                    agreementWindow.Closed += (_, _) =>
                     {
-                        return;
-                    }
+                        if (!agreementWindow.Accepted)
+                        {
+                            return;
+                        }
 
-                    var mainWindow = new MainWindow();
-                    desktop.MainWindow = mainWindow;
-                    mainWindow.Show();
-                };
+                        var mainWindow = new MainWindow();
+                        desktop.MainWindow = mainWindow;
+                        mainWindow.Show();
+                    };
 
-                desktop.MainWindow = agreementWindow;
+                    desktop.MainWindow = agreementWindow;
+                }
             }
 
             base.OnFrameworkInitializationCompleted();

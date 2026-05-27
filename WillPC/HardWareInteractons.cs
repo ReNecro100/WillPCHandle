@@ -24,6 +24,7 @@ public class GPU
         Name = name;
         RAM = ram;
     }
+    public override string ToString() => Name;
 }
 
 // 2. CPU
@@ -41,6 +42,7 @@ public class CPU
         Cores = cores;
         Speed = speed;
     }
+    public override string ToString() => Name;
 }
 
 // 3. DirectX
@@ -54,6 +56,7 @@ public class DirectX
     {
         Name = name;
     }
+    public override string ToString() => Name;
 }
 
 // 4. OS
@@ -67,6 +70,7 @@ public class OS
     {
         Name = name;
     }
+    public override string ToString() => Name;
 }
 
 // 5. Config
@@ -168,7 +172,7 @@ class HardWareInteractons
                 {
                     connection.Open();
 
-                    SqliteCommand commandConfig = new SqliteCommand("SELECT * FROM cpu, directX, gpu, os, hdd;", connection);
+                    SqliteCommand commandConfig = new SqliteCommand("SELECT * FROM cpu;", connection);
 
                     //Do something about it
                     //Процессор
@@ -211,93 +215,13 @@ class HardWareInteractons
                             }
                             PCdata = "Процессор: " + c["Name"] + '\n' + "Количество ядер: " + c["NumberOfCores"] + '\n' + "Частота: " + c["MaxClockSpeed"] + '\n';
                         }
-                        //Видеокарта
-                        int gpuId = 0;
-                        foreach (ManagementObject g in gpu.Get())
-                        {
-                            using (SqliteDataReader readerConfig = commandConfig.ExecuteReader())
-                            {
-                                if (readerConfig.HasRows)
-                                {
-                                    bool gpuIsFound = false;
-                                    while (readerConfig.Read())
-                                    {
-                                        if (readerConfig.GetString(7) == g["Name"])
-                                        {
-                                            gpuIsFound = true;
-                                            gpuId = readerConfig.GetInt32(6);
-                                            break;
-                                        }
-                                    }
-                                    if (!gpuIsFound)
-                                    {
-                                        SqliteCommand command = new SqliteCommand();
-                                        command.Connection = connection;
-                                        command.CommandText = $"INSERT INTO GPU(Name, RAM) VALUES ('{g["Name"]}', '{Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб"}')";
-                                        command.ExecuteNonQuery();
+                    }
 
-                                        SqliteCommand commandGetId = new SqliteCommand($"SELECT id FROM gpu where name = '{g["Name"]}';", connection);
-                                        using (SqliteDataReader readerGetId = commandGetId.ExecuteReader())
-                                        {
-                                            if (readerGetId.HasRows)
-                                            {
-                                                while (readerGetId.Read())
-                                                {
-                                                    gpuId = readerGetId.GetInt32(0);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            PCdata += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + '\n'; //Name, Caption, VideoProcessor
-                        }
-                        //Оперативка (пока оставим)
-
-
-                        //ОС
-                        int osId = 0;
-                        foreach (ManagementObject os in searcher.Get())
-                        {
-                            using (SqliteDataReader readerConfig = commandConfig.ExecuteReader())
-                            {
-                                if (readerConfig.HasRows)
-                                {
-                                    bool gpuIsFound = false;
-                                    while (readerConfig.Read())
-                                    {
-                                        if (readerConfig.GetString(10) == RuntimeInformation.OSDescription)
-                                        {
-                                            gpuIsFound = true;
-                                            osId = readerConfig.GetInt32(9);
-                                            break;
-                                        }
-                                    }
-                                    if (!gpuIsFound)
-                                    {
-                                        SqliteCommand command = new SqliteCommand();
-                                        command.Connection = connection;
-                                        command.CommandText = $"INSERT INTO OS(Name) VALUES ('{RuntimeInformation.OSDescription}')";
-                                        command.ExecuteNonQuery();
-
-                                        SqliteCommand commandGetId = new SqliteCommand($"SELECT id FROM os where name = '{RuntimeInformation.OSDescription}';", connection);
-                                        using (SqliteDataReader readerGetId = commandGetId.ExecuteReader())
-                                        {
-                                            if (readerGetId.HasRows)
-                                            {
-                                                while (readerGetId.Read())
-                                                {
-                                                    osId = readerGetId.GetInt32(0);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        //DirectX
-                        int directId = 0;
+                    //Видеокарта
+                    commandConfig = new SqliteCommand("SELECT * FROM gpu;", connection);
+                    int gpuId = 0;
+                    foreach (ManagementObject g in gpu.Get())
+                    {
                         using (SqliteDataReader readerConfig = commandConfig.ExecuteReader())
                         {
                             if (readerConfig.HasRows)
@@ -305,10 +229,10 @@ class HardWareInteractons
                                 bool gpuIsFound = false;
                                 while (readerConfig.Read())
                                 {
-                                    if (readerConfig.GetString(5) == GetDirectXVersion())
+                                    if (readerConfig.GetString(1) == g["Name"])
                                     {
                                         gpuIsFound = true;
-                                        directId = readerConfig.GetInt32(4);
+                                        gpuId = readerConfig.GetInt32(6);
                                         break;
                                     }
                                 }
@@ -316,53 +240,136 @@ class HardWareInteractons
                                 {
                                     SqliteCommand command = new SqliteCommand();
                                     command.Connection = connection;
-                                    command.CommandText = $"INSERT INTO directx(Name) VALUES ('{GetDirectXVersion()}')";
+                                    command.CommandText = $"INSERT INTO GPU(Name, RAM) VALUES ('{g["Name"]}', '{Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб"}')";
                                     command.ExecuteNonQuery();
 
-                                    SqliteCommand commandGetId = new SqliteCommand($"SELECT id FROM os where name = '{GetDirectXVersion()}';", connection);
+                                    SqliteCommand commandGetId = new SqliteCommand($"SELECT id FROM gpu where name = '{g["Name"]}';", connection);
                                     using (SqliteDataReader readerGetId = commandGetId.ExecuteReader())
                                     {
                                         if (readerGetId.HasRows)
                                         {
                                             while (readerGetId.Read())
                                             {
-                                                directId = readerGetId.GetInt32(0);
+                                                gpuId = readerGetId.GetInt32(0);
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-
-                        SqliteCommand commandConfig2 = new SqliteCommand();
-                        commandConfig2.Connection = connection;
-
-                        // ПОЛНЫЙ ОБЪЕМ ОПЕРАТИВНОЙ ПАМЯТИ
-                        ManagementObjectSearcher ram = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
-
-                        string opka = "";
-                        foreach (ManagementObject r in ram.Get())
-                        {
-                            opka = Math.Round(Convert.ToDouble(r["TotalPhysicalMemory"]) / Math.Pow(2, 30), 2) + " Гб";
-                            commandConfig2.CommandText = $"INSERT INTO Config(gpu, cpu, ram, os, directx) VALUES ({gpuId}, '{cpuId}', '{opka}', '{osId}', '{directId}')";
-                        }
-
-                        int number = commandConfig2.ExecuteNonQuery();
-
-                        foreach (ManagementObject h in hdd.Get())
-                        {
-                            SqliteCommand command = new SqliteCommand();
-                            command.Connection = connection;
-                            command.CommandText = $"INSERT INTO HDD(Config, Name, FreeSpace) VALUES ({configId}, '{h["Name"]}', '{Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + " Гб"}')";
-                            command.ExecuteNonQuery();
-                            PCdata += $"Место на диске {h["Name"]} " + Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + '\n';
-                        }
-                        PCdata += "Свободная оперативная память: " + Math.Round(Convert.ToDouble(opka) / Math.Pow(2, 30), 2) + " Гб" + '\n';
-                        PCdata += RuntimeInformation.OSDescription + '\n';
-                        PCdata += "Версия DirectX: " + GetDirectXVersion() + '\n';
-                        //Console.WriteLine($"В таблицу Users добавлено объектов: {number}");
-                        File.WriteAllText("cache/PCdata.txt", PCdata);
+                        PCdata += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + '\n'; //Name, Caption, VideoProcessor
                     }
+                    //Оперативка (пока оставим)
+
+                    commandConfig = new SqliteCommand("SELECT * FROM os;", connection);
+                    //ОС
+                    int osId = 0;
+                    foreach (ManagementObject os in searcher.Get())
+                    {
+                        using (SqliteDataReader readerConfig = commandConfig.ExecuteReader())
+                        {
+                            if (readerConfig.HasRows)
+                            {
+                                bool gpuIsFound = false;
+                                while (readerConfig.Read())
+                                {
+                                    if (readerConfig.GetString(1) == RuntimeInformation.OSDescription)
+                                    {
+                                        gpuIsFound = true;
+                                        osId = readerConfig.GetInt32(9);
+                                        break;
+                                    }
+                                }
+                                if (!gpuIsFound)
+                                {
+                                    SqliteCommand command = new SqliteCommand();
+                                    command.Connection = connection;
+                                    command.CommandText = $"INSERT INTO OS(Name) VALUES ('{RuntimeInformation.OSDescription}')";
+                                    command.ExecuteNonQuery();
+
+                                    SqliteCommand commandGetId = new SqliteCommand($"SELECT id FROM os where name = '{RuntimeInformation.OSDescription}';", connection);
+                                    using (SqliteDataReader readerGetId = commandGetId.ExecuteReader())
+                                    {
+                                        if (readerGetId.HasRows)
+                                        {
+                                            while (readerGetId.Read())
+                                            {
+                                                osId = readerGetId.GetInt32(0);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    commandConfig = new SqliteCommand("SELECT * FROM directx;", connection);
+                    //DirectX
+                    int directId = 0;
+                    using (SqliteDataReader readerConfig = commandConfig.ExecuteReader())
+                    {
+                        if (readerConfig.HasRows)
+                        {
+                            bool gpuIsFound = false;
+                            while (readerConfig.Read())
+                            {
+                                if (readerConfig.GetString(1) == GetDirectXVersion())
+                                {
+                                    gpuIsFound = true;
+                                    directId = readerConfig.GetInt32(4);
+                                    break;
+                                }
+                            }
+                            if (!gpuIsFound)
+                            {
+                                SqliteCommand command = new SqliteCommand();
+                                command.Connection = connection;
+                                command.CommandText = $"INSERT INTO directx(Name) VALUES ('{GetDirectXVersion()}')";
+                                command.ExecuteNonQuery();
+
+                                SqliteCommand commandGetId = new SqliteCommand($"SELECT id FROM os where name = '{GetDirectXVersion()}';", connection);
+                                using (SqliteDataReader readerGetId = commandGetId.ExecuteReader())
+                                {
+                                    if (readerGetId.HasRows)
+                                    {
+                                        while (readerGetId.Read())
+                                        {
+                                            directId = readerGetId.GetInt32(0);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    SqliteCommand commandConfig2 = new SqliteCommand();
+                    commandConfig2.Connection = connection;
+
+                    // ПОЛНЫЙ ОБЪЕМ ОПЕРАТИВНОЙ ПАМЯТИ
+                    ManagementObjectSearcher ram = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+
+                    string opka = "";
+                    foreach (ManagementObject r in ram.Get())
+                    {
+                        opka = Math.Round(Convert.ToDouble(r["TotalPhysicalMemory"]) / Math.Pow(2, 30), 2) + " Гб";
+                        commandConfig2.CommandText = $"INSERT INTO Config(ńame, gpu, cpu, ram, os, directx) VALUES ('Config{gpuId}', {gpuId}, '{cpuId}', '{opka}', '{osId}', '{directId}')";
+                    }
+
+                    int number = commandConfig2.ExecuteNonQuery();
+
+                    foreach (ManagementObject h in hdd.Get())
+                    {
+                        SqliteCommand command = new SqliteCommand();
+                        command.Connection = connection;
+                        command.CommandText = $"INSERT INTO HDD(Config, Name, FreeSpace) VALUES ({configId}, '{h["Name"]}', '{Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + " Гб"}')";
+                        command.ExecuteNonQuery();
+                        PCdata += $"Место на диске {h["Name"]} " + Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + '\n';
+                    }
+                    PCdata += "Свободная оперативная память: " + Math.Round(Convert.ToDouble(opka) / Math.Pow(2, 30), 2) + " Гб" + '\n';
+                    PCdata += RuntimeInformation.OSDescription + '\n';
+                    PCdata += "Версия DirectX: " + GetDirectXVersion() + '\n';
+                    //Console.WriteLine($"В таблицу Users добавлено объектов: {number}");
+                    File.WriteAllText("cache/PCdata.txt", PCdata);
                 }
             }
 
@@ -371,6 +378,50 @@ class HardWareInteractons
         }
 
         return PCdata;
+    }
+
+    public List<CPU> GetCPUs()
+    {
+        List<CPU> cpus = new List<CPU>();
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand("select * from cpu", connection);
+            using (SqliteDataReader readerConfig = command.ExecuteReader())
+            {
+                if (readerConfig.HasRows)
+                {
+                    while (readerConfig.Read())
+                    {
+                        cpus.Add(new CPU(readerConfig.GetString(1), readerConfig.GetInt32(2), readerConfig.GetString(3)));
+                    }
+                }
+            }
+        }
+        return cpus;
+    }
+
+    public List<GPU> GetGPUs()
+    {
+        List<GPU> gpus = new List<GPU>();
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand("select * from gpu", connection);
+            using (SqliteDataReader readerConfig = command.ExecuteReader())
+            {
+                if (readerConfig.HasRows)
+                {
+                    while (readerConfig.Read())
+                    {
+                        gpus.Add(new GPU());
+                    }
+                }
+            }
+        }
+        return gpus;
     }
 
     public static string GetDirectXVersion()

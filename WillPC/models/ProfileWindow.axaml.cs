@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -21,7 +22,9 @@ namespace WillPC
             SteamInterations steamInterations = new SteamInterations();
             HardWareInteractons hardWareInteractons = new HardWareInteractons();
 
-            PCData.Text = hardWareInteractons.GetPCData(2);
+            PCData.Text = hardWareInteractons.GetPCData(1);
+            List<CPU> cpus = hardWareInteractons.GetCPUs();
+            Processors.ItemsSource = cpus;
         }
     }
 }

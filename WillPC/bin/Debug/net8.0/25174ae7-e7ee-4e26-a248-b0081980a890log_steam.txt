@@ -1,2 +1,0 @@
-[Control] PlatformImpl is null, couldn't handle input. (PresentationSource #40893240)
-[Control] PlatformImpl is null, couldn't handle input. (PresentationSource #166885)

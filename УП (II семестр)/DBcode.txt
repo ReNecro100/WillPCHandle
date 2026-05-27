@@ -28,6 +28,7 @@ CREATE TABLE OS (
 -- 5. Таблица Config
 CREATE TABLE Config (
     id INTEGER PRIMARY KEY,
+    Name TEXT,
     GPU INTEGER,
     CPU INTEGER,
     RAM TEXT,
@@ -56,26 +57,4 @@ CREATE TABLE [User] (
     SteamLink TEXT,
     Config INTEGER,
     FOREIGN KEY (Config) REFERENCES Config(id)
-);
-
--- 8. Таблица ApptotalInfo
-CREATE TABLE ApptotalInfo (
-    id INTEGER PRIMARY KEY,
-    [User] INTEGER NOT NULL,
-    HeaderImage TEXT,
-    Name TEXT NOT NULL,
-    Description TEXT,
-    Genre TEXT,
-    MinimalRequirements INTEGER,
-    RecommendedRequirements INTEGER,
-    CompatibilityIndicator TEXT,
-    FOREIGN KEY ([User]) REFERENCES [User](id)
-);
-
--- 9. Таблица Screenshots
-CREATE TABLE Screenshots (
-    id INTEGER PRIMARY KEY,
-    SteamGame INTEGER NOT NULL,
-    [Path] TEXT NOT NULL,
-    FOREIGN KEY (SteamGame) REFERENCES ApptotalInfo(id)
 );

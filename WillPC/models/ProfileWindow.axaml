@@ -95,12 +95,15 @@
 
                                 <Border Background="#80000000"/>
 
+							<Image
+								   Source="C:\Users\Andrzej\Desktop\Всё за колледж фр\3 курс\УП (II семестр)\WillPCHandle\WillPC\pics\profilePIC.jpg"
+								   Height="100" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0"/>
                                 <TextBlock Name="UserName"
 										   Text="UserName"
                                            Foreground="White"
                                            FontSize="40"
                                            VerticalAlignment="Center"
-                                           Margin="44,0,0,0"/>
+                                           Margin="140,0,0,0"/>
                         </Grid>
                 </Border>
 			<Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,1,15,0">
@@ -115,9 +118,8 @@
 							<TextBlock Grid.Row="1" TextWrapping="Wrap" Name="PCData"/>
 							
 							<Grid ColumnDefinitions="Auto, Auto" Grid.Row="2" ColumnSpacing="50">
-								<ComboBox Grid.Column="0" PlaceholderText="Processor" Width="150">
-									<TextBlock Text="Tom"/>
-									<TextBlock Text="Tom"/>
+								<ComboBox Grid.Column="0" PlaceholderText="Processor" Width="150" x:Name="Processors">
+
 								</ComboBox>
 								<ComboBox Grid.Column="1" PlaceholderText="Video card" Width="150">
 									<TextBlock Text="Tom"/>
@@ -125,14 +127,14 @@
 								</ComboBox>
 							</Grid>
 							
-							<TextBox Grid.Row="3" Name="ConfigRAM" Watermark="RAM, Gb" MaxLength="50" Width="300"/>
+							<TextBox Grid.Row="3" Name="ConfigRAM" Watermark="RAM, Gb" MaxLength="50" Width="300" HorizontalAlignment="Left"/>
 							
 							<Grid ColumnDefinitions="Auto, Auto" Grid.Row="4" ColumnSpacing="50">
-								<ComboBox Grid.Column="0" PlaceholderText="Processor" Width="150">
+								<ComboBox Grid.Column="0" PlaceholderText="Operation system" Width="150">
 									<TextBlock Text="Tom"/>
 									<TextBlock Text="Tom"/>
 								</ComboBox>
-								<ComboBox Grid.Column="1" PlaceholderText="Video card" Width="150">
+								<ComboBox Grid.Column="1" PlaceholderText="DirectX version" Width="150">
 									<TextBlock Text="Tom"/>
 									<TextBlock Text="Tom"/>
 								</ComboBox>

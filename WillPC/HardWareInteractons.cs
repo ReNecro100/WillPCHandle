@@ -14,13 +14,15 @@ using System.Security.Cryptography;
 // 1. GPU
 public class GPU
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public string RAM { get; set; }
 
     public GPU() { }
 
-    public GPU(string name, string ram)
+    public GPU(int id, string name, string ram)
     {
+        Id = id;
         Name = name;
         RAM = ram;
     }
@@ -30,14 +32,16 @@ public class GPU
 // 2. CPU
 public class CPU
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public int Cores { get; set; }
     public string Speed { get; set; }
 
     public CPU() { }
 
-    public CPU(string name, int cores, string speed)
+    public CPU(int id, string name, int cores, string speed)
     {
+        Id = id;
         Name = name;
         Cores = cores;
         Speed = speed;
@@ -48,12 +52,14 @@ public class CPU
 // 3. DirectX
 public class DirectX
 {
+    public int Id { get; set; }
     public string Name { get; set; }
 
     public DirectX() { }
 
-    public DirectX(string name)
+    public DirectX(int id, string name)
     {
+        Id = id;
         Name = name;
     }
     public override string ToString() => Name;
@@ -62,12 +68,14 @@ public class DirectX
 // 4. OS
 public class OS
 {
+    public int Id { get; set; }
     public string Name { get; set; }
 
     public OS() { }
 
-    public OS(string name)
+    public OS(int id, string name)
     {
+        Id = id;
         Name = name;
     }
     public override string ToString() => Name;
@@ -132,23 +140,22 @@ class HardWareInteractons
                         Config pcConfig = new Config();
                         while (readerConfig.Read())
                         {
-                            CPU cPU = new CPU((string)readerConfig.GetValue(7), Convert.ToInt32(readerConfig.GetValue(8)), (string)readerConfig.GetValue(9));
-                            DirectX directX = new DirectX((string)readerConfig.GetValue(11));
-                            GPU gPU = new GPU((string)readerConfig.GetValue(13), (string)readerConfig.GetValue(14));
-                            OS oS = new OS((string)readerConfig.GetValue(16));
-                            hdds.Add(new HDD((string)readerConfig.GetValue(19), (string)readerConfig.GetValue(20)));
-                            pcConfig = new Config(Convert.ToInt32(readerConfig.GetValue(0)), gPU, cPU, (string)readerConfig.GetValue(3), oS, directX, hdds);
+                            CPU cPU = new CPU(readerConfig.GetInt32(6), readerConfig.GetString(7), readerConfig.GetInt32(8), readerConfig.GetString(9));
+                            DirectX directX = new DirectX(readerConfig.GetInt32(10), readerConfig.GetString(11));
+                            GPU gPU = new GPU(readerConfig.GetInt32(2), readerConfig.GetString(13), readerConfig.GetString(14));
+                            OS oS = new OS(readerConfig.GetInt32(15), readerConfig.GetString(16));
+                            hdds.Add(new HDD(readerConfig.GetString(19), readerConfig.GetString(20)));
+                            pcConfig = new Config(readerConfig.GetInt32(0), gPU, cPU, readerConfig.GetString(3), oS, directX, hdds);
                         }
-                        hdds = hdds.Distinct().ToList();
-                        PCdata = "Процессор: " + pcConfig.CPU.Name + '\n' + "Количество ядер: " + pcConfig.CPU.Cores + '\n' + "Частота: " + pcConfig.CPU.Speed + '\n' +
-                            "Видеокарта: " + pcConfig.GPU.Name + '\n' + "Видеопамять: " + pcConfig.GPU.RAM + '\n';
+                        PCdata = "Processor: " + pcConfig.CPU.Name + '\n' + "Number of cores: " + pcConfig.CPU.Cores + '\n' + "Clock rate: " + pcConfig.CPU.Speed + '\n' +
+                            "Video card: " + pcConfig.GPU.Name + '\n' + "VRAM: " + pcConfig.GPU.RAM + '\n';
                         foreach (var item in pcConfig.HDDS)
                         {
-                            PCdata += $"Место на диске {item.Name} " + item.FreeSpace + '\n';
+                            PCdata += $"Free space on disc {item.Name} " + item.FreeSpace + '\n';
                         }
-                        PCdata += "Свободная оперативная память: " + pcConfig.RAM + '\n' +
+                        PCdata += "RAM: " + pcConfig.RAM + '\n' +
                         pcConfig.OS.Name + '\n' +
-                        "Версия DirectX: " + pcConfig.DirectX.Name + '\n';
+                        "DirectX version: " + pcConfig.DirectX.Name + '\n';
                     }
                     else
                     {
@@ -197,7 +204,7 @@ class HardWareInteractons
                                 {
                                     SqliteCommand command = new SqliteCommand();
                                     command.Connection = connection;
-                                    command.CommandText = $"INSERT INTO CPU(Name, Cores, Speed) VALUES ('{c["Name"]}', '{c["NumberOfCores"]}', '{c["MaxClockSpeed"] + " ГГц"}')";
+                                    command.CommandText = $"INSERT INTO CPU(Name, Cores, Speed) VALUES ('{c["Name"]}', '{c["NumberOfCores"]}', '{c["MaxClockSpeed"] + " GHz"}')";
                                     command.ExecuteNonQuery();
 
                                     SqliteCommand commandGetId = new SqliteCommand($"SELECT id FROM cpu where name = '{c["Name"]}';", connection);
@@ -213,7 +220,7 @@ class HardWareInteractons
                                     }
                                 }
                             }
-                            PCdata = "Процессор: " + c["Name"] + '\n' + "Количество ядер: " + c["NumberOfCores"] + '\n' + "Частота: " + c["MaxClockSpeed"] + '\n';
+                            PCdata = "Processor: " + c["Name"] + '\n' + "Number of cores: " + c["NumberOfCores"] + '\n' + "Clock rate: " + c["MaxClockSpeed"] + '\n';
                         }
                     }
 
@@ -240,7 +247,7 @@ class HardWareInteractons
                                 {
                                     SqliteCommand command = new SqliteCommand();
                                     command.Connection = connection;
-                                    command.CommandText = $"INSERT INTO GPU(Name, RAM) VALUES ('{g["Name"]}', '{Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Гб"}')";
+                                    command.CommandText = $"INSERT INTO GPU(Name, RAM) VALUES ('{g["Name"]}', '{Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + " Gb"}')";
                                     command.ExecuteNonQuery();
 
                                     SqliteCommand commandGetId = new SqliteCommand($"SELECT id FROM gpu where name = '{g["Name"]}';", connection);
@@ -257,7 +264,7 @@ class HardWareInteractons
                                 }
                             }
                         }
-                        PCdata += "Видеокарта: " + g["Name"] + '\n' + "Видеопамять: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + '\n'; //Name, Caption, VideoProcessor
+                        PCdata += "Video card: " + g["Name"] + '\n' + "VRAM: " + Math.Round(Convert.ToInt64(g["AdapterRAM"]) / Math.Pow(2, 30)) + '\n'; //Name, Caption, VideoProcessor
                     }
                     //Оперативка (пока оставим)
 
@@ -363,11 +370,11 @@ class HardWareInteractons
                         command.Connection = connection;
                         command.CommandText = $"INSERT INTO HDD(Config, Name, FreeSpace) VALUES ({configId}, '{h["Name"]}', '{Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + " Гб"}')";
                         command.ExecuteNonQuery();
-                        PCdata += $"Место на диске {h["Name"]} " + Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + '\n';
+                        PCdata += $"Free space on disc {h["Name"]} " + Math.Round(Convert.ToInt64(h["FreeSpace"]) / Math.Pow(2, 30)) + '\n';
                     }
-                    PCdata += "Свободная оперативная память: " + Math.Round(Convert.ToDouble(opka) / Math.Pow(2, 30), 2) + " Гб" + '\n';
+                    PCdata += "RAM: " + Math.Round(Convert.ToDouble(opka) / Math.Pow(2, 30), 2) + " Гб" + '\n';
                     PCdata += RuntimeInformation.OSDescription + '\n';
-                    PCdata += "Версия DirectX: " + GetDirectXVersion() + '\n';
+                    PCdata += "DirectX version: " + GetDirectXVersion() + '\n';
                     //Console.WriteLine($"В таблицу Users добавлено объектов: {number}");
                     File.WriteAllText("cache/PCdata.txt", PCdata);
                 }
@@ -394,7 +401,7 @@ class HardWareInteractons
                 {
                     while (readerConfig.Read())
                     {
-                        cpus.Add(new CPU(readerConfig.GetString(1), readerConfig.GetInt32(2), readerConfig.GetString(3)));
+                        cpus.Add(new CPU(readerConfig.GetInt32(0), readerConfig.GetString(1), readerConfig.GetInt32(2), readerConfig.GetString(3)));
                     }
                 }
             }
@@ -410,18 +417,94 @@ class HardWareInteractons
             connection.Open();
 
             SqliteCommand command = new SqliteCommand("select * from gpu", connection);
-            using (SqliteDataReader readerConfig = command.ExecuteReader())
+            using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (readerConfig.HasRows)
+                if (reader.HasRows)
                 {
-                    while (readerConfig.Read())
+                    while (reader.Read())
                     {
-                        gpus.Add(new GPU());
+                        gpus.Add(new GPU(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
                     }
                 }
             }
         }
         return gpus;
+    }
+
+    public List<DirectX> GetDirectXs()
+    {
+        List<DirectX> directxs = new List<DirectX>();
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand("select * from directx", connection);
+            using (SqliteDataReader reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        directxs.Add(new DirectX(reader.GetInt32(0), reader.GetString(1)));
+                    }
+                }
+            }
+        }
+        return directxs;
+    }
+
+    public List<OS> GetOSs()
+    {
+        List<OS> directxs = new List<OS>();
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand("select * from os", connection);
+            using (SqliteDataReader reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        directxs.Add(new OS(reader.GetInt32(0), reader.GetString(1)));
+                    }
+                }
+            }
+        }
+        return directxs;
+    }
+    public List<Config> GetConfigs(int userId)
+    {
+        List<Config> configs = new List<Config>();
+        string sqlExpression = $"SELECT \r\n    config.id,\r\n    config.GPU,\r\n    config.CPU,\r\n    config.RAM,\r\n    config.OS,\r\n    config.DirectX,\r\n    cpu.id,\r\n    cpu.Name,\r\n    cpu.Cores,\r\n    cpu.Speed,\r\n    directX.id,\r\n    directX.Name,\r\n    gpu.id,\r\n    gpu.Name,\r\n    gpu.RAM,\r\n    os.id,\r\n    os.Name,\r\n    hdd.id,\r\n    hdd.Config,\r\n    hdd.Name,\r\n    hdd.FreeSpace\r\nFROM config\r\nLEFT JOIN cpu ON config.cpu = cpu.id\r\nLEFT JOIN gpu ON config.gpu = gpu.id\r\nLEFT JOIN directX ON config.directX = directX.id\r\nLEFT JOIN os ON config.os = os.id\r\nLEFT JOIN hdd ON hdd.config = config.id\r\nWHERE config.owner = {userId};";
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand(sqlExpression, connection);
+            using (SqliteDataReader readerConfig = command.ExecuteReader())
+            {
+                if (readerConfig.HasRows)
+                {
+                    List<HDD> hdds = new List<HDD>();
+                    while (readerConfig.Read())
+                    {
+                        CPU cPU = new CPU(readerConfig.GetInt32(6), readerConfig.GetString(7), readerConfig.GetInt32(8), readerConfig.GetString(9));
+                        DirectX directX = new DirectX(readerConfig.GetInt32(10), readerConfig.GetString(11));
+                        GPU gPU = new GPU(readerConfig.GetInt32(2), readerConfig.GetString(13), readerConfig.GetString(14));
+                        OS oS = new OS(readerConfig.GetInt32(15), readerConfig.GetString(16));
+                        hdds.Add(new HDD(readerConfig.GetString(19), readerConfig.GetString(20)));
+                        configs.Add(new Config(readerConfig.GetInt32(0), gPU, cPU, readerConfig.GetString(3), oS, directX, hdds));
+                    }
+                }
+                else
+                {
+                    throw new Exception("no rows");
+                }
+            }
+        }
+        return configs;
     }
 
     public static string GetDirectXVersion()

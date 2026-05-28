@@ -23,8 +23,18 @@ namespace WillPC
             HardWareInteractons hardWareInteractons = new HardWareInteractons();
 
             PCData.Text = hardWareInteractons.GetPCData(1);
+
             List<CPU> cpus = hardWareInteractons.GetCPUs();
             Processors.ItemsSource = cpus;
+
+            List<GPU> gpus = hardWareInteractons.GetGPUs();
+            VideoCards.ItemsSource = gpus;
+
+            List<OS> oss = hardWareInteractons.GetOSs();
+            OperationSystems.ItemsSource = oss;
+
+            List<DirectX> directXes = hardWareInteractons.GetDirectXs();
+            DirectXs.ItemsSource = directXes;
         }
     }
 }

@@ -119,24 +119,21 @@
 							
 							<Grid ColumnDefinitions="Auto, Auto" Grid.Row="2" ColumnSpacing="50">
 								<ComboBox Grid.Column="0" PlaceholderText="Processor" Width="150" x:Name="Processors">
-
+									<!-- Процы -->
 								</ComboBox>
-								<ComboBox Grid.Column="1" PlaceholderText="Video card" Width="150">
-									<TextBlock Text="Tom"/>
-									<TextBlock Text="Tom"/>
+								<ComboBox Grid.Column="1" PlaceholderText="Video card" Width="150" x:Name="VideoCards">
+									<!-- Видюхи -->
 								</ComboBox>
 							</Grid>
 							
 							<TextBox Grid.Row="3" Name="ConfigRAM" Watermark="RAM, Gb" MaxLength="50" Width="300" HorizontalAlignment="Left"/>
 							
 							<Grid ColumnDefinitions="Auto, Auto" Grid.Row="4" ColumnSpacing="50">
-								<ComboBox Grid.Column="0" PlaceholderText="Operation system" Width="150">
-									<TextBlock Text="Tom"/>
-									<TextBlock Text="Tom"/>
+								<ComboBox Grid.Column="0" PlaceholderText="Operation system" Width="150" x:Name="OperationSystems">
+									<!-- ОС -->
 								</ComboBox>
-								<ComboBox Grid.Column="1" PlaceholderText="DirectX version" Width="150">
-									<TextBlock Text="Tom"/>
-									<TextBlock Text="Tom"/>
+								<ComboBox Grid.Column="1" PlaceholderText="DirectX version" Width="150" x:Name="DirectXs">
+									<!-- ДиректХ -->
 								</ComboBox>
 							</Grid>
 						</Grid>

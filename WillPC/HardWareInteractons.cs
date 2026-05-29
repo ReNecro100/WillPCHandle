@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls.Platform;
+﻿using Avalonia.Controls.Converters;
+using Avalonia.Controls.Platform;
 using Avalonia.Controls.Shapes;
 using Microsoft.Data.Sqlite;
 using Microsoft.Win32;
@@ -27,6 +28,10 @@ public class GPU
         RAM = ram;
     }
     public override string ToString() => Name;
+    public string GetDescription()
+    {
+        return "Video card: " + Name + '\n' + "VRAM: " + RAM + '\n';
+    }
 }
 
 // 2. CPU
@@ -47,6 +52,11 @@ public class CPU
         Speed = speed;
     }
     public override string ToString() => Name;
+
+    public string GetDescription() 
+    {
+        return "Processor: " + Name + '\n' + "Number of cores: " + Cores + '\n' + "Clock rate: " + Speed + '\n';
+    }
 }
 
 // 3. DirectX
@@ -63,6 +73,11 @@ public class DirectX
         Name = name;
     }
     public override string ToString() => Name;
+
+    public string GetDescription()
+    {
+        return "DirectX version: " + Name + '\n';
+    }
 }
 
 // 4. OS
@@ -79,12 +94,17 @@ public class OS
         Name = name;
     }
     public override string ToString() => Name;
+    public string GetDescription()
+    {
+        return Name + '\n';
+    }
 }
 
 // 5. Config
 public class Config
 {
     public int Id { get; set; }
+    public string Name { get; set; }
     public GPU GPU { get; set; }
     public CPU CPU { get; set; }
     public string RAM { get; set; }
@@ -94,8 +114,9 @@ public class Config
 
     public Config() { }
 
-    public Config(int id, GPU gpu, CPU cpu, string ram, OS os, DirectX directX, List<HDD> hDDS)
+    public Config(int id, string name, GPU gpu, CPU cpu, string ram, OS os, DirectX directX, List<HDD> hDDS)
     {
+        Name = name;
         Id = id;
         GPU = gpu;
         CPU = cpu;
@@ -103,6 +124,22 @@ public class Config
         OS = os;
         DirectX = directX;
         HDDS = hDDS;
+    }
+    public override string ToString() => Name;
+
+    public string GetDescription()
+    {
+        string hddsdescs = "";
+        foreach (var item in HDDS)
+        {
+            hddsdescs+=item.GetDescription();
+        }
+        return CPU.GetDescription()+
+            GPU.GetDescription()+
+            hddsdescs+ 
+            "RAM: " + RAM + '\n'+
+            OS.GetDescription()+
+            DirectX.GetDescription();
     }
 }
 
@@ -119,14 +156,19 @@ public class HDD
         Name = name;
         FreeSpace = freeSpace;
     }
+    public string GetDescription()
+    {
+        return $"Free space on disc {Name} " + FreeSpace + '\n';
+    }
 }
 class HardWareInteractons
 {
     private string PCdata;
     public string GetPCData(int configId, bool toUpdate = false)
     {
+        if (configId == 0) { return "Choose a config to continue"; }
         try {
-            string sqlExpression = $"SELECT \r\n    config.id,\r\n    config.GPU,\r\n    config.CPU,\r\n    config.RAM,\r\n    config.OS,\r\n    config.DirectX,\r\n    cpu.id,\r\n    cpu.Name,\r\n    cpu.Cores,\r\n    cpu.Speed,\r\n    directX.id,\r\n    directX.Name,\r\n    gpu.id,\r\n    gpu.Name,\r\n    gpu.RAM,\r\n    os.id,\r\n    os.Name,\r\n    hdd.id,\r\n    hdd.Config,\r\n    hdd.Name,\r\n    hdd.FreeSpace\r\nFROM config\r\nLEFT JOIN cpu ON config.cpu = cpu.id\r\nLEFT JOIN gpu ON config.gpu = gpu.id\r\nLEFT JOIN directX ON config.directX = directX.id\r\nLEFT JOIN os ON config.os = os.id\r\nLEFT JOIN hdd ON hdd.config = config.id\r\nWHERE config.id = {configId};";
+            string sqlExpression = $"SELECT \r\n    config.id,\r\n    config.GPU,\r\n    config.CPU,\r\n    config.RAM,\r\n    config.OS,\r\n    config.DirectX,\r\n    cpu.id,\r\n    cpu.Name,\r\n    cpu.Cores,\r\n    cpu.Speed,\r\n    directX.id,\r\n    directX.Name,\r\n    gpu.id,\r\n    gpu.Name,\r\n    gpu.RAM,\r\n    os.id,\r\n    os.Name,\r\n    hdd.id,\r\n    hdd.Config,\r\n    hdd.Name,\r\n    hdd.FreeSpace,\r\n    config.name\r\n    FROM config\r\nLEFT JOIN cpu ON config.cpu = cpu.id\r\nLEFT JOIN gpu ON config.gpu = gpu.id\r\nLEFT JOIN directX ON config.directX = directX.id\r\nLEFT JOIN os ON config.os = os.id\r\nLEFT JOIN hdd ON hdd.config = config.id\r\nWHERE config.id = {configId};";
             using (var connection = new SqliteConnection("Data Source=data.db"))
             {
                 connection.Open();
@@ -145,17 +187,9 @@ class HardWareInteractons
                             GPU gPU = new GPU(readerConfig.GetInt32(2), readerConfig.GetString(13), readerConfig.GetString(14));
                             OS oS = new OS(readerConfig.GetInt32(15), readerConfig.GetString(16));
                             hdds.Add(new HDD(readerConfig.GetString(19), readerConfig.GetString(20)));
-                            pcConfig = new Config(readerConfig.GetInt32(0), gPU, cPU, readerConfig.GetString(3), oS, directX, hdds);
+                            pcConfig = new Config(readerConfig.GetInt32(0), readerConfig.GetString(21), gPU, cPU, readerConfig.GetString(3), oS, directX, hdds);
                         }
-                        PCdata = "Processor: " + pcConfig.CPU.Name + '\n' + "Number of cores: " + pcConfig.CPU.Cores + '\n' + "Clock rate: " + pcConfig.CPU.Speed + '\n' +
-                            "Video card: " + pcConfig.GPU.Name + '\n' + "VRAM: " + pcConfig.GPU.RAM + '\n';
-                        foreach (var item in pcConfig.HDDS)
-                        {
-                            PCdata += $"Free space on disc {item.Name} " + item.FreeSpace + '\n';
-                        }
-                        PCdata += "RAM: " + pcConfig.RAM + '\n' +
-                        pcConfig.OS.Name + '\n' +
-                        "DirectX version: " + pcConfig.DirectX.Name + '\n';
+                        PCdata = pcConfig.GetDescription();
                     }
                     else
                     {
@@ -239,7 +273,7 @@ class HardWareInteractons
                                     if (readerConfig.GetString(1) == g["Name"])
                                     {
                                         gpuIsFound = true;
-                                        gpuId = readerConfig.GetInt32(6);
+                                        gpuId = readerConfig.GetInt32(0);
                                         break;
                                     }
                                 }
@@ -283,7 +317,7 @@ class HardWareInteractons
                                     if (readerConfig.GetString(1) == RuntimeInformation.OSDescription)
                                     {
                                         gpuIsFound = true;
-                                        osId = readerConfig.GetInt32(9);
+                                        osId = readerConfig.GetInt32(0);
                                         break;
                                     }
                                 }
@@ -323,7 +357,7 @@ class HardWareInteractons
                                 if (readerConfig.GetString(1) == GetDirectXVersion())
                                 {
                                     gpuIsFound = true;
-                                    directId = readerConfig.GetInt32(4);
+                                    directId = readerConfig.GetInt32(0);
                                     break;
                                 }
                             }
@@ -359,7 +393,7 @@ class HardWareInteractons
                     foreach (ManagementObject r in ram.Get())
                     {
                         opka = Math.Round(Convert.ToDouble(r["TotalPhysicalMemory"]) / Math.Pow(2, 30), 2) + " Гб";
-                        commandConfig2.CommandText = $"INSERT INTO Config(ńame, gpu, cpu, ram, os, directx) VALUES ('Config{gpuId}', {gpuId}, '{cpuId}', '{opka}', '{osId}', '{directId}')";
+                        commandConfig2.CommandText = $"INSERT INTO Config(name, gpu, cpu, ram, os, directx) VALUES ('Config{gpuId}', {gpuId}, '{cpuId}', '{opka}', '{osId}', '{directId}')";
                     }
 
                     int number = commandConfig2.ExecuteNonQuery();
@@ -477,7 +511,7 @@ class HardWareInteractons
     public List<Config> GetConfigs(int userId)
     {
         List<Config> configs = new List<Config>();
-        string sqlExpression = $"SELECT \r\n    config.id,\r\n    config.GPU,\r\n    config.CPU,\r\n    config.RAM,\r\n    config.OS,\r\n    config.DirectX,\r\n    cpu.id,\r\n    cpu.Name,\r\n    cpu.Cores,\r\n    cpu.Speed,\r\n    directX.id,\r\n    directX.Name,\r\n    gpu.id,\r\n    gpu.Name,\r\n    gpu.RAM,\r\n    os.id,\r\n    os.Name,\r\n    hdd.id,\r\n    hdd.Config,\r\n    hdd.Name,\r\n    hdd.FreeSpace\r\nFROM config\r\nLEFT JOIN cpu ON config.cpu = cpu.id\r\nLEFT JOIN gpu ON config.gpu = gpu.id\r\nLEFT JOIN directX ON config.directX = directX.id\r\nLEFT JOIN os ON config.os = os.id\r\nLEFT JOIN hdd ON hdd.config = config.id\r\nWHERE config.owner = {userId};";
+        string sqlExpression = $"SELECT \r\n    config.id,\r\n    config.GPU,\r\n    config.CPU,\r\n    config.RAM,\r\n    config.OS,\r\n    config.DirectX,\r\n    cpu.id,\r\n    cpu.Name,\r\n    cpu.Cores,\r\n    cpu.Speed,\r\n    directX.id,\r\n    directX.Name,\r\n    gpu.id,\r\n    gpu.Name,\r\n    gpu.RAM,\r\n    os.id,\r\n    os.Name,\r\n    hdd.id,\r\n    hdd.Config,\r\n    hdd.Name,\r\n    hdd.FreeSpace,\r\n    config.name\r\n    FROM config\r\nLEFT JOIN cpu ON config.cpu = cpu.id\r\nLEFT JOIN gpu ON config.gpu = gpu.id\r\nLEFT JOIN directX ON config.directX = directX.id\r\nLEFT JOIN os ON config.os = os.id\r\nLEFT JOIN hdd ON hdd.config = config.id\r\nWHERE config.owner = {userId};";
         using (var connection = new SqliteConnection("Data Source=data.db"))
         {
             connection.Open();
@@ -488,6 +522,7 @@ class HardWareInteractons
                 if (readerConfig.HasRows)
                 {
                     List<HDD> hdds = new List<HDD>();
+                    int newID = 0;
                     while (readerConfig.Read())
                     {
                         CPU cPU = new CPU(readerConfig.GetInt32(6), readerConfig.GetString(7), readerConfig.GetInt32(8), readerConfig.GetString(9));
@@ -495,7 +530,12 @@ class HardWareInteractons
                         GPU gPU = new GPU(readerConfig.GetInt32(2), readerConfig.GetString(13), readerConfig.GetString(14));
                         OS oS = new OS(readerConfig.GetInt32(15), readerConfig.GetString(16));
                         hdds.Add(new HDD(readerConfig.GetString(19), readerConfig.GetString(20)));
-                        configs.Add(new Config(readerConfig.GetInt32(0), gPU, cPU, readerConfig.GetString(3), oS, directX, hdds));
+                        if (newID != readerConfig.GetInt32(0))
+                        {
+                            configs.Add(new Config(readerConfig.GetInt32(0), readerConfig.GetString(21), gPU, cPU, readerConfig.GetString(3), oS, directX, hdds));
+                            hdds = new List<HDD>();
+                            newID = readerConfig.GetInt32(0);
+                        }
                     }
                 }
                 else

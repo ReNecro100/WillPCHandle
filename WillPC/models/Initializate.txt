@@ -22,11 +22,3 @@ if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 };
 
                 desktop.MainWindow = agreementWindow;
-
-
-
-
-Должен быть какой-то конфиг.жсон
-Вот его содержание:
-
-CurrentUser

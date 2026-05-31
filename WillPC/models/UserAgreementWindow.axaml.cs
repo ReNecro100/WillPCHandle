@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
+using System.Collections.Generic;
 using System.ComponentModel;
 namespace WillPC
 {
@@ -26,6 +27,9 @@ namespace WillPC
         private void AcceptAgreement(object sender, RoutedEventArgs e)
         {
             Accepted = true;
+            List<User> aUser = ManagerJSON.DeSerialize<User>("userInfo.json");
+            User user = new User(Accepted, aUser[0].Name, aUser[0].Password, aUser[0].SteamLink);
+            ManagerJSON.Serialize<User>(new List<User>{ user }, "userInfo.json");
             _canClose = true;
             Close();
         }

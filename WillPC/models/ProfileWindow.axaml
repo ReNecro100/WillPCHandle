@@ -109,9 +109,9 @@
 			<Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,1,15,0">
 				<Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="100">
 					<Border Classes="GameCard"  Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top">
-						<Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" RowSpacing="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+						<Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" RowSpacing="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,10,10">
 							<Grid ColumnDefinitions="Auto, Auto" Grid.Row="0" ColumnSpacing="50">
-								<ComboBox Grid.Column="0" PlaceholderText="Current Config" Width="200" x:Name="Configurations" SelectionChanged="Configurations_SelectionChanged">
+								<ComboBox Grid.Column="0" PlaceholderText="Current Config" Width="150" x:Name="Configurations" SelectionChanged="Configurations_SelectionChanged">
 									<!-- Конфиги -->
 								</ComboBox>
 								<Button Classes="MybuttonStyle" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="35" Margin="0,0,0,0" Click="CreateNewConfig">
@@ -147,9 +147,9 @@
 					</Border>
 					<Border Classes="GameCard"  Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Top">
 						<Grid RowDefinitions="40, 40, 200, 40" RowSpacing="15" HorizontalAlignment="Center" VerticalAlignment="Center">
-							<TextBox Grid.Row="0" Name="UserUsername" Watermark="Username" MaxLength="50" VerticalAlignment="Center"/>
-							<TextBox Grid.Row="1" Name="UserSteamLink" Watermark="Steam account link" MaxLength="50" VerticalAlignment="Center"/>
-							<Button Classes="MybuttonStyle" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center">
+							<TextBox Grid.Row="0" x:Name="UserUsername" Watermark="Username" MaxLength="50" VerticalAlignment="Center"/>
+							<TextBox Grid.Row="1" x:Name="UserSteamLink" Watermark="Steam account link" MaxLength="50" VerticalAlignment="Center"/>
+							<Button Classes="MybuttonStyle" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="SavingNewInfo">
 								<TextBlock TextWrapping="Wrap" Padding="0,0,0,0" Text="Save" HorizontalAlignment="Center" VerticalAlignment="Center"
 										   Foreground="White"/>
 							</Button>

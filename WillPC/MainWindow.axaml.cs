@@ -103,8 +103,12 @@ namespace WillPC
 
         private async void RefreshPcInfo(object? sender, RoutedEventArgs e)
         {
-            await RefreshPcInfoAsync(true);
-            _ = ShowMainPageCardsAsync();
+            var mainWindow = new ProfileWindow();
+            //desktop.MainWindow = mainWindow;
+            mainWindow.Show();
+            Close();
+            //await RefreshPcInfoAsync(true);
+            //_ = ShowMainPageCardsAsync();
         }
 
         private async Task RefreshPcInfoAsync(bool forceUpdate = false)

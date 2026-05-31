@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using System.Collections.Generic;
 
 namespace WillPC
 {
@@ -16,10 +17,12 @@ namespace WillPC
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 //Nakatitj logiku z JSON
-                bool isAgreed = true;
+                List<User> aUser = ManagerJSON.DeSerialize<User>("userInfo.json");
+
+                bool isAgreed = aUser[0].HasAgreedToUserAgreement;
                 if (isAgreed)
                 {
-                    desktop.MainWindow = new ProfileWindow();
+                    desktop.MainWindow = new MainWindow();
                 }
                 else
                 {

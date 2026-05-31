@@ -40,6 +40,11 @@ namespace WillPC
             Configurations.ItemsSource = configs;
 
             PCData.Text = hardWareInteractons.GetPCData(0);
+
+            User user = ManagerJSON.DeSerialize<User>("userInfo.json")[0];
+
+            UserUsername.Text = user.Name;
+            UserSteamLink.Text = user.SteamLink;
         }
         public void Configurations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -90,6 +95,16 @@ namespace WillPC
 
                     Configurations.Items.Add(newConfig);
                 }
+            }
+        }
+        public void SavingNewInfo(object sender, RoutedEventArgs e)
+        {
+            if (UserUsername.Text.Length > 0)
+            {
+                User aUser = ManagerJSON.DeSerialize<User>("userInfo.json")[0];
+                User user = new User(aUser.HasAgreedToUserAgreement, UserUsername.Text, aUser.Password, UserSteamLink.Text);
+                ManagerJSON.Serialize<User>(new List<User> { user }, "userInfo.json");
+                user.PushToDB();
             }
         }
     }

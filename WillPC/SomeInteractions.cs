@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using Tmds.DBus.Protocol;
 
@@ -42,15 +44,38 @@ public static class ManagerJSON
 
 public class User
 {
+    public bool HasAgreedToUserAgreement { get; set; }
     public string Name { get; set; }
     public string Password { get; set; }
     public string SteamLink { get; set; }
+    public int Id {  get; set; }
+    public int ConfigId {  get; set; }
     public User() { }
-    public User(string name, string password, string steamLink)
+    public User(bool hasAgreedToUserAgreement, string name, string password, string steamLink)
     {
+        HasAgreedToUserAgreement = hasAgreedToUserAgreement;
         Name = name;
         Password = password;
         SteamLink = steamLink;
+        Id = -1;
+        string sqlExpression = $"select id, config from user where name = '{Name}' and password = '{GetPasswordHash(Password)}'";
+        using (var connection = new SqliteConnection("Data Source=data.db"))
+        {
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand(sqlExpression, connection);
+            using (SqliteDataReader readerConfig = command.ExecuteReader())
+            {
+                if (readerConfig.HasRows)
+                {
+                    while (readerConfig.Read())
+                    {
+                        Id = readerConfig.GetInt32(0);
+                        ConfigId = readerConfig.GetInt32(1);
+                    }
+                }
+            }
+        }
     }
     public void PushToDB()
     {
@@ -59,7 +84,7 @@ public class User
             connection.Open();
             SqliteCommand command = new SqliteCommand();
             command.Connection = connection;
-            command.CommandText = $"INSERT INTO User(Name, Password, SteamLink) VALUES ('{Name}', '{Password}', '{SteamLink}')";
+            command.CommandText = $"INSERT INTO User(Name, SteamLink, config) VALUES ('{Name}', '{SteamLink}', '{ConfigId}')";
             command.ExecuteNonQuery();
         }
     }
@@ -101,5 +126,17 @@ public class User
             command.CommandText = $"update user set config = {newConfig} where id = {userId}";
             command.ExecuteNonQuery();
         }
+    }
+    public string GetPasswordHash(string input)
+    {
+        byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+        // 2. Compute the SHA256 hash
+        byte[] hashBytes = SHA256.HashData(inputBytes);
+
+        // 3. Convert bytes to a readable Hexadecimal string
+        string hashString = Convert.ToHexString(hashBytes);
+
+        return hashString;
     }
 }
